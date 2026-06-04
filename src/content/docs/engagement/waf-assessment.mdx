@@ -8,6 +8,10 @@ sidebar:
 
 import { Aside } from '@astrojs/starlight/components';
 
+<Aside type="tip" title="📄 Download the workfile">
+  <a href={`${import.meta.env.BASE_URL}templates/engagement/waf-assessment.xlsx`} download>waf-assessment.xlsx</a> — pre-formatted template; fill in for your engagement.
+</Aside>
+
 ## Why WAF on AVS engagements
 
 The WAF assessment provides the structured input for control **A.2.2** (Well-Architected Workloads) and **B.2.2** (WAR of AVS workloads). The auditor will look for the WAR export and the linked remediation log.

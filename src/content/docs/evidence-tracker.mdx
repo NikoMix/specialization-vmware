@@ -7,6 +7,11 @@ sidebar:
 
 import { Aside } from '@astrojs/starlight/components';
 
+<Aside type="tip" title="📄 Download the workfiles">
+  - <a href={`${import.meta.env.BASE_URL}templates/audit/evidence-tracker.xlsx`} download>evidence-tracker.xlsx</a> — one row per control × customer, status dropdowns, summary tab
+  - <a href={`${import.meta.env.BASE_URL}templates/audit/pre-qual-checklist.xlsx`} download>pre-qual-checklist.xlsx</a> — pre-qualification gate checklist
+</Aside>
+
 <Aside type="tip">
   Copy this tracker into your project management tool (Excel, Azure DevOps, Jira, or SharePoint) and
   assign owners and due dates for each control. Update status as evidence is collected.
@@ -103,12 +108,23 @@ import { Aside } from '@astrojs/starlight/components';
 
 ## Certification Holders Mapping
 
-| Individual Name | Role | AZ-104 | AZ-305 | AZ-700 *(rec.)* | VCP-DCV *(rec.)* | NSX-T *(rec.)* | Expiry |
-|---|---|:---:|:---:|:---:|:---:|:---:|---|
-| | | | | | | | |
-| | | | | | | | |
+Track required (AZ-104, AZ-305) and recommended (AZ-700, VCP-DCV, NSX-T) certifications separately to avoid an overly-wide table.
 
-> Add rows as needed. ✅ = holds cert, ⬜ = does not hold.
+### Required certifications
+
+| Individual Name | Role | AZ-104 | AZ-305 | Expiry |
+|---|---|:---:|:---:|---|
+| | | ⬜ | ⬜ | |
+| | | ⬜ | ⬜ | |
+
+### Recommended certifications (not audit gates)
+
+| Individual Name | Role | AZ-700 | VCP-DCV | NSX-T | Expiry |
+|---|---|:---:|:---:|:---:|---|
+| | | ⬜ | ⬜ | ⬜ | |
+| | | ⬜ | ⬜ | ⬜ | |
+
+Add rows as needed. ✅ = holds cert, ⬜ = does not hold.
 
 ---
 

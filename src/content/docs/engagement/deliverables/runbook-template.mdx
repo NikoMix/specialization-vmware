@@ -8,6 +8,10 @@ sidebar:
 
 import { Aside } from '@astrojs/starlight/components';
 
+<Aside type="tip" title="📄 Download the workfile">
+  <a href={`${import.meta.env.BASE_URL}templates/deliverables/runbook-template.docx`} download>runbook-template.docx</a> — pre-formatted template; fill in for your engagement.
+</Aside>
+
 <Aside type="tip">
   Maintain one wave plan for the whole migration, and one cutover runbook **per wave**. The cutover
   runbook is what the team executes on cutover night.
