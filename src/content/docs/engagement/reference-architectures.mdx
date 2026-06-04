@@ -1,0 +1,135 @@
+---
+title: "Reference Architectures"
+description: Six AVS reference architectures — datacenter exit, stretched cluster, DR-to-AVS, VDI adjacency, hybrid steady-state, mission-critical rehost.
+sidebar:
+  label: "Reference Architectures"
+  order: 6
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+These six patterns cover the vast majority of AVS engagements. Each section provides a target topology, NSX-T design, ER / Global Reach design, identity, backup, monitoring, and an indicative cost envelope.
+
+<Aside type="tip">
+  Pick the closest pattern at design time and document the deltas in the HLD — this satisfies the
+  "alignment to Azure Architecture Center reference architectures" requirement for control A.2.2.
+</Aside>
+
+---
+
+## 1. Datacenter exit / rehost (HCX bulk)
+
+**When:** Customer is exiting one or more datacenters; vSphere refresh is due; minimal app change.
+
+| Element | Design choice |
+|---|---|
+| AVS topology | Single AVS private cloud, single cluster, AV36 / AV52 / AV64 based on sizing |
+| Migration | HCX bulk migration with mobility groups; Network Extension for IP retention |
+| Network | ER + Global Reach to on-prem during migration; cut to AVS-only post |
+| NSX-T | T0 → upstream; T1 per workload tier; DFW deny-all + allowlist |
+| Identity | On-prem AD reachable via ER; vCenter SSO bound to on-prem AD |
+| Backup | Azure Backup Server for guest VMs |
+| DR | Optional in-AVS second cluster or out-of-AVS region |
+| Cost envelope | Node reservation (1-yr or 3-yr) for steady state; PAYG for surge |
+
+---
+
+## 2. Stretched cluster (active/passive metro)
+
+**When:** Mission-critical workload needs zero/near-zero RPO across AZs.
+
+| Element | Design choice |
+|---|---|
+| AVS topology | Stretched cluster across 2 AZs in same region |
+| Storage | vSAN ESA with stretched cluster policy |
+| Network | Latency &amp; bandwidth tested between AZs; redundant ER |
+| NSX-T | T0 active/active; DFW consistent across both sides |
+| Identity | Same as Pattern 1 |
+| Backup | Azure Backup Server + DR-grade backup tier |
+| DR | Built-in via stretched cluster; second region optional |
+| Cost envelope | Higher — duplicated host capacity across AZs |
+
+---
+
+## 3. DR-to-AVS (on-prem primary, AVS as DR)
+
+**When:** Customer keeps on-prem primary, modernises DR target.
+
+| Element | Design choice |
+|---|---|
+| AVS topology | Smaller AVS private cloud, sized for DR steady-state + fail-over headroom |
+| Replication | HCX DR or SRM with vSphere Replication |
+| Network | ER + Global Reach; replication bandwidth sized to RPO |
+| NSX-T | Mirrors on-prem segment plan |
+| Identity | Same AD as on-prem |
+| Backup | Customer's existing backup; AVS hosts backed via Azure Backup Server during fail-over |
+| DR | The pattern itself |
+| Cost envelope | Lower steady-state nodes; surge during DR fail-over |
+
+---
+
+## 4. VDI adjacency (Horizon on AVS)
+
+**When:** Customer runs Horizon VDI and wants Azure adjacency for AI / data services.
+
+| Element | Design choice |
+|---|---|
+| AVS topology | Dedicated cluster sized for Horizon profiles |
+| Horizon | Horizon on AVS; profile manager (e.g. App Volumes, FSLogix) |
+| Network | ER + Global Reach; egress for end-user traffic |
+| NSX-T | DFW micro-segmentation per pod |
+| Identity | Same AD as on-prem; conditional access via Entra |
+| Backup | Profile / user-data backup strategy |
+| DR | Cross-region Horizon failover (if required) |
+| Cost envelope | AV36P or AV52 for VDI density |
+
+---
+
+## 5. Hybrid steady-state (Arc + AVS + selective burst)
+
+**When:** Customer keeps most VMware on-prem (Arc-managed) and uses AVS for selective Azure-adjacent workloads.
+
+| Element | Design choice |
+|---|---|
+| On-prem | Azure Arc-enabled VMware vSphere — Azure resource model |
+| AVS | Small AVS footprint for workloads that need Azure-adjacency |
+| Network | ER + Global Reach |
+| NSX-T (AVS) | Standard DFW baseline |
+| Identity | Single AD across on-prem + AVS |
+| Backup | Common backup tooling across on-prem + AVS |
+| DR | Per workload; can use AVS as DR for selected on-prem workloads |
+| Cost envelope | Smallest AVS footprint; Arc licensing for on-prem governance |
+
+---
+
+## 6. Mission-critical app rehost (Oracle, SQL FCI, large SAP non-prod)
+
+**When:** Customer has VMware-only-supported workloads (Oracle RAC, SQL FCI, SAP) blocked from hyperscale IaaS.
+
+| Element | Design choice |
+|---|---|
+| AVS topology | Dedicated cluster (often AV52 / AV64 for memory) |
+| Workload | Oracle RAC supported on AVS per Oracle ACE; SQL FCI per Microsoft docs; SAP per certification matrix |
+| Storage | ANF for AVS datastores at Premium / Ultra tier |
+| Network | ER + Global Reach; latency-sensitive paths designed |
+| NSX-T | DFW micro-segmentation per app tier |
+| Identity | App-specific (Oracle Wallet, SQL AG, SAP STMS) |
+| Backup | App-aware backup (RMAN for Oracle, native for SQL, etc.) |
+| DR | Active/passive or stretched cluster |
+| Cost envelope | Higher — premium node SKU + premium storage |
+
+---
+
+## How to choose
+
+| Customer signal | Recommended pattern |
+|---|---|
+| Datacenter exit | 1 |
+| Near-zero RPO mandate | 2 |
+| DR modernisation | 3 |
+| Horizon VDI estate | 4 |
+| Vast majority of workloads stay on-prem | 5 (Arc-led) |
+| Oracle / SQL FCI / SAP blocked from hyperscale IaaS | 6 |
+
+> Most engagements combine multiple patterns (e.g. Pattern 1 + Pattern 3 — exit + DR). Document
+> each pattern in scope within the HLD.

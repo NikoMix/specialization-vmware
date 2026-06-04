@@ -1,0 +1,132 @@
+---
+title: "Azure Migrate VMware + HCX Readiness"
+description: First-class chapter on running the Azure Migrate VMware assessment plus HCX readiness checklist for an AVS engagement.
+sidebar:
+  label: "Assessment Platform Inputs"
+  order: 5
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside type="caution">
+  These two inputs underpin Module B controls **B.1.1** (Workload Assessment) and **B.3.2**
+  (Migration Tools). Skipping or short-changing either creates audit gaps.
+</Aside>
+
+## Part 1 — Azure Migrate VMware assessment
+
+### Appliance deployment
+
+| Step | Detail |
+|---|---|
+| 1 | Create the Azure Migrate project in the customer's tenant |
+| 2 | Download the Azure Migrate appliance OVA |
+| 3 | Deploy to the customer's vCenter |
+| 4 | Bind to vCenter with a read-only service account |
+| 5 | Deploy the dependency-analysis component (agentless or agent-based) |
+| 6 | Allow **≥ 7 days** of telemetry collection for performance-based assessment |
+
+### Discovery + dependency mapping
+
+- Confirm host + VM count discovered matches customer's inventory
+- Run dependency mapping for the top-20 workloads identified in qualification
+- Export dependency maps
+
+### Assessment configuration
+
+| Choice | Performance-based | As-on-premises |
+|---|---|---|
+| When | Reliable performance counters, ≥ 7 days telemetry | Telemetry unreliable, or "parity" baseline desired |
+| Output | Right-sized AVS nodes | Like-for-like AVS sizing |
+
+Run **both** if undecided, then advise the customer on the recommended option and document the decision.
+
+### AVS sizing math
+
+- Aggregate Azure Migrate vCPU / RAM / storage demand
+- Map to AV36 / AV36P / AV52 / AV64
+- Add **10–20% surge buffer** for migration vMotion bursts
+- Add **DR standby** capacity if AVS is also the DR target
+- Result: minimum node count + growth plan
+
+### Output → B.1.1 evidence
+
+- Azure Migrate assessment PDF / Excel export
+- Dependency map exports
+- Sizing math spreadsheet
+- Remediation plan for "Ready with conditions" / "Not ready" VMs
+
+---
+
+## Part 2 — HCX readiness checklist
+
+### vSphere compatibility
+
+- Source vCenter version (≥ 6.5)
+- Target AVS vCenter version (managed by Microsoft)
+- HCX bridging the version gap (HCX supports broad version range)
+
+### Network bandwidth
+
+- ER circuit bandwidth available for migration
+- HCX overhead: plan for **~10–20% protocol overhead**
+- Concurrent customer workload bandwidth requirement
+- Decision: throttle HCX during business hours? Migrate in windows?
+
+### HCX Interconnect appliance footprint
+
+| Appliance | Purpose | Resource footprint per site |
+|---|---|---|
+| HCX Manager | Control plane | 4 vCPU / 12 GB RAM |
+| HCX-IX Interconnect | Data plane (migration) | 8 vCPU / 3 GB RAM |
+| HCX-NE Network Extension | L2 stretch | 8 vCPU / 3 GB RAM |
+| HCX-WO WAN Optimization | Optional dedup/compress | 8 vCPU / 14 GB RAM |
+| HCX Sentinel | Mobility for non-vSphere | varies |
+
+Verify the source environment has spare capacity to host these appliances.
+
+### Port + MTU requirements
+
+- Customer firewall must allow HCX-required ports (443, 8123, 9443, 4500, 500, UDP/4500, etc. — confirm latest [HCX port docs](https://docs.vmware.com/en/VMware-HCX/))
+- **MTU 1500** end-to-end (HCX handles its own MTU negotiation but underlay must support it)
+- Asymmetric routing avoided (Network Extension)
+
+### Service mesh
+
+- Plan the service mesh between source and AVS
+- Network profiles: Management, vMotion, Uplink, vSphere Replication
+- Compute + storage profiles selected
+- Test the mesh end-to-end before scheduling any migration
+
+### Mobility group strategy
+
+- Group VMs by app boundary
+- Plan migration order to respect dependencies
+- Decide per group: Bulk migration / vMotion / Replication-Assisted vMotion (RAV) / Cold
+
+### Network extension cutover plan
+
+- Which VLANs extend during migration?
+- Cutover trigger (after all VMs in group migrated)
+- IP retention strategy (extended segment) vs re-IP strategy
+
+### Output → B.3.2 evidence
+
+- HCX deployment screenshots
+- Service mesh configuration
+- Mobility group definitions
+- Migration job logs
+- Network extension cutover plan + executed evidence
+
+---
+
+## Combined output bundle
+
+A single SharePoint / Confluence folder for the customer engagement, containing:
+
+- Azure Migrate assessment + dependency exports (B.1.1)
+- HCX readiness checklist completed (B.1.1 + B.3.2)
+- HCX service mesh + mobility plan (B.3.2)
+- Sizing math + remediation plan (B.1.1)
+- Network topology diagram with non-overlapping CIDRs (B.1.1)
+- ExpressRoute bandwidth estimation (B.1.1)

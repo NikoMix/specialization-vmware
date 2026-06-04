@@ -1,0 +1,85 @@
+---
+title: "A.3.3 – Operations Management Tooling"
+description: Evidence requirements for control A.3.3 – Azure ops tooling deployment plus automated security/compliance checks via GitHub Actions or Azure DevOps.
+sidebar:
+  label: "3.3 Operations Management"
+  order: 7
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+## What the Auditor Checks
+
+The auditor verifies use of **Azure (or 3rd-party) operations management tooling** — at minimum **Azure Monitor OR Azure Automation OR Azure Backup / Site Recovery deployed** — AND automated security + compliance checks running via **GitHub Actions or Azure DevOps**, producing **one sanitised artifact** (security scan report, monitoring dashboard export, audit-ready YAML pipeline + code-scanning logs, SBOM, or policy-as-code compliance snapshot). The Azure Advisor Reliability Review may be used as supporting evidence.
+
+**Typical questions:**
+- Which Azure ops tools are deployed for two customers? Show the deployment evidence.
+- Where is the CI/CD pipeline definition that runs the automated security/compliance checks?
+- Show one sanitised artifact per customer — scan report, dashboard export, pipeline + scanning logs, SBOM, or policy snapshot.
+
+---
+
+## Required Evidence Checklist
+
+| # | Evidence Item | Accepted Formats | Status |
+|---|---|---|---|
+| 1 | **Azure Monitor** OR **Azure Automation** OR **Azure Backup / Site Recovery** deployment evidence | PDF, Screenshot, IaC | ⬜ |
+| 2 | **GitHub Actions** OR **Azure DevOps** pipeline definition for automated security + compliance checks | YAML, PDF, Repo link | ⬜ |
+| 3 | **One sanitised artifact** per customer: security scan report / monitoring dashboard export / audit-ready YAML + scanning logs / **SBOM** / policy-as-code compliance snapshot | PDF, Excel, JSON | ⬜ |
+| 4 | *(Optional)* **Azure Advisor Reliability Review** supporting evidence | PDF | ⬜ |
+
+> **Customers required:** 2 unique • **Window:** Last 12 months
+> All evidence must be **sanitised** (no PII or customer IP), timestamped, and traceable to pipeline runs.
+
+<Aside type="tip">
+  For AVS, the Azure Monitor for AVS solution + Defender for Cloud + Azure Backup combination
+  satisfies most of this control. Pair with a GitHub Actions workflow that lints Bicep / Terraform
+  and exports a policy-as-code compliance snapshot.
+</Aside>
+
+---
+
+## Evidence Guidance
+
+### Azure ops tools (AVS-specific)
+
+- **Azure Monitor for AVS** — vSAN metrics, NSX-T flows, syslog from ESXi
+- **Azure Automation** — Update Management for AVS guest VMs
+- **Azure Backup Server** (or licensed equivalent) for AVS guest VMs (covered also in B.4.2)
+- **Azure Site Recovery** / SRM / HCX DR for AVS workload protection
+
+### CI/CD security & compliance
+
+Pipeline must:
+- Lint IaC (Bicep / Terraform / ARM)
+- Run secret scanning (GitHub Advanced Security, gitleaks, or equivalent)
+- Run policy-as-code compliance check (e.g. Azure Policy Compliance via `az policy state list`)
+- Produce a sanitised artifact for evidence
+
+### Sanitised artifact options
+
+Pick **one** per customer:
+- Security scan report (Defender for Cloud secure score export, gitleaks report)
+- Monitoring dashboard export (Azure Monitor workbook PDF)
+- Audit-ready YAML pipeline + code-scanning logs
+- SBOM (CycloneDX or SPDX) from a built artifact
+- Policy-as-code compliance snapshot
+
+---
+
+## Evidence Status
+
+| Evidence Item | Owner | Status | Last Updated | Notes |
+|---|---|---|---|---|
+| Azure ops tools – Customer A | | ⬜ Not started | | |
+| CI pipeline + artifact – Customer A | | ⬜ Not started | | |
+| Azure ops tools – Customer B | | ⬜ Not started | | |
+| CI pipeline + artifact – Customer B | | ⬜ Not started | | |
+
+---
+
+## Common Gaps
+
+- **Tools deployed but no CI pipeline evidence**: Both halves are required — tool deployment AND automated security/compliance pipeline.
+- **Artifact contains PII**: Sanitisation is mandatory. Use redacted exports.
+- **No timestamps / pipeline run traceability**: The artifact must clearly link back to a pipeline run timestamp.

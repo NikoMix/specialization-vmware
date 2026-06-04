@@ -1,0 +1,109 @@
+---
+title: "Customer Qualification Questionnaire"
+description: Pre-engagement questionnaire to qualify AVS opportunities — vSphere estate, sizing, urgency, networking, identity, DR, licensing.
+sidebar:
+  label: "Qualification Questionnaire"
+  order: 2
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside type="tip">
+  Use this questionnaire on the first qualification call. Answers feed directly into Azure Migrate
+  sizing, ExpressRoute bandwidth estimation, and the AVS node SKU recommendation.
+</Aside>
+
+## 1 — Current vSphere estate
+
+- vSphere version(s) in use
+- ESXi host count by version
+- Total socket count + core count
+- vSAN / external storage in use? Capacity?
+- NSX-T or NSX-V deployed? Versions?
+- vCenter count + topology
+- Total VM count
+- Top 20 workloads (name, OS, role, criticality)
+
+## 2 — Cluster sizing
+
+- Aggregate vCPU allocated vs. consumed
+- Aggregate RAM allocated vs. consumed
+- Aggregate storage allocated vs. consumed
+- Peak utilisation windows
+- Workload growth trend (last 12 months)
+
+## 3 — Workload dependencies
+
+- Application-to-application dependencies known? (Dependency-mapping tool deployed?)
+- Database hosts and protocols
+- Identity provider dependencies (AD, Entra, Ping, Okta)
+- Inbound + outbound integration points
+- Compliance / data-residency constraints
+
+## 4 — Network topology
+
+- WAN topology (MPLS, SD-WAN, internet-only)
+- Existing ExpressRoute circuits (provider, bandwidth, location)
+- On-prem datacenters + cross-DC connectivity
+- VPN sites
+- Remote-location count
+- Concurrent end-user count
+- IP plan — CIDR ranges already in use (for CIDR-overlap check)
+- DNS topology + DNS forwarders
+
+## 5 — DR posture today
+
+- Current DR target (secondary DC, partner DC, cloud)
+- RPO / RTO targets per tier
+- Fail-over mechanism (SRM, scripted, manual)
+- Last successful fail-over drill date
+
+## 6 — Migration urgency / forcing function
+
+- Lease end? Date?
+- M&amp;A integration?
+- Datacenter exit? Date?
+- vSphere version EoL?
+- DR modernisation mandate?
+- Other?
+
+## 7 — Licensing constraints
+
+- Oracle workloads + licensing model (Authorized Cloud Environment for AVS?)
+- SQL Server workloads + edition / licensing
+- Windows Server licensing (BYOL vs new licences)
+- SAP workloads
+- Other ISV constraints
+
+## 8 — Identity
+
+- On-prem AD forest + trust topology
+- Entra ID tenant + sync (Entra Connect)
+- Federation to 3rd-party IdPs
+- Privileged access management posture (PIM, PAM)
+
+## 9 — Data sovereignty / regions
+
+- Acceptable Azure regions for primary AVS
+- Acceptable regions for DR
+- Data sovereignty regulations (e.g. EU Data Boundary, FedRAMP)
+
+## 10 — Decision-making
+
+- Sponsor (name, title)
+- Technical decision-maker
+- Budget approval process
+- Procurement timeline
+- Existing Microsoft EA / MCA agreement?
+
+---
+
+## Disposition guidance (post-questionnaire)
+
+| Signal | Likely outcome |
+|---|---|
+| Datacenter exit + > 50 VMs + ER already in place | Strong fit → Offering 1 |
+| DR modernisation mandate + on-prem primary keeps | Offering 2 (DR-to-AVS) |
+| Active/passive metro requirement + AZ pair available | Offering 3 (stretched cluster) |
+| Cloud-native ambition + small vSphere estate | Recommend Azure-native rehost via Azure Migrate, not AVS |
+| No urgency + no forcing function | Nurture; recommend WAR + Azure Migrate as paid discovery |

@@ -1,0 +1,15 @@
+{
+  "name": "vmware-on-azure-specialization",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Partner enablement content for the VMware on Microsoft Azure (Azure VMware Solution) Advanced Specialization audit",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/starlight": "^0.39.2",
+    "astro": "^6.3.5"
+  }
+}

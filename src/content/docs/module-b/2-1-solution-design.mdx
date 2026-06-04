@@ -1,0 +1,127 @@
+---
+title: "B.2.1 – Solution Design"
+description: Evidence requirements for control B.2.1 – AVS solution design covering migration strategy, ALZ alignment, ExpressRoute Global Reach, NSX-T, and backup/DR.
+sidebar:
+  label: "2.1 Solution Design"
+  order: 2
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+## What the Auditor Checks
+
+The auditor verifies a **consistent design approach** for an AVS engagement. The project must be either **On-Prem → Cloud (P2V / V2V)** or **Cloud → Cloud** (from other clouds or VMware → AVS). The design must cover:
+
+- Migration strategy (apps / DBs / auxiliary components in scope)
+- Migration risk + mitigation
+- High-level sequence + validation criteria
+- Non-overlapping network topology
+- **Azure Landing Zone** alignment (Mgmt Groups: Tenant / Platform / Landing Zone / Sandbox; subscriptions for Identity / Connectivity / Management / AVS-Prod / AVS-Pilot; RBAC role definitions + assignments; Policy definitions + assignments; AzOps process; AVS Resource Provider registration permissions; DHCP / DNS strategy — hybrid or cloud)
+- **ExpressRoute Global Reach** for migration scenarios when available
+- AVS ExpressRoute circuit key termination on ER Gateway / Virtual WAN
+- Connectivity from on-prem / Azure jump box to **vCenter / NSX-T / HCX** interfaces
+- VLAN segments + DHCP + port mirroring + DNS forwarder via NSX-T or Azure portal
+- Connectivity to guest VM on AVS
+- Guest VM → internet / on-prem / Azure VM connectivity
+- Guest VM → Azure PaaS via Private Endpoint
+- Backup / restore / monitor / DR design
+
+**Typical questions:**
+- Walk us through the design — is this P2V/V2V or cloud → cloud?
+- Show the ALZ alignment: management groups, subscription topology, RBAC, policy.
+- Where is Global Reach configured? If not, why not?
+- Show NSX-T design — VLAN segments, DHCP, port mirroring, DNS forwarder.
+- How do guest VMs reach Azure PaaS via Private Endpoint?
+- Show backup, restore, monitor, and DR design sections.
+
+---
+
+## Required Evidence Checklist
+
+> **Minimum 2 artifacts** from the list below.
+
+| # | Evidence Item | Accepted Formats | Status |
+|---|---|---|---|
+| 1 | **High-Level Design (HLD)** document | PDF, Word | ⬜ |
+| 2 | **Low-Level Design (LLD)** / Functional Spec | PDF, Word, Excel | ⬜ |
+| 3 | **Architecture diagrams** (logical + physical) | PDF, Visio, Draw.io | ⬜ |
+| 4 | **Automated tooling reports** (Azure Migrate, ALZ accelerator outputs) | PDF, JSON | ⬜ |
+| 5 | **ALZ alignment** evidence (MG structure, sub topology, RBAC, Policy) | PDF, IaC, Screenshot | ⬜ |
+| 6 | **Global Reach** configuration evidence (or written rationale if unavailable) | PDF, Screenshot | ⬜ |
+| 7 | **NSX-T design** (VLAN segments, DHCP, port mirroring, DNS forwarder) | PDF, Visio | ⬜ |
+| 8 | **Backup / restore / monitor / DR design** sections | PDF, Word | ⬜ |
+
+> **Customers required:** 1 AVS production customer • **Window:** Last 12 months
+
+<Aside type="tip">
+  Use the [`engagement/deliverables/hld-template`](../../engagement/deliverables/hld-template/) and
+  [`lld-template`](../../engagement/deliverables/lld-template/) as your starting point — they
+  already contain the section structure aligned to this control.
+</Aside>
+
+---
+
+## Evidence Guidance
+
+### ALZ alignment (AVS-specific)
+
+| ALZ element | AVS specifics |
+|---|---|
+| Management Groups | Tenant → Platform → Landing Zones → Sandbox |
+| Subscriptions | Identity, Connectivity, Management, **AVS-Prod**, **AVS-Pilot** |
+| RBAC | AVS Operator, AVS Network Admin, AVS Identity Admin custom roles |
+| Policy | Naming, tagging, allowed AVS regions, allowed node SKUs |
+| AzOps process | Documented for AVS subscriptions and AVS Resource Provider registration |
+| DHCP / DNS | Hybrid (on-prem DNS forwarder) vs. cloud (Azure DNS Private Resolver) — chosen and justified |
+
+### ExpressRoute Global Reach
+
+- Configure when available in the regions involved
+- Document the ER circuit key termination point (ER Gateway or Virtual WAN hub)
+- Show the on-prem ↔ AVS traffic path
+
+### NSX-T design
+
+- T0 → upstream routing
+- T1 → workload segments
+- DFW baseline (deny-all + named allow rules)
+- DHCP relay or NSX-T DHCP service
+- Port mirroring for inspection
+- DNS forwarder (NSX-T or Azure portal)
+
+### Guest VM → Azure PaaS via Private Endpoint
+
+- Document the VNet → AVS connectivity (ER Gateway or vWAN hub)
+- Private Endpoint subnet in the connectivity / spoke VNet
+- DNS resolution chain from AVS guest VM → on-prem DNS / Azure Private Resolver → Private Endpoint
+
+### Backup / restore / monitor / DR design
+
+Brief sections (these expand in B.3.3 and B.4.2):
+- Backup: Azure Backup Server (or licensed equivalent) for guest VMs
+- Restore: documented restore test plan
+- Monitor: Azure Monitor for AVS + Defender for Cloud
+- DR: HCX DR or SRM with target site + RPO/RTO targets
+
+---
+
+## Evidence Status
+
+| Evidence Item | Owner | Status | Last Updated | Notes |
+|---|---|---|---|---|
+| HLD | | ⬜ Not started | | |
+| LLD | | ⬜ Not started | | |
+| Architecture diagrams | | ⬜ Not started | | |
+| ALZ alignment | | ⬜ Not started | | |
+| Global Reach config | | ⬜ Not started | | |
+| NSX-T design | | ⬜ Not started | | |
+
+---
+
+## Common Gaps
+
+- **Design doesn't show ALZ MG/sub topology**: Architecture-only diagrams aren't enough — the ALZ governance layer must be explicit.
+- **Global Reach silently omitted**: If Global Reach is unavailable, write the rationale; don't leave it out.
+- **NSX-T DFW baseline missing**: Default-permit DFW is a security finding; show the deny-all + allowlist baseline.
+- **No DNS strategy**: Hybrid vs cloud DNS must be chosen and documented.
+- **Guest → Azure PaaS path undocumented**: Common — Private Endpoint design is overlooked.

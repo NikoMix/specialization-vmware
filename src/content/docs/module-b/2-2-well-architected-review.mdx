@@ -1,0 +1,81 @@
+---
+title: "B.2.2 – Well-Architected Review of Workloads"
+description: Evidence requirements for control B.2.2 – Azure Well-Architected Review on AVS workloads covering at least 2 pillars.
+sidebar:
+  label: "2.2 Well-Architected Review"
+  order: 3
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+## What the Auditor Checks
+
+The auditor verifies use of the **Azure Well-Architected Review (WAR)** on AVS workloads, evaluating against pillars relevant to the workload. You must demonstrate output for **at least 2 pillars**. The review may be conducted before, during, or after deployment.
+
+**Typical questions:**
+- Show the WAR export for an AVS customer.
+- Which 2 (or more) pillars did you cover, and why those?
+- How did findings translate into action?
+
+---
+
+## Required Evidence Checklist
+
+| # | Evidence Item | Accepted Formats | Status |
+|---|---|---|---|
+| 1 | **Exported WAR results** for at least 1 unique customer (customer named) covering ≥ 2 pillars | PDF | ⬜ |
+| 2 | **Pillar selection rationale** | PDF, Word | ⬜ |
+| 3 | **Action log** linking WAR findings to remediation | PDF, Excel | ⬜ |
+
+> **Customers required:** 1 unique • **Window:** Last 12 months
+> **Minimum pillar coverage:** 2
+
+<Aside type="tip">
+  For AVS workloads, the strongest WAR pillars are typically **Reliability** (stretched-cluster
+  decision, host failure, SLA math), **Cost Optimization** (node reservations, ANF tier, ER
+  bandwidth), and **Operational Excellence** (Arc, Monitor, syslog, runbooks). Choose 2 of these
+  for richest evidence.
+</Aside>
+
+---
+
+## Evidence Guidance
+
+### Running WAR for AVS
+
+- Run via [Microsoft Assessments → Azure Well-Architected Review](https://learn.microsoft.com/assessments/azure-architecture-review/)
+- Scope to the AVS workload (private cloud + guest VMs)
+- Select 2+ pillars relevant to the engagement
+- Customer must be named on the export
+
+### Pillar selection (AVS-specific guidance)
+
+| Pillar | AVS questions to focus on |
+|---|---|
+| **Reliability** | Stretched clusters? Host failure tolerance? SLA composition (AVS + ANF + ER)? Backup RPO/RTO? |
+| **Cost Optimization** | Node reservation vs PAYG? AV36 vs AV52 vs AV64 right-sizing? ANF tier choice? ER bandwidth scaled to actual use? |
+| **Operational Excellence** | Azure Arc coverage of guest VMs? Monitor for AVS deployed? Syslog from ESXi / NSX-T? Runbooks for AVS-specific incidents? |
+| **Security** | NSX-T DFW baseline? Defender for Servers on guest VMs? Customer-managed keys (CMK) for AVS? |
+| **Performance Efficiency** | vSAN ESA capacity headroom? Storage policies per workload tier? |
+
+### Action log
+
+Each WAR finding → owner → target date → status. Show closure or in-flight tracking.
+
+---
+
+## Evidence Status
+
+| Evidence Item | Owner | Status | Last Updated | Notes |
+|---|---|---|---|---|
+| WAR export | | ⬜ Not started | | |
+| Pillar selection rationale | | ⬜ Not started | | |
+| Action log | | ⬜ Not started | | |
+
+---
+
+## Common Gaps
+
+- **Only 1 pillar covered**: V1.9.1 requires **2+**. Re-run to add a second pillar if needed.
+- **No customer name on the export**: The auditor needs the customer named on the artifact.
+- **No action log**: WAR is a process; the findings must lead somewhere.

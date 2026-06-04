@@ -1,0 +1,134 @@
+---
+title: "Offering One-Pager"
+description: AVS engagement offerings — Foundation + first migration wave, DR-to-AVS, and stretched-cluster build.
+sidebar:
+  label: "Offering One-Pager"
+  order: 1
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+## Three packaged offerings
+
+| # | Offering | Duration | Best fit |
+|---|---|---|---|
+| 1 | **AVS Foundation + first migration wave** | 8–12 weeks | Datacenter exit, vSphere refresh, M&amp;A consolidation |
+| 2 | **DR-to-AVS** with SRM or HCX DR | 6–10 weeks | Customers keeping primary on-prem, modernising DR |
+| 3 | **Stretched cluster build** (active/passive metro) | 4–8 weeks | Mission-critical workloads needing near-zero RPO |
+
+> Long-tail migration waves typically run 6–18 months in addition to offering 1.
+
+<Aside type="tip">
+  Each offering should ship with: a fixed-scope SOW, a wave plan template, and a hypercare plan. The
+  WAF assessment + Azure Migrate assessment are pre-requisites that may be sold as a separate, paid
+  discovery if the customer is not yet committed.
+</Aside>
+
+---
+
+## Offering 1 – AVS Foundation + first migration wave
+
+**Outcomes**
+
+- AVS landing zone aligned to CAF / ALZ Accelerator
+- AVS private cloud provisioned (single cluster, AV36 / AV52 / AV64 per sizing)
+- HCX deployed with mobility groups + service mesh
+- ExpressRoute + Global Reach (where available)
+- First wave of 10–50 workloads migrated and validated
+- KT + hypercare for 30 days post-cutover
+
+**Engagement squad** (typical)
+
+- AVS platform architect (VMware SME — recommend VCP-DCV)
+- Azure architect (AZ-305)
+- Network engineer (AZ-700)
+- Migration lead
+- Project manager
+
+**Deliverables**
+
+- HLD + LLD
+- Wave plan
+- Cutover runbook per wave
+- As-built documentation
+- KT plan + hypercare plan
+
+**Pricing model**
+
+- Default: T&amp;M with capped fee
+- Alternative: fixed-fee for landing zone + first wave; T&amp;M for subsequent waves
+
+**Exclusions**
+
+- Long-tail wave execution beyond wave 1
+- Application refactor / replatform work
+- Long-term operational management (separate managed service offer)
+
+---
+
+## Offering 2 – DR-to-AVS
+
+**Outcomes**
+
+- AVS DR private cloud provisioned
+- SRM or HCX DR configured
+- DR run-book + fail-over drill executed
+- RPO / RTO targets validated
+
+**Engagement squad**
+
+- AVS platform architect
+- Azure architect (network focus)
+- DR specialist
+
+**Deliverables**
+
+- DR design document
+- DR run-book
+- Fail-over drill report
+- Hypercare for DR readiness
+
+---
+
+## Offering 3 – Stretched cluster build
+
+**Outcomes**
+
+- AVS stretched cluster deployed across 2 AZs
+- Network design for metro latency + bandwidth
+- Workload placement strategy
+- Cutover of designated mission-critical workload(s)
+- DR / failure-mode runbook
+
+**Engagement squad**
+
+- AVS platform architect
+- Azure network engineer
+- Migration lead (workload-specific)
+
+**Deliverables**
+
+- Stretched cluster design (including SLA math)
+- Network design
+- Workload cutover plan
+- Failure-mode runbook
+
+---
+
+## Required Microsoft assessments (built into every offering)
+
+These are **audit evidence**, not optional:
+
+| Assessment | Phase | Linked controls |
+|---|---|---|
+| FinOps Review | Discovery | A.1.1 |
+| Cloud Adoption Strategy Evaluator (CASE) | Discovery | A.1.1 |
+| Pricing Calculator | Planning | A.1.2 |
+| DevOps Capability Assessment | Planning | A.1.2 |
+| Cloud Adoption Security Review | Design | A.2.1 |
+| Azure Well-Architected Review | Design / Pre-go-live | A.2.2, B.2.2 |
+| Azure Landing Zone Review | Design | A.3.1 |
+| Azure Migrate (VMware appliance) | Discovery / Assess | B.1.1 |
+| *(Optional)* Azure Advisor Reliability Review | Operate | A.3.3 |
+
+> Quote the assessment effort explicitly in the SOW so the customer expects it.

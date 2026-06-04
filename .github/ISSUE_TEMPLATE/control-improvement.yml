@@ -1,0 +1,37 @@
+name: Control improvement
+description: Improve evidence guidance for a Module A or Module B control.
+title: "[Control improvement] <module>.<control> – <short description>"
+labels: ["module-a or module-b", "engagement-playbook"]
+body:
+  - type: dropdown
+    id: module
+    attributes:
+      label: Module
+      options:
+        - Module A
+        - Module B
+    validations:
+      required: true
+  - type: input
+    id: control
+    attributes:
+      label: Control number (e.g. A.2.1, B.3.3)
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What's wrong / unclear / missing today?
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested improvement
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Engagement context (anonymised)
+      description: Which engagement / customer (anonymised) surfaced this?

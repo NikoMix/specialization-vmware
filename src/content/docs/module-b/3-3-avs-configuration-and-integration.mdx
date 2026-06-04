@@ -1,0 +1,108 @@
+---
+title: "B.3.3 – AVS Configuration and Azure Services Integration"
+description: Evidence requirements for control B.3.3 – AVS configuration and integration with adjacent Azure services (at least 3 of the listed capabilities).
+sidebar:
+  label: "3.3 AVS Configuration & Integration"
+  order: 6
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+## What the Auditor Checks
+
+The auditor verifies AVS configuration and Azure-services integration evidence across **at least 3** of the listed capabilities, supported by **at least 2** documentation artifacts.
+
+**Typical questions:**
+- Which 3+ integration capabilities have you implemented? Show each.
+- Where are the architecture diagrams covering networking, HA/DR, backup, management, monitoring, and load balancing?
+
+---
+
+## Required Evidence Checklist
+
+### Integration capabilities (demonstrate **at least 3**)
+
+| # | Capability | Status |
+|---|---|---|
+| 1 | **Azure Blob backend** for vSphere Content Library | ⬜ |
+| 2 | **Populate Content Library** with licensed Windows / Linux images | ⬜ |
+| 3 | **Identity source for AVS** — on-prem AD or federated Entra ID via on-prem AD on Azure VMs (domain controllers) | ⬜ |
+| 4 | **Add / remove hosts** without application impact | ⬜ |
+| 5 | **Configure Gateway** for AVS app | ⬜ |
+| 6 | **Enable public Internet** on AVS (NSX-T DNAT or Azure-managed Public IP) | ⬜ |
+| 7 | **Scale AVS nodes** (scale-out / scale-in operations) | ⬜ |
+| 8 | **Quota-increase process** documented and executed | ⬜ |
+| 9 | **Configure Virtual WAN** for multi-site access | ⬜ |
+
+### Supporting documentation (**minimum 2**)
+
+| # | Evidence Item | Accepted Formats | Status |
+|---|---|---|---|
+| D1 | **Solution Design Docs** | PDF, Word | ⬜ |
+| D2 | **Project Plan + migration sequence** | PDF, Excel, Project | ⬜ |
+| D3 | **Architecture Diagrams** covering Networking, HA/DR, Backup, Management + Monitoring, Load Balancing | PDF, Visio | ⬜ |
+
+> **Customers required:** 1 AVS production customer • **Window:** Last 12 months
+
+<Aside type="tip">
+  Identity source + scale operations + Content Library populated is a typical "easy 3" combination
+  that most production AVS deployments already cover. Document each with a screenshot + brief
+  narrative + the role it plays in the design.
+</Aside>
+
+---
+
+## Evidence Guidance
+
+### Azure Blob backend for Content Library
+
+- Configure vSphere Content Library on AVS to use an Azure Blob container as backend
+- Screenshot of Content Library configuration referencing the blob URL
+
+### Identity source
+
+For AVS, two patterns are common:
+1. **On-prem AD reachable from AVS** via ER / VPN — vCenter Single Sign-On (SSO) bound to on-prem AD
+2. **Domain controllers on Azure VMs** (federated with on-prem AD) — vCenter SSO bound to the Azure-hosted DCs
+
+Document chosen pattern + AVS SSO configuration.
+
+### Add / remove hosts without app impact
+
+- Show the procedure (vCenter DRS evacuation + host removal)
+- Reference a real instance (change ticket + before/after host count)
+
+### Public Internet on AVS
+
+Two options:
+- **NSX-T DNAT** for inbound + SNAT for outbound
+- **Azure-managed Public IP** consumed via the AVS Public IP service
+
+### Quota-increase process
+
+- Document the process: AVS portal → Quota request → support ticket
+- Provide an example: requested 4 → 6 node quota, approved on date
+
+### Virtual WAN multi-site
+
+- vWAN hub with AVS ER circuit attached
+- Multiple branches / regions attached
+- Routing intent / routing policies if used
+
+---
+
+## Evidence Status
+
+| Capability | Owner | Status | Last Updated | Notes |
+|---|---|---|---|---|
+| Capability 1 | | ⬜ Not started | | |
+| Capability 2 | | ⬜ Not started | | |
+| Capability 3 | | ⬜ Not started | | |
+
+---
+
+## Common Gaps
+
+- **Only 2 capabilities covered**: V1.9.1 requires **at least 3**. Pick easy wins (identity, Content Library, scale).
+- **Identity source unclear**: vCenter SSO binding to AD must be explicit — screenshot the SSO config.
+- **Diagrams don't cover all 5 areas**: Networking / HA/DR / Backup / Mgmt+Monitoring / Load Balancing must all be represented.

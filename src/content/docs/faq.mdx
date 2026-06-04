@@ -1,0 +1,122 @@
+---
+title: Frequently Asked Questions
+description: Common questions from partners during the VMware on Microsoft Azure (Azure VMware Solution) Advanced Specialization engagement.
+sidebar:
+  order: 11
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+## Pre-Qualification
+
+### Is VCP-DCV still required for the audit?
+
+**No.** The previous Module B Control 1.1 (Third-Party Certifications — VCP-DCV / Master Services Competency for Data Center Virtualization) was **removed in the V1.8 update (October 8, 2025)** and remains absent in V1.9.1. VCP-DCV is **recommended** as a delivery skill (your VMware SME should hold it) but is **not an audit gate**.
+
+### How do I know if we already meet the ACR thresholds?
+
+Check **Partner Center → Insights → Azure Revenue** and filter to the relevant time window. Note that Partner Center data typically lags by **2–4 weeks**, so plan accordingly. Your PDM can provide a more current view on request. AVS node consumption (AV36 / AV36P / AV52 / AV64) is the primary anchor.
+
+### Can we count ACR from multiple subscription types (CSP, DPOR, PAL)?
+
+Yes. All three eligible association types count: **DPOR**, **PAL**, **CSP**. A single customer may have multiple association types but counts as one unique customer.
+
+### Can a single individual's certifications count toward the minimum if they hold multiple?
+
+Yes for the AZ-104 / AZ-305 minimum (each cert needs at least one holder). One person holding both AZ-104 and AZ-305 satisfies both lines.
+
+---
+
+## Audit Process
+
+### How long does the audit take?
+
+For well-prepared partners, the full process from audit request to badge publication is typically **6–8 weeks**. Unprepared partners typically take **12–16 weeks**.
+
+### How much does the audit cost?
+
+- **Module B only**: $2,400 USD, 4-hour session
+- **Module A + Module B combined**: $3,600 USD, 8-hour session
+
+The audit is conducted by **ISSI** (Information Systems &amp; Services Inc.).
+
+### When can I skip Module A?
+
+If your organisation passed **Module A within the last 2 years**, you may request **Module B only** at your next renewal. Confirm the prior pass date with your PDM before booking the audit.
+
+### What format does the auditor want evidence in?
+
+Auditors generally accept **PDF, Word, Excel, and PowerPoint** documents. Screenshots should be exported as PDF where possible. All documents should be clearly named with control references (e.g., `B.1.1_AzureMigrate_Assessment_v2.pdf`).
+
+### What happens if we fail the audit?
+
+You receive a **remediation report** itemising the specific controls and gaps. You have approximately **30 days** to address and resubmit. Failure to remediate may require restarting the audit process.
+
+### Can we anonymise customer names in case studies and references?
+
+Yes for internal documents (e.g., "Customer A"). However, ISSI may verify references against Partner Center records. Work with your PDM on acceptable anonymisation levels.
+
+### Is the audit conducted in English?
+
+Yes, by default. Confirm language options with ISSI at kickoff.
+
+---
+
+## Evidence – AVS specifics
+
+### Do we have to use Azure Migrate, or can we use a 3rd-party tool?
+
+You may use partner / community tools for discovery and dependency mapping, **but the final recommendation must be consolidated into Azure Migrate**. The auditor expects Azure Migrate output as part of B.1.1 evidence.
+
+### Performance-based vs. As-on-premises Azure Migrate assessment — which?
+
+The checklist advises informing customers of both options and selecting based on context. Performance-based gives more accurate AVS sizing for steady-state workloads. As-on-premises is appropriate when performance metrics are unreliable or unavailable.
+
+### What if a workload is flagged "Ready with conditions" or "Not ready"?
+
+Your assessment evidence must include a **remediation plan** for these VMs (e.g., resize, refactor, exclude from wave 1). The remediation plan itself becomes part of the B.1.1 evidence.
+
+### Is ExpressRoute Global Reach mandatory for the audit?
+
+Required **when available** in the regions involved. The design (B.2.1) must reflect Global Reach for migration scenarios where on-prem ↔ AVS connectivity is needed and Global Reach is regionally available.
+
+### Do we need stretched clusters in our reference design?
+
+Not mandatory. Stretched clusters are one of the six reference architectures and apply when the customer needs near-zero RPO across two metro Availability Zones. Most engagements use single-cluster AVS private clouds.
+
+### What counts for B.3.3 (AVS configuration &amp; Azure integration)?
+
+You must demonstrate evidence in **at least 3** of: vSphere Content Library on Azure Blob; licensed Windows/Linux images in Content Library; AD or federated Entra ID via on-prem AD on Azure VMs as AVS identity source; non-impact host add/remove; AVS app gateway; AVS public internet enablement; AVS node scale-out; quota-increase process; Virtual WAN multi-site.
+
+### Does HCX have to be the migration tool?
+
+No. You may use HCX (Enterprise edition is included with AVS), VMware-native motion mechanisms, or 3rd-party tools (Commvault, RiverMeadow, Rubrik, etc.). Whichever you choose must be demonstrated with plans/scripts/output snapshots in B.3.2.
+
+---
+
+## Post-Specialization
+
+### How long is the Advanced Specialization valid?
+
+Advanced Specializations are typically valid for **one year** and must be renewed annually. The renewal process includes a re-audit or a lighter evidence update, depending on Microsoft's renewal policy at the time. **Module A specifically is reusable for 2 years**, so renewal cycles may alternate between Module B only and combined audits.
+
+### What about the V2.0 PREVIEW (Jun 1, 2026)?
+
+The V1.9.1 checklist is active **Jan 1 – Jun 30, 2026**. A **V2.0 PREVIEW** for both Module A and Module B becomes effective **June 1, 2026**. Plan to re-baseline your evidence package after the current cycle. The Engagement Agent and this guide will be updated when V2.0 is published.
+
+### Where does the specialization badge appear?
+
+On your **Microsoft AppSource partner profile**, in **Microsoft Partner Finder**, and downloadable from Partner Center for use on your website and marketing materials.
+
+### Are there additional benefits beyond the badge?
+
+Yes:
+- **Co-sell priority** for AVS opportunities
+- **Marketing through Microsoft** (MtM) eligibility
+- **Partner-funded marketing** opportunities
+- Access to **Microsoft-led go-to-market programmes**
+
+<Aside>
+  Benefits and programmes change periodically. Confirm current benefits with your PDM or on the
+  [Microsoft Partner Network benefits page](https://partner.microsoft.com/en-us/partnership/partner-network/benefits).
+</Aside>

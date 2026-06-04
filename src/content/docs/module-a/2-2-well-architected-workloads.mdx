@@ -1,0 +1,72 @@
+---
+title: "A.2.2 – Well-Architected Workloads"
+description: Evidence requirements for control A.2.2 – design aligned to Azure Architecture Center reference architectures with a completed Azure Well-Architected Review.
+sidebar:
+  label: "2.2 Well-Architected Workloads"
+  order: 4
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+## What the Auditor Checks
+
+The auditor verifies that workloads about to be deployed are designed in alignment with **Azure Architecture Center reference architectures** and have a completed **Azure Well-Architected Review (WAR)** to confirm production-readiness.
+
+**Typical questions:**
+- Show the reference-architecture alignment evidence for two customer workloads.
+- Where are the exported WAR results?
+- How did WAR findings shape the design before go-live?
+
+---
+
+## Required Evidence Checklist
+
+| # | Evidence Item | Accepted Formats | Status |
+|---|---|---|---|
+| 1 | **Azure Well-Architected Review** export (≥ 1 pillar covered; 2+ pillars recommended) | PDF | ⬜ |
+| 2 | **Reference architecture alignment** evidence (link to AAC + customer design diff) | PDF, PowerPoint, Visio | ⬜ |
+| 3 | **Remediation/action log** for WAR findings | PDF, Excel | ⬜ |
+
+> **Customers required:** 2 unique • **Window:** Last 12 months
+
+<Aside type="tip">
+  For AVS engagements, anchor on the [Azure VMware Solution reference architectures](https://learn.microsoft.com/azure/architecture/solution-ideas/articles/azure-vmware-solution-foundation) plus the
+  [AVS landing zone accelerator](https://learn.microsoft.com/azure/cloud-adoption-framework/scenarios/azure-vmware/). WAR findings often drive the
+  Reliability and Cost pillars hardest — plan to address those before go-live.
+</Aside>
+
+---
+
+## Evidence Guidance
+
+### Azure Well-Architected Review
+
+- Run via [Microsoft Assessments → Azure Well-Architected Review](https://learn.microsoft.com/assessments/azure-architecture-review/)
+- For AVS workloads, prioritise pillars: **Reliability**, **Cost Optimization**, **Operational Excellence**
+- Export PDF results and pair with the remediation log
+
+### Reference architecture alignment
+
+For each customer workload:
+- Identify the closest Azure Architecture Center pattern
+- Document the deltas (where the customer design differs and why)
+- Include an architecture diagram showing the alignment
+
+---
+
+## Evidence Status
+
+| Evidence Item | Owner | Status | Last Updated | Notes |
+|---|---|---|---|---|
+| WAR – Customer A | | ⬜ Not started | | |
+| Reference-arch alignment – Customer A | | ⬜ Not started | | |
+| WAR – Customer B | | ⬜ Not started | | |
+| Reference-arch alignment – Customer B | | ⬜ Not started | | |
+
+---
+
+## Common Gaps
+
+- **WAR run after go-live with no remediation**: WAR is most valuable pre-go-live. If run after, you must show subsequent remediation work.
+- **Generic "best practices" doc instead of a real WAR export**: The auditor wants the WAR portal export, not a slide deck summary.
+- **No reference-architecture link**: Even a brief "this design is based on AAC pattern X, with deltas Y and Z" satisfies the alignment evidence.

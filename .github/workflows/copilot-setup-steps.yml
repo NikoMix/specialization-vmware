@@ -1,0 +1,24 @@
+name: Copilot Setup Steps
+
+# Pre-build the environment for the GitHub Copilot coding agent so it can
+# install dependencies and run npm scripts without each session re-installing.
+on:
+  workflow_dispatch:
+
+jobs:
+  copilot-setup-steps:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Build site (verify)
+        run: npm run build

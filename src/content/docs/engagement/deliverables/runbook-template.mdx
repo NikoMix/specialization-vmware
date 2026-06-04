@@ -1,0 +1,125 @@
+---
+title: "Runbook Template – Wave Plan + Cutover + Interconnect"
+description: Migration runbook template covering wave plan, cutover steps, rollback, and HCX interconnect specifics.
+sidebar:
+  label: "Runbook Template"
+  order: 3
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside type="tip">
+  Maintain one wave plan for the whole migration, and one cutover runbook **per wave**. The cutover
+  runbook is what the team executes on cutover night.
+</Aside>
+
+## Part A — Wave plan
+
+### Wave summary
+
+| Wave | Workload group | VM count | Migration type | Target window | Owner |
+|---|---|---|---|---|---|
+| 1 | | | HCX Bulk / vMotion / RAV / Cold | | |
+| 2 | | | | | |
+| 3 | | | | | |
+
+### Sequencing rules
+
+- Dependencies respected (DB before app, app before web)
+- Wave 1 includes a "guinea pig" workload (low-risk, fast feedback)
+- Final wave includes mission-critical workloads only after confidence built
+
+### Rollback triggers
+
+| Trigger | Decision |
+|---|---|
+| HCX mesh health degraded > 30 min | Pause wave |
+| Post-cutover Sev-1 within 4 hours | Roll back affected VMs |
+| ER bandwidth saturation | Throttle HCX or defer remaining migrations |
+
+---
+
+## Part B — Cutover runbook (per wave)
+
+### Pre-checks (T-24 h)
+
+- [ ] HCX mobility group prepared
+- [ ] Network Extension health verified
+- [ ] Bandwidth headroom on ER confirmed
+- [ ] Target AVS capacity confirmed
+- [ ] Backup of source VMs verified
+- [ ] Customer comms sent (impact window)
+- [ ] Rollback decision-maker identified + available
+
+### Freeze window start (T-0)
+
+- [ ] Communication: "Migration in progress"
+- [ ] Change management ticket opened
+- [ ] Source VMs in scope: quiesce app / drain connections (per app SOP)
+- [ ] HCX migration started for the wave
+
+### Migration in flight
+
+- [ ] Monitor HCX dashboard (% complete, throughput, errors)
+- [ ] Monitor ER bandwidth utilisation
+- [ ] Address per-VM warnings immediately
+
+### Network extension cutover
+
+- [ ] Confirm all VMs in extension scope migrated
+- [ ] Trigger NE cutover (or de-extension + IP retention check)
+- [ ] Validate gateway availability on AVS side
+
+### Validation (T+0 to T+2 h)
+
+- [ ] VM power state on AVS
+- [ ] Network connectivity (ping, gateway, DNS)
+- [ ] Application smoke tests per app SOP
+- [ ] Database integrity check (DB tier)
+- [ ] End-user / synthetic transaction (web tier)
+
+### Rollback decision tree
+
+| Result | Action |
+|---|---|
+| All validations pass | Complete cutover, close window |
+| Single non-critical VM failed | Defer that VM, complete rest |
+| Multiple VMs failed | Stop, assess, decide rollback or continue with mitigations |
+| Sev-1 outage | Roll back per rollback runbook |
+
+### Post-cutover (T+24 h)
+
+- [ ] Customer comms: "Migration complete"
+- [ ] Update CMDB / inventory
+- [ ] Update monitoring scopes (Azure Monitor / Defender for Cloud)
+- [ ] Update backup scopes
+- [ ] Hypercare watch enabled
+
+---
+
+## Part C — Interconnect specifics
+
+### HCX mobility group composition
+
+| Group | Constraint |
+|---|---|
+| Group 1 | All VMs sharing one L2 segment to be migrated together (for NE cutover) |
+| Group 2 | Independent dependency cluster |
+
+### Network extension cutover
+
+- Cutover triggers when last VM in extension leaves source
+- "Cutover" = de-extend segment, traffic continues via AVS gateway
+- Plan for **brief packet loss** (typically &lt; 2 minutes) at cutover
+
+### IP retention strategy
+
+| Strategy | When to use |
+|---|---|
+| Retain IPs (NE cutover) | Minimise app reconfiguration; respect DNS TTL |
+| Re-IP at migration | When NE cutover not feasible; pair with DNS update workflow |
+
+### HCX-WO (WAN optimization) toggling
+
+- Enable for bandwidth-constrained migrations
+- Disable for low-latency / high-bandwidth links where it adds overhead

@@ -1,0 +1,22 @@
+# CODEOWNERS for the VMware on Microsoft Azure (AVS) specialization toolkit.
+#
+# Replace the @-handles below with your organisation's actual GitHub teams or
+# users before merging to main.
+
+# Default — practice lead reviews anything not otherwise scoped
+*                                       @AVS-PRACTICE-LEAD
+
+# Module A — audit lead owns generic Azure foundation controls
+/src/content/docs/module-a/             @AUDIT-LEAD @AVS-PRACTICE-LEAD
+
+# Module B — AVS audit lead
+/src/content/docs/module-b/             @AVS-AUDIT-LEAD @AVS-PRACTICE-LEAD
+
+# Engagement playbook — AVS practice lead
+/src/content/docs/engagement/           @AVS-PRACTICE-LEAD @ENGAGEMENT-LEADS
+
+# Innersource governance — practice lead
+/src/content/docs/innersource/          @AVS-PRACTICE-LEAD
+
+# Workflows, agents, memories, scripts — platform team + practice lead
+/.github/                               @PLATFORM-LEAD @AVS-PRACTICE-LEAD

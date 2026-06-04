@@ -1,0 +1,80 @@
+---
+title: Overview
+description: What is the VMware on Microsoft Azure (Azure VMware Solution) Advanced Specialization and when should your organisation pursue it?
+sidebar:
+  order: 1
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+## What is the VMware on Microsoft Azure Advanced Specialization?
+
+The **VMware on Microsoft Azure Advanced Specialization** (also referred to as the **Azure VMware Solution (AVS)** specialization) is a Microsoft Partner credential that validates deep technical and delivery expertise in migrating, modernising, and operating VMware vSphere estates on Azure using **Azure VMware Solution**. It signals to customers and Microsoft that your organisation:
+
+- Has **delivered an AVS production migration** with documented assessment, design, deployment and operations evidence
+- Operates an **Azure landing zone** aligned to the Cloud Adoption Framework, with repeatable IaC and ALZ Accelerator patterns
+- Plans **HCX-led migrations** sized via Azure Migrate, with non-overlapping networks and ExpressRoute Global Reach connectivity where required
+- Has passed the **ISSI third-party remote audit** validating Module A (general Azure foundation) and Module B (AVS-specific) controls
+
+<Aside type="tip">
+  Partners who hold Advanced Specializations typically appear higher in the Microsoft Partner Finder,
+  qualify for additional co-sell benefits, and gain access to Microsoft-funded marketing programmes
+  for the workloads they specialise in.
+</Aside>
+
+## When to recommend AVS (vs. native IaaS rehost)
+
+| Scenario | Best fit |
+|---|---|
+| Datacenter exit with vSphere refresh due | **AVS** — preserve vSphere/NSX/vSAN operational model; HCX bulk migration |
+| Mission-critical apps with VMware-only support contracts (e.g. SAP, Oracle RAC) | **AVS** |
+| Need stretched metro cluster with near-zero RPO | **AVS** stretched clusters |
+| DR-only target for on-prem VMware | **AVS** + SRM / HCX DR |
+| New cloud-native workload | Azure-native PaaS / IaaS (not AVS) |
+| Replatform / refactor to PaaS already planned | Azure-native (use Arc-enabled VMware for the steady-state on-prem footprint) |
+| Small estate with no VMware operational dependency | Azure-native IaaS rehost via Azure Migrate |
+
+## Why pursue this specialization?
+
+| Benefit | Details |
+|---|---|
+| **Differentiation** | Verifiable, audited credential for VMware-to-Azure migration capability |
+| **Co-sell eligibility** | Priority co-sell referrals from Microsoft field sellers for AVS opportunities |
+| **Marketing assets** | Specialization badge + Microsoft-approved marketing collateral |
+| **Partner Finder visibility** | Appear in customer-facing searches filtered by AVS specialization |
+| **Customer confidence** | Audited proof of repeatable migration delivery |
+
+## How this guide helps
+
+This repository is structured as an **engagement toolkit**. Each page maps to a specific audit control and contains:
+
+1. **What the auditor checks** — exact criteria from the V1.9.1 audit checklist
+2. **Required evidence** — a structured checklist of accepted artefacts (Azure Migrate output, HCX plans, ALZ blueprints, WAR exports, runbooks)
+3. **Evidence status table** — assign owners, set deadlines, track status
+4. **Tips** — practical advice for gathering and formatting evidence
+
+Use this guide alongside your Microsoft Partner Center portal, your Azure Migrate project, and your internal project management tooling.
+
+## Specialization scope
+
+This guide covers the V1.9.1 checklist active **January 1 – June 30, 2026**:
+
+| Module | Scope |
+|---|---|
+| **Module A** | Azure Essentials Cloud Foundation (7 controls). Shared across Azure specializations; **a Module A pass is reusable for up to 2 years**. |
+| **Module B** | Azure VMware Solution workload (8 controls): 1.0 Assess → 2.0 Design → 3.0 Deployment → 4.0 Review and Release for Operations. |
+
+<Aside type="note">
+  **V1.9.1 change**: The previous Module B "Third-Party Certifications" control (VCP-DCV / Master Services
+  Competency – Data Center Virtualization) was **removed** in the October 8, 2025 update. VCP-DCV remains
+  a recommended delivery skill — see the [Engagement Playbook](../engagement/offering-one-pager/) — but
+  is no longer an audit gate.
+</Aside>
+
+## Related resources
+
+- [Microsoft Partner Center – Specializations](https://partner.microsoft.com/en-us/partnership/specialization)
+- [Azure VMware Solution product page](https://azure.microsoft.com/en-us/products/azure-vmware/)
+- [Azure VMware Solution documentation](https://learn.microsoft.com/azure/azure-vmware/)
+- [Azure VMware Solution landing zone accelerator (CAF)](https://learn.microsoft.com/azure/cloud-adoption-framework/scenarios/azure-vmware/)
+- [Azure Migrate – VMware assessment](https://learn.microsoft.com/azure/migrate/)

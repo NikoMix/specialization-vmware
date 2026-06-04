@@ -1,0 +1,124 @@
+---
+title: "B.1.1 – Workload Assessment"
+description: Evidence requirements for control B.1.1 – pre-migration workload assessment using Azure Migrate, dependency mapping, and AVS node sizing.
+sidebar:
+  label: "1.1 Workload Assessment"
+  order: 1
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+## What the Auditor Checks
+
+The auditor verifies that you ran a **comprehensive pre-migration assessment** covering licensing, discovery + dependency mapping (consolidated into **Azure Migrate**), AVS node quota planning (including standby for surge / DR), assessment-type advisory ("Performance-based" vs "As on-premises"), remediation plans for non-ready VMs, node sizing, software needing AVS-host access, **ExpressRoute bandwidth** estimation, networking topology with no overlap between on-prem / AVS management / AVS workload networks, remote-location / VPN-site / user counts, and inbound + outbound connectivity + security.
+
+**Typical questions:**
+- Show the Azure Migrate output. If you used a 3rd-party / community tool, where is the consolidated Azure Migrate recommendation?
+- What was the AVS node SKU and count? Show the sizing math and the surge / DR standby buffer.
+- Which assessment type did you use — Performance-based or As-on-premises — and why?
+- Show the remediation plan for any VMs flagged "Ready with conditions" or "Not ready".
+- Where is the ExpressRoute bandwidth calculation (data volume × migration timeline)?
+- Show the network topology — non-overlapping CIDRs across on-prem / AVS mgmt / AVS workload.
+- How are remote locations, VPN sites, and end-user counts factored in?
+- How are inbound and outbound connectivity / security covered?
+
+---
+
+## Required Evidence Checklist
+
+> **Minimum 2 evidence artifacts** from the list below.
+
+| # | Evidence Item | Accepted Formats | Status |
+|---|---|---|---|
+| 1 | **Azure Migrate** assessment output (required source of final recommendation) | PDF, Excel | ⬜ |
+| 2 | *(If used)* 3rd-party / community discovery tool output, consolidated into Azure Migrate | PDF, Excel | ⬜ |
+| 3 | **Assessment Checklist** | PDF, Excel, Word | ⬜ |
+| 4 | **Templates** used for the assessment | PDF, Word | ⬜ |
+| 5 | **Questionnaires** completed by the customer | PDF, Word | ⬜ |
+| 6 | **Project plan** showing assessment activities + outcomes | PDF, Excel, Project | ⬜ |
+| 7 | **AVS node sizing math** + surge / DR standby buffer | PDF, Excel | ⬜ |
+| 8 | **ExpressRoute bandwidth** estimation (data volume × timeline) | PDF, Excel | ⬜ |
+| 9 | **Network topology diagram** with non-overlapping CIDRs | PDF, Visio, Draw.io | ⬜ |
+| 10 | **Remediation plan** for "Ready with conditions" / "Not ready" VMs | PDF, Excel | ⬜ |
+
+> **Customers required:** 1 AVS production customer • **Window:** Last 12 months
+
+<Aside type="tip">
+  You may discover with RVTools, Movere, or vendor-specific tools, but the **final recommendation
+  must be consolidated into Azure Migrate**. The auditor will look specifically for the Azure Migrate
+  output as the canonical source.
+</Aside>
+
+---
+
+## Evidence Guidance
+
+### Azure Migrate (canonical)
+
+- Deploy the Azure Migrate appliance on the customer's vCenter
+- Run discovery + dependency mapping for at least 1 full assessment cycle
+- Export the Azure Migrate assessment report covering AVS node SKU recommendation, readiness analysis, and dependency graph
+
+### Assessment type advisory
+
+Document which type you selected and why:
+
+| Type | When to use |
+|---|---|
+| **Performance-based** | Steady-state workloads with reliable performance counters (1+ week of telemetry) |
+| **As on-premises** | When performance data is unreliable / missing, or when the customer wants a "lift-and-shift parity" baseline |
+
+The auditor expects you to have *advised the customer on both options* and recorded the decision.
+
+### AVS node sizing
+
+Show the math:
+- Aggregate vCPU / RAM / storage demand from Azure Migrate
+- Map to node SKU (AV36 / AV36P / AV52 / AV64)
+- Add **surge** capacity (e.g. 10–20% for migration vMotion bursts)
+- Add **DR standby** capacity if AVS is also the DR target
+- Result: minimum node count + growth plan
+
+### ExpressRoute bandwidth estimation
+
+Formula example:
+```
+required Mbps = (data volume in MB × 8) / (target migration window in seconds)
+```
+Factor in: HCX overhead, on-prem ER utilisation headroom, and any concurrent customer workloads.
+
+### Network topology (non-overlapping CIDRs)
+
+Three subnets must be non-overlapping:
+- **On-prem** customer networks
+- **AVS management** (vCenter, NSX-T Manager, HCX Manager) — assigned during AVS provisioning
+- **AVS workload** (NSX-T segments for guest VMs)
+
+### Remediation plan
+
+For each VM flagged "Ready with conditions" or "Not ready":
+- Reason (e.g. unsupported OS, oversize disk, encrypted VM)
+- Remediation action (resize / refactor / exclude from wave 1)
+- Owner + target date
+
+---
+
+## Evidence Status
+
+| Evidence Item | Owner | Status | Last Updated | Notes |
+|---|---|---|---|---|
+| Azure Migrate output | | ⬜ Not started | | |
+| AVS node sizing math | | ⬜ Not started | | |
+| ExpressRoute bandwidth est. | | ⬜ Not started | | |
+| Network topology diagram | | ⬜ Not started | | |
+| Remediation plan | | ⬜ Not started | | |
+
+---
+
+## Common Gaps
+
+- **3rd-party tool output with no Azure Migrate consolidation**: This is the #1 B.1.1 fail. Always finalise into Azure Migrate.
+- **No surge / DR buffer in node sizing**: Sizing must include headroom for migration bursts and (if applicable) DR standby.
+- **CIDR overlap missed**: Common — the customer's on-prem ranges overlap AVS workload defaults. Catch this in the assessment, not the design.
+- **No ExpressRoute bandwidth calc**: Bandwidth estimation is explicitly called out; "we'll use the existing circuit" is not enough.
+- **Performance-based vs As-on-prem decision undocumented**: Record the advisory conversation.

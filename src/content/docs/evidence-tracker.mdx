@@ -1,0 +1,127 @@
+---
+title: Evidence Tracker
+description: Master checklist to track evidence collection status across all Module A and Module B controls for the Azure VMware Solution specialization (V1.9.1).
+sidebar:
+  order: 10
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+<Aside type="tip">
+  Copy this tracker into your project management tool (Excel, Azure DevOps, Jira, or SharePoint) and
+  assign owners and due dates for each control. Update status as evidence is collected.
+</Aside>
+
+## Status Legend
+
+| Symbol | Meaning |
+|---|---|
+| ⬜ | Not started |
+| 🟡 | In progress |
+| ✅ | Complete – evidence ready |
+| ❌ | Blocked / gap identified |
+| ⚠️ | Submitted – awaiting auditor confirmation |
+
+---
+
+## Module A – Azure Essentials Cloud Foundation
+
+> Requires **2 unique customers per control** in the last 12 months. Same customer may be reused across multiple controls. Module A pass is valid for **2 years**.
+
+| Control | Description | Owner | Due Date | Status | Notes |
+|---|---|---|---|---|---|
+| A.1.1 | Cloud &amp; AI Adoption Business Strategy | | | ⬜ | FinOps Review + CASE |
+| A.1.2 | Cloud &amp; AI Adoption Plan | | | ⬜ | Cost Mgmt + DevOps Capability Assessment |
+| A.2.1 | Security &amp; Governance Tooling | | | ⬜ | Defender for Cloud + Cloud Adoption Security Review |
+| A.2.2 | Well-Architected Workloads | | | ⬜ | WAR export |
+| A.3.1 | Repeatable Deployment (ALZ) | | | ⬜ | Bicep / Terraform / ARM + ALZ Review |
+| A.3.2 | Plan for Skilling | | | ⬜ | Skilling plan + Learn paths |
+| A.3.3 | Operations Management Tooling | | | ⬜ | Monitor / Automation / Backup + CI security pipeline |
+
+---
+
+## Module B – Azure VMware Solution (V1.9.1, 8 controls)
+
+> Requires **1 AVS production customer** in the last 12 months (same customer may be reused across all 8 controls).
+
+| Control | Description | Owner | Due Date | Status | Notes |
+|---|---|---|---|---|---|
+| B.1.1 | Workload Assessment | | | ⬜ | Azure Migrate VMware + dependency map |
+| B.2.1 | Solution Design | | | ⬜ | HLD / LLD / architecture diagrams |
+| B.2.2 | Well-Architected Review of Workloads | | | ⬜ | WAR export (≥ 2 pillars) |
+| B.3.1 | Infrastructure Implementation &amp; Configuration | | | ⬜ | SOW + as-built docs |
+| B.3.2 | Migration Tools | | | ⬜ | HCX plans / scripts / 3rd-party tool outputs |
+| B.3.3 | AVS Configuration &amp; Azure Services Integration | | | ⬜ | ≥ 3 integration capabilities demonstrated |
+| B.4.1 | Service Validation &amp; Testing | | | ⬜ | Test plan + customer sign-off |
+| B.4.2 | Post-Deployment Documentation | | | ⬜ | SOPs, monitoring, DR, backup |
+
+---
+
+## Pre-Qualification Gate
+
+| Item | Owner | Status | Notes |
+|---|---|---|---|
+| Active Solutions Partner designation confirmed | | ⬜ | |
+| AVS ACR consumption confirmed | | ⬜ | |
+| AVS-adjacent infra ACR confirmed | | ⬜ | |
+| ≥ 1 AVS production customer in last 12 months | | ⬜ | |
+| ≥ 2 unique customers for Module A | | ⬜ | |
+| AZ-104 (≥ 1 holder) | | ⬜ | |
+| AZ-305 (≥ 1 holder) | | ⬜ | |
+| (Recommended) VCP-DCV holder identified | | ⬜ | Not an audit gate; delivery quality |
+| Module A pass within last 2 years? (waiver eligible) | | ⬜ | If yes, request Module B only |
+| Audit requested via Partner Center | | ⬜ | |
+
+---
+
+## Customer-Evidence Matrix
+
+> Track which customer satisfies which controls. Same customer may appear across multiple controls.
+
+| Customer (anonymised) | Industry | AVS production? | Module A controls covered | Module B controls covered |
+|---|---|---|---|---|
+| Customer A | | ✅ / ⬜ | A.1.1, A.1.2, ... | B.1.1, B.2.1, ... |
+| Customer B | | ✅ / ⬜ | | |
+
+---
+
+## Required Microsoft Assessments (audit evidence)
+
+| Assessment | Linked controls | Owner | Status | Date completed |
+|---|---|---|---|---|
+| FinOps Review | A.1.1 | | ⬜ | |
+| Cloud Adoption Strategy Evaluator (CASE) | A.1.1 | | ⬜ | |
+| Pricing Calculator export | A.1.2 | | ⬜ | |
+| DevOps Capability Assessment | A.1.2 | | ⬜ | |
+| Cloud Adoption Security Review | A.2.1 | | ⬜ | |
+| Azure Well-Architected Review | A.2.2, B.2.2 | | ⬜ | |
+| Azure Landing Zone Review | A.3.1 | | ⬜ | |
+| Azure Migrate – VMware appliance | B.1.1 | | ⬜ | |
+| Azure Advisor Reliability Review *(optional)* | A.3.3 | | ⬜ | |
+
+---
+
+## Certification Holders Mapping
+
+| Individual Name | Role | AZ-104 | AZ-305 | AZ-700 *(rec.)* | VCP-DCV *(rec.)* | NSX-T *(rec.)* | Expiry |
+|---|---|:---:|:---:|:---:|:---:|:---:|---|
+| | | | | | | | |
+| | | | | | | | |
+
+> Add rows as needed. ✅ = holds cert, ⬜ = does not hold.
+
+---
+
+## Evidence Submission Log
+
+| Date | Control | Document Name | Version | Submitted to | Confirmation Received |
+|---|---|---|---|---|---|
+| | | | | | |
+
+---
+
+## Auditor Queries &amp; Responses
+
+| Date Received | Control | Query | Response | Date Resolved |
+|---|---|---|---|---|
+| | | | | |

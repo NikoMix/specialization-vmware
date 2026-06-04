@@ -1,0 +1,133 @@
+---
+title: "B.4.2 – Post-Deployment Documentation"
+description: Evidence requirements for control B.4.2 – operational documentation covering SOPs, monitoring, backup, DR, and ops handover for AVS.
+sidebar:
+  label: "4.2 Post-Deployment Documentation"
+  order: 8
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+## What the Auditor Checks
+
+The auditor verifies operational documentation covering **all** of the following for the AVS customer:
+
+- How the partner **documents decisions / architectures / procedures**
+- **SOPs for BAU operations** ("how-to" scenarios)
+- **AVS host monitoring** solution
+- **Azure Monitoring Agent (MMA)** or equivalent on guest VMs
+- **Guest-VM logs in Azure Monitor**
+- **Azure Update Management + Config Management** (or similar) on AVS guest VMs via Automation Account + Log Analytics
+- AVS guest VMs in **Defender for Cloud** (Defender for Servers)
+- **Backup** via Azure Backup Server (or licensed equivalent) **with restore demonstrated**
+- **DR via HCX / SRM / partner solution**
+- **Automated DR** with workloads deployable to alternate site in running state
+
+**Typical questions:**
+- Show your AVS SOPs / "how-to" library.
+- Where are the AVS host monitoring dashboards?
+- Show the AVS guest VMs in Defender for Cloud.
+- Show a restore demonstration (test or real).
+- Walk us through the automated DR fail-over.
+
+---
+
+## Required Evidence Checklist
+
+> All bullets must be covered for the 1 in-scope customer. Evidence may reuse artifacts from prior controls.
+
+| # | Evidence Item | Accepted Formats | Status |
+|---|---|---|---|
+| 1 | **Documentation process** (how decisions / architectures / procedures are captured) | PDF, Word | ⬜ |
+| 2 | **AVS BAU SOPs** ("how-to" library) | PDF, Word, Wiki | ⬜ |
+| 3 | **AVS host monitoring** solution evidence (Azure Monitor for AVS / vROps / etc.) | PDF, Screenshot | ⬜ |
+| 4 | **Azure Monitoring Agent (MMA)** or equivalent deployed on AVS guest VMs | PDF, Screenshot | ⬜ |
+| 5 | **Guest-VM logs in Azure Monitor** (Log Analytics workspace query result) | PDF, Screenshot | ⬜ |
+| 6 | **Update Management + Config Management** on AVS guests via Automation Account + Log Analytics | PDF, Screenshot | ⬜ |
+| 7 | **Defender for Cloud (Defender for Servers)** coverage of AVS guest VMs | PDF, Screenshot | ⬜ |
+| 8 | **Azure Backup Server** (or equivalent) backup configuration | PDF, Screenshot | ⬜ |
+| 9 | **Restore demonstration** (test or real) | PDF, Screenshot, Video | ⬜ |
+| 10 | **DR design** via HCX / SRM / partner solution | PDF, Word, Diagram | ⬜ |
+| 11 | **Automated DR fail-over** evidence (workloads deployable to alternate site in running state) | PDF, Screenshot, Video | ⬜ |
+
+> **Customers required:** 1 AVS production customer
+
+<Aside type="tip">
+  Restore demonstration and DR fail-over are the two evidence items most commonly forgotten. Bake
+  them into the hypercare plan as scheduled drills and capture the screenshots / videos as you go.
+</Aside>
+
+---
+
+## Evidence Guidance
+
+### Documentation process
+
+A 1-page description of how your team manages docs:
+- Repository (Confluence / SharePoint / Git wiki)
+- Review cadence
+- Ownership
+- Versioning standard
+
+### AVS BAU SOPs
+
+Minimum SOP coverage:
+- Add / remove AVS host
+- Patch ESXi (Microsoft-managed for AVS — document the customer-facing process for change windows)
+- Backup operations
+- Restore operations
+- DR fail-over + fail-back
+- Incident triage path (joint Microsoft + VMware support case)
+
+### Monitoring stack
+
+Layered approach:
+| Layer | Tool |
+|---|---|
+| AVS host metrics (vSAN, ESXi, NSX-T) | Azure Monitor for AVS |
+| Guest OS metrics + logs | MMA / Azure Monitor Agent → Log Analytics |
+| Application logs | Application-specific (often into the same workspace) |
+| Security signal | Defender for Cloud + Sentinel |
+
+### Update + Config Management
+
+- Automation Account + Log Analytics for Update Management
+- DSC / Guest Configuration for Config Management
+- Schedule and reporting evidence
+
+### Backup + restore
+
+- Azure Backup Server VM image backup (or partner equivalent like Veeam, Commvault)
+- Backup schedule + retention
+- **Restore demonstration**: at least one successful restore screenshot or video
+
+### DR
+
+- HCX DR or SRM topology diagram
+- Automated DR run-book reference (also in [`engagement/deliverables/runbook-template`](../../engagement/deliverables/runbook-template/))
+- Fail-over evidence: VMs powered on at the alternate site
+
+---
+
+## Evidence Status
+
+| Evidence Item | Owner | Status | Last Updated | Notes |
+|---|---|---|---|---|
+| SOPs | | ⬜ Not started | | |
+| Monitoring | | ⬜ Not started | | |
+| MMA / Azure Monitor Agent | | ⬜ Not started | | |
+| Update Management | | ⬜ Not started | | |
+| Defender for Servers | | ⬜ Not started | | |
+| Backup config | | ⬜ Not started | | |
+| Restore demonstration | | ⬜ Not started | | |
+| DR design | | ⬜ Not started | | |
+| Automated DR evidence | | ⬜ Not started | | |
+
+---
+
+## Common Gaps
+
+- **Restore not demonstrated**: Most common miss. Schedule a test restore during hypercare.
+- **Automated DR is only designed, not exercised**: Run a tabletop or partial fail-over and capture evidence.
+- **MMA / Azure Monitor Agent gap on AVS guests**: Common — guest OS agent rollout lags VM migration.
+- **SOPs incomplete**: The SOP library must cover BAU end-to-end, not just provisioning.

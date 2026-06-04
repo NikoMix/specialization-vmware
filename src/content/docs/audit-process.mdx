@@ -1,0 +1,162 @@
+---
+title: Audit Process
+description: End-to-end walkthrough of the VMware on Microsoft Azure (Azure VMware Solution) Advanced Specialization third-party remote audit (V1.9.1).
+sidebar:
+  order: 3
+---
+
+import { Aside, Steps, Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Overview
+
+The Advanced Specialization audit is conducted by **ISSI** (Information Systems &amp; Services Inc.), a Microsoft-approved third-party audit firm. The audit is performed remotely (video call + document review) and typically takes **2–4 weeks** from first contact to result, depending on evidence readiness.
+
+| Item | V1.9.1 detail |
+|---|---|
+| Checklist version | V1.9.1, active **Jan 1 – Jun 30, 2026** |
+| Auditor | ISSI |
+| Cost – Module B only | $2,400 USD (4-hour session) |
+| Cost – Module A + Module B combined | $3,600 USD (8-hour session) |
+| Module A reuse | Pass is valid for **2 years** — may waive at next Module B renewal |
+| Successor | V2.0 PREVIEW (Module A &amp; B) effective **Jun 1, 2026** |
+
+<Aside type="tip">
+  Partners who prepare their evidence package in advance (using this guide) consistently report faster
+  audit cycles and fewer remediation rounds. Aim to have all evidence collected **before** requesting
+  the audit.
+</Aside>
+
+---
+
+## Audit Phases
+
+<Steps>
+
+1. ### Pre-Qualification Confirmation
+
+   Before requesting the audit, confirm you meet all four [pre-qualification requirements](../requirements/).
+
+   **Actions:**
+   - Run the Quick Readiness Checklist on the Requirements page
+   - Confirm ACR figures with your PDM (Insights data can lag by 2–4 weeks)
+   - Ensure AZ-104 and AZ-305 certifications are active
+   - Confirm Module A pass status — if passed within last 2 years, you may opt for Module B only ($2,400 / 4 h)
+
+2. ### Audit Request via Partner Center
+
+   Navigate to **Partner Center → Benefits → Advanced Specializations** and request the audit for _VMware on Microsoft Azure_.
+
+   **What happens next:**
+   - Microsoft routes your request to ISSI
+   - You receive an introductory email within 5–10 business days
+   - A kickoff call is scheduled with your assigned auditor
+
+3. ### Kickoff Call with Auditor
+
+   The kickoff call is typically 30–60 minutes. Expect the auditor to:
+
+   - Introduce the audit process and timeline
+   - Confirm which modules will be assessed (Module B only, or A + B combined)
+   - Agree on evidence submission format (SharePoint, email, or their portal)
+   - Set a deadline for evidence submission
+
+   **Tip:** Bring the AVS migration lead, network architect, and your Microsoft assessment owner (FinOps Review, CASE, ALZ Review, WAR).
+
+4. ### Evidence Collection &amp; Submission
+
+   Use the [Evidence Tracker](../evidence-tracker/) to manage collection across all controls.
+
+   <Tabs>
+     <TabItem label="Module A – General (7)">
+       | Control | Key Evidence |
+       |---|---|
+       | [A.1.1 Business Strategy](../module-a/1-1-business-strategy/) | FinOps Review + CASE outputs |
+       | [A.1.2 Adoption Plan](../module-a/1-2-adoption-plan/) | Cost Management report + DevOps Capability Assessment |
+       | [A.2.1 Security &amp; Governance Tooling](../module-a/2-1-security-governance-tooling/) | Defender for Cloud baseline + Cloud Adoption Security Review |
+       | [A.2.2 Well-Architected Workloads](../module-a/2-2-well-architected-workloads/) | WAR export + reference-architecture alignment |
+       | [A.3.1 Repeatable Deployment (ALZ)](../module-a/3-1-repeatable-deployment-alz/) | Bicep / Terraform / ARM IaC + Azure Landing Zone Review |
+       | [A.3.2 Plan for Skilling](../module-a/3-2-plan-for-skilling/) | Skilling plan + Microsoft Learn paths |
+       | [A.3.3 Operations Management Tooling](../module-a/3-3-operations-management-tooling/) | Azure Monitor / Automation / Backup + automated security-compliance pipeline |
+     </TabItem>
+     <TabItem label="Module B – Azure VMware Solution (8)">
+       | Control | Key Evidence |
+       |---|---|
+       | [B.1.1 Workload Assessment](../module-b/1-1-workload-assessment/) | Azure Migrate VMware assessment + dependency map |
+       | [B.2.1 Solution Design](../module-b/2-1-solution-design/) | HLD / LLD / architecture diagrams + ALZ alignment |
+       | [B.2.2 WAR of Workloads](../module-b/2-2-well-architected-review/) | WAR export for AVS workloads (≥ 2 pillars) |
+       | [B.3.1 Infrastructure Implementation](../module-b/3-1-infrastructure-implementation/) | SOW + as-built docs + project plan |
+       | [B.3.2 Migration Tools](../module-b/3-2-migration-tools/) | HCX mobility plans / scripts / 3rd-party tool outputs |
+       | [B.3.3 AVS Configuration &amp; Azure Integration](../module-b/3-3-avs-configuration-and-integration/) | Networking, HA/DR, backup, monitoring evidence |
+       | [B.4.1 Service Validation &amp; Testing](../module-b/4-1-service-validation-testing/) | Test plan + customer sign-off |
+       | [B.4.2 Post-Deployment Documentation](../module-b/4-2-post-deployment-documentation/) | SOPs, monitoring, backup, DR evidence |
+     </TabItem>
+   </Tabs>
+
+5. ### Auditor Review
+
+   ISSI reviews your submitted evidence against the V1.9.1 checklist and may request clarifications or additional documents. Typical review duration: **5–10 business days**.
+
+   - Respond to queries promptly (target &lt; 2 business days)
+   - Assign a single point of contact for auditor communication
+   - Keep evidence version-controlled (use dated filenames)
+
+6. ### Audit Interview (Module B technical walk-through)
+
+   ISSI typically requests a 4-hour video session for Module B (or 8 hours combined with Module A). Prepare:
+
+   - AVS migration lead to walk through the assessment, design, and migration evidence for the named customer
+   - Network architect to discuss ExpressRoute / Global Reach / NSX-T design
+   - Microsoft assessment owner to demonstrate FinOps / CASE / WAR / ALZ Review outputs
+
+7. ### Remediation (if applicable)
+
+   If gaps are identified, ISSI provides a **remediation report** listing specific controls and missing evidence.
+
+   <Aside type="caution">
+     You typically have **30 days** to address remediation findings. Treat this as a priority — delays
+     can result in needing to restart the audit cycle.
+   </Aside>
+
+   - Address each finding systematically using the Module A/B pages in this guide
+   - Resubmit only the affected controls unless instructed otherwise
+
+8. ### Audit Pass &amp; Specialization Award
+
+   Once ISSI confirms a pass, Microsoft Partner Center is updated within **10–15 business days**. The specialization badge appears on your profile.
+
+   **Next steps after passing:**
+   - Download the specialization badge from Partner Center
+   - Update your marketing materials and website
+   - Notify your PDM to unlock co-sell and marketing benefits
+   - **Module A**: log the pass date — you may reuse it for the next 2 years
+
+</Steps>
+
+---
+
+## Timeline Summary
+
+| Phase | Typical Duration |
+|---|---|
+| Pre-qualification confirmation | 1–2 weeks |
+| Audit request to ISSI assignment | 5–10 business days |
+| Evidence collection (prepared) | 1–2 weeks |
+| Evidence collection (unprepared) | 4–8 weeks |
+| Auditor review | 5–10 business days |
+| Audit interview (Module B 4 h / combined 8 h) | 1 day |
+| Remediation (if needed) | Up to 30 days |
+| Specialization badge publication | 10–15 business days |
+| **Total (well-prepared partner)** | **~6–8 weeks** |
+
+---
+
+## Key Contacts
+
+| Role | Responsibility |
+|---|---|
+| **Microsoft PDM** | Pre-qualification confirmation, ACR data queries, Module A reuse confirmation |
+| **ISSI (audit firm)** | Evidence submission, audit scheduling, remediation tracking |
+| **Internal engagement lead** | Evidence collection coordination |
+| **AVS migration lead** | Module B technical evidence (assessment, design, deployment) |
+| **Network architect** | NSX-T / ExpressRoute / Global Reach evidence |
+| **Microsoft assessment owner** | FinOps Review, CASE, WAR, Azure Landing Zone Review, DevOps Capability Assessment, Cloud Adoption Security Review |

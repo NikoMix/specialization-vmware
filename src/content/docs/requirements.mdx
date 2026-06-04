@@ -1,0 +1,129 @@
+---
+title: Pre-Qualification Requirements
+description: Complete checklist of requirements your organisation must meet before applying for the VMware on Microsoft Azure (Azure VMware Solution) Advanced Specialization audit.
+sidebar:
+  order: 2
+---
+
+import { Aside, Steps } from '@astrojs/starlight/components';
+
+<Aside type="caution">
+  All four requirement categories below must be satisfied **before** requesting the audit. Review each
+  section carefully and confirm readiness with your Microsoft Partner Development Manager (PDM).
+</Aside>
+
+## Requirement 1 – Active Solutions Partner Designation
+
+Your organisation must hold an **active** Solutions Partner designation in the relevant Azure track:
+
+| Designation | How to verify |
+|---|---|
+| Solutions Partner for **Infrastructure (Azure)** | Partner Center → Overview → Membership |
+
+> ✅ **Evidence needed:** Screenshot of active designation from Partner Center, or the Partner Center PDF report showing designation status.
+
+---
+
+## Requirement 2 – Azure Consumed Revenue (ACR) Performance
+
+Your organisation must demonstrate sustained Azure Consumed Revenue across **AVS and adjacent infrastructure services**. Confirm the current ACR threshold per the Partner Center specialization page — the indicative thresholds below reflect the current Infrastructure-track expectations and the AVS workload anchor.
+
+### Anchor – Azure VMware Solution consumption
+
+ACR generated from **AVS node SKUs** (AV36, AV36P, AV52, AV64), including stretched-cluster deployments.
+
+### Adjacent – Infrastructure services
+
+| Service category | Examples |
+|---|---|
+| Networking | ExpressRoute, ExpressRoute Global Reach, Virtual WAN, Azure Route Server, Public IP |
+| Storage | Azure NetApp Files for AVS datastores, Azure Blob (vSphere backup target) |
+| Identity & management | Azure Arc-enabled VMware vSphere, Azure Monitor, Microsoft Defender for Cloud |
+| Backup & DR | Azure Backup, Azure Site Recovery, AVS-native HCX DR / SRM |
+
+### Customer Diversity Requirement
+
+Your organisation must have **at least 1 unique AVS production customer** in the last 12 months whose evidence is used to satisfy Module B controls, plus **at least 2 unique customers** for Module A.
+
+**Eligible association types:**
+
+| Association Type | Abbreviation |
+|---|---|
+| Digital Partner of Record | DPOR |
+| Partner Admin Link | PAL |
+| Cloud Solution Provider | CSP |
+
+> ✅ **Evidence needed:** ACR reports from Partner Center → Insights → Azure Revenue. Export and annotate to show AVS consumption and unique customer counts.
+
+---
+
+## Requirement 3 – Certifications
+
+Your delivery team must hold the Microsoft Azure certifications required by the Infrastructure specialization track:
+
+| Certification | Minimum holders | Exam code |
+|---|---|---|
+| Azure Administrator Associate | 1 | AZ-104 |
+| Azure Solutions Architect Expert | 1 | AZ-305 |
+
+### Recommended (delivery quality, not an audit gate)
+
+| Certification | Why |
+|---|---|
+| **VMware VCP-DCV** (current version) | Validates VMware platform skills — strongly recommended for the VMware SME on every engagement. The previous Module B control requiring this credential was **removed Oct 8, 2025**. |
+| **VMware NSX-T** professional credential | NSX-T design + DFW + T0/T1 expertise for AVS network architecture |
+| **AZ-700 Azure Network Engineer Associate** | ExpressRoute, Global Reach and Virtual WAN depth |
+
+<Aside type="tip">
+  AVS engagements typically pair a VMware SME (VCP-DCV) with an Azure architect (AZ-305 / AZ-700). One
+  person rarely covers both — staff the squad accordingly.
+</Aside>
+
+> ✅ **Evidence needed:** Microsoft Learn transcripts or certification verification links for each individual. Prepare a mapping table (Name → Certification → Expiry Date).
+
+---
+
+## Requirement 4 – Third-Party Remote Audit
+
+Your organisation must **pass the V1.9.1 third-party remote audit** conducted by **ISSI** (Information Systems &amp; Services Inc.), a Microsoft-approved audit firm.
+
+| Item | Detail |
+|---|---|
+| Auditor | ISSI (third-party) |
+| Audit cost – Module B only | $2,400 USD |
+| Audit cost – Module A + Module B combined | $3,600 USD |
+| Audit duration – Module B only | 4 hours |
+| Audit duration – Module A + Module B combined | 8 hours |
+| Module A reuse | **Pass is valid for 2 years** — at next Module B renewal you may waive Module A if it was passed within the last 24 months |
+| Checklist version | V1.9.1, active **January 1 – June 30, 2026** |
+| Upcoming version | V2.0 PREVIEW (Module A &amp; B) effective **June 1, 2026** — re-baseline after current cycle |
+
+<Steps>
+1. Confirm pre-qualification (Requirements 1–3 above are met)
+2. Request audit via Partner Center → Advanced Specializations
+3. Receive ISSI auditor assignment and kickoff call scheduling
+4. Submit evidence package to the auditor
+5. Complete the audit interview/review session
+6. Address any remediation findings (if required)
+7. Receive audit pass confirmation
+</Steps>
+
+> ✅ **Evidence needed:** This entire repository constitutes your evidence preparation package. Use [Module A](../module-a/1-1-business-strategy/) and [Module B](../module-b/1-1-workload-assessment/) pages for control-level evidence.
+
+---
+
+## Quick Readiness Checklist
+
+Use this table to confirm readiness before requesting the audit:
+
+| # | Requirement | Status |
+|---|---|---|
+| 1 | Active Solutions Partner designation (Infrastructure / Azure) | ⬜ Not started / ✅ Ready |
+| 2a | ACR threshold met – AVS node consumption | ⬜ Not started / ✅ Ready |
+| 2b | ACR threshold met – AVS-adjacent infra services | ⬜ Not started / ✅ Ready |
+| 2c | ≥ 1 AVS production customer (Module B) in last 12 months | ⬜ Not started / ✅ Ready |
+| 2d | ≥ 2 unique customers (Module A) in last 12 months | ⬜ Not started / ✅ Ready |
+| 3a | AZ-104 held by ≥ 1 individual | ⬜ Not started / ✅ Ready |
+| 3b | AZ-305 held by ≥ 1 individual | ⬜ Not started / ✅ Ready |
+| 3c | (Recommended) VCP-DCV held by ≥ 1 individual on AVS engagements | ⬜ Not started / ✅ Ready |
+| 4 | Audit requested via Partner Center, evidence package prepared | ⬜ Not started / ✅ Ready |

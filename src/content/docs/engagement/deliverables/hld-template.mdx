@@ -1,0 +1,107 @@
+---
+title: "HLD Template – Azure VMware Solution Landing Zone"
+description: High-Level Design template for an AVS engagement covering landing zone, networking, identity, storage, backup, DR, monitoring.
+sidebar:
+  label: "HLD Template"
+  order: 1
+---
+
+> Copy this template into your customer-facing HLD document. Sections marked **(audit)** map directly to Module B controls.
+
+## 1. Executive summary
+
+- Business drivers
+- Forcing function + target dates
+- Recommended pattern(s) (from [Reference Architectures](../../reference-architectures/))
+- Headline cost envelope
+
+## 2. Scope **(audit – B.2.1, B.3.1)**
+
+- In-scope workloads
+- Out-of-scope workloads
+- Migration type (P2V / V2V or Cloud → Cloud)
+
+## 3. Azure region + AZ strategy
+
+- Primary region
+- DR region (if applicable)
+- Stretched cluster AZ pair (if Pattern 2)
+
+## 4. AVS private cloud **(audit – B.3.1)**
+
+- Node SKU (AV36 / AV36P / AV52 / AV64) + count
+- Growth plan (additional nodes timing)
+- vSAN ESA configuration
+- Customer-managed keys (CMK) decision
+- Maintenance windows
+
+## 5. Networking **(audit – B.2.1, B.3.3)**
+
+- ER circuits (customer ER + AVS managed ER)
+- ER Global Reach configuration (or rationale if unavailable)
+- vWAN / Route Server pattern
+- NSX-T design (T0 / T1, segments, DFW baseline, IDS/IPS)
+- Public IP pattern (NSX-T DNAT vs Azure-managed)
+- DNS strategy (hybrid vs cloud)
+- CIDR plan with non-overlap confirmed
+
+## 6. Identity **(audit – B.2.1, B.3.3)**
+
+- AD forest / Entra topology
+- AVS SSO source (on-prem AD via ER, or Azure-hosted DCs)
+- Privileged access (PIM, just-in-time)
+
+## 7. Storage **(audit – B.2.1)**
+
+- vSAN ESA capacity + headroom
+- ANF for AVS datastores (tier + capacity)
+- Blob for backup target / Content Library
+
+## 8. Backup **(audit – B.4.2)**
+
+- Backup tool (Azure Backup Server / 3rd-party)
+- Schedule + retention per workload tier
+- Restore drill cadence
+
+## 9. DR **(audit – B.2.1, B.4.2)**
+
+- DR mechanism (HCX DR / SRM / partner)
+- Target site
+- RPO / RTO per tier
+- Fail-over / fail-back runbook reference
+
+## 10. Monitoring **(audit – B.2.1, B.4.2)**
+
+- Azure Monitor for AVS
+- Log Analytics workspace
+- Defender for Cloud (Defender for Servers)
+- Sentinel ingestion (if scoped)
+- Custom dashboards
+
+## 11. Landing zone alignment **(audit – B.2.1)**
+
+- MG structure
+- Subscription topology
+- RBAC custom roles
+- Policy assignments
+- AzOps process
+- AVS Resource Provider registration
+
+## 12. Cost model **(audit – A.1.2)**
+
+- Pricing Calculator output
+- Node reservation strategy
+- Bandwidth + ANF tier cost
+- Year-1 / year-3 envelope
+
+## 13. Risks + mitigations
+
+- Top 5 risks with mitigation owners
+
+## 14. Decisions log
+
+- Key decisions taken + rationale
+
+## 15. Acceptance criteria
+
+- Customer sign-off criteria for the HLD

@@ -1,0 +1,81 @@
+---
+title: "A.2.1 – Security & Governance Tooling"
+description: Evidence requirements for control A.2.1 – security baseline via Defender for Cloud (or 3rd-party) plus the Cloud Adoption Security Review.
+sidebar:
+  label: "2.1 Security & Governance"
+  order: 3
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+## What the Auditor Checks
+
+The auditor verifies that you have the capability to **deploy governance and security tooling for compliance and security baselines**, demonstrated through both an operational tool deployment and a completed Microsoft Cloud Adoption Security Review.
+
+**Typical questions:**
+- Show the security baseline deployed for two customers (Defender for Cloud, Sentinel, or an equivalent 3rd-party stack).
+- Where is the completed Cloud Adoption Security Review for each customer?
+- How are the findings tracked through to remediation?
+
+---
+
+## Required Evidence Checklist
+
+| # | Evidence Item | Accepted Formats | Status |
+|---|---|---|---|
+| 1 | **Microsoft Defender for Cloud** deployment evidence **OR** equivalent 3rd-party security baseline | PDF, Screenshot, Architecture diagram | ⬜ |
+| 2 | **Cloud Adoption Security Review** completed (required) | PDF, Word | ⬜ |
+| 3 | **Governance tools deployment** evidence (Azure Policy, RBAC baseline, blueprints) | PDF, Word, IaC | ⬜ |
+| 4 | **Remediation tracker** showing findings → actions → status | PDF, Excel | ⬜ |
+
+> **Customers required:** 2 unique • **Window:** Last 12 months
+
+<Aside type="tip">
+  The Cloud Adoption Security Review pairs naturally with an Azure Policy / Defender for Cloud
+  baseline deployment. Run the review during ALZ rollout (A.3.1) so the findings drive the
+  policy-as-code baseline you deploy.
+</Aside>
+
+---
+
+## Evidence Guidance
+
+### Defender for Cloud (or 3rd-party) baseline
+
+For AVS specifically:
+- **Defender for Servers** on AVS guest VMs (covered also in B.4.2)
+- **Defender for Cloud** secure score for the AVS subscription
+- **Sentinel** workspace consuming AVS syslog (NSX-T, vCenter, ESXi)
+
+If using a 3rd-party stack, include vendor naming + scope and explain coverage parity.
+
+### Cloud Adoption Security Review
+
+- Run via the [Microsoft Cloud Adoption Security Review](https://learn.microsoft.com/security/) assessment
+- Export results
+- Map findings to the customer's remediation backlog
+
+### Governance tools
+
+- Azure Policy assignments at MG / Sub scope (ALZ-aligned)
+- RBAC baseline (custom roles for AVS operators, NSX admins)
+- Naming + tagging standards enforced via policy
+
+---
+
+## Evidence Status
+
+| Evidence Item | Owner | Status | Last Updated | Notes |
+|---|---|---|---|---|
+| Defender for Cloud – Customer A | | ⬜ Not started | | |
+| Cloud Adoption Security Review – Customer A | | ⬜ Not started | | |
+| Defender for Cloud – Customer B | | ⬜ Not started | | |
+| Cloud Adoption Security Review – Customer B | | ⬜ Not started | | |
+
+---
+
+## Common Gaps
+
+- **No Cloud Adoption Security Review on file**: It is required — without it the control fails.
+- **3rd-party tool with no scope mapping**: If you don't use Defender for Cloud, you must explicitly map your 3rd-party coverage to the equivalent Microsoft security baselines.
+- **AVS guest VMs missing from Defender for Servers**: Common AVS-specific gap — make sure the guest OS coverage extends into the AVS private cloud.

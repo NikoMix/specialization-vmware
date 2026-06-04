@@ -1,0 +1,63 @@
+---
+title: "Hypercare Plan Template – 30 / 60 / 90"
+description: Hypercare plan template for AVS post-go-live — incident triage, joint Microsoft + VMware support, capacity reviews, optimisation backlog.
+sidebar:
+  label: "Hypercare Plan Template"
+  order: 5
+---
+
+## Hypercare structure
+
+| Phase | Duration | Coverage |
+|---|---|---|
+| 30 days | Day 1 – Day 30 | Daily standup + dedicated on-call (partner) |
+| 60 days | Day 31 – Day 60 | Twice-weekly standup + on-call |
+| 90 days | Day 61 – Day 90 | Weekly standup + business-hours support |
+
+## Incident triage path
+
+```
+Customer detects incident
+  ↓
+Customer ops team logs ticket in their ITSM
+  ↓
+Customer ops attempts L1 / L2 triage using runbook library
+  ↓ (if AVS-platform-related)
+Customer ops opens Azure support case (Severity per SLA)
+  ↓
+If VMware-layer involved → Microsoft escalates jointly to VMware support
+  ↓
+Partner hypercare resource shadows + assists
+```
+
+### Joint Microsoft + VMware support
+
+- Microsoft owns the support case end-to-end for AVS
+- VMware GSS engaged transparently by Microsoft for VMware-layer issues
+- Customer / partner is the single point of contact with Microsoft
+
+## Capacity reviews
+
+| Cadence | Topic |
+|---|---|
+| Weekly | AVS host CPU / RAM / storage utilisation; ER bandwidth |
+| Bi-weekly | ANF tier utilisation; vSAN headroom |
+| Monthly | Node-count growth projection + reservation strategy |
+
+## Optimisation backlog
+
+Findings captured during hypercare → backlog → prioritised:
+
+| ID | Finding | Pillar (WAF) | Owner | Status |
+|---|---|---|---|---|
+| 1 | Right-size over-provisioned VMs | Cost Optimization | | |
+| 2 | Reduce DFW rule count via grouping | Operational Excellence | | |
+| 3 | Promote backup tier on Tier 1 workloads | Reliability | | |
+
+## Exit criteria
+
+- [ ] No Sev-1 outstanding
+- [ ] All hypercare actions closed or transferred to backlog
+- [ ] Final WAR re-review completed
+- [ ] Customer ops team signs off readiness
+- [ ] Lessons-learned roll-up filed in [`innersource/roadmap`](../../../innersource/roadmap/)

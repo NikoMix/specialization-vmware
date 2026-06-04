@@ -1,0 +1,84 @@
+---
+title: "Discovery Workshop"
+description: 3-day discovery workshop agenda for AVS engagements — business + estate, networking + identity + security, migration wave planning + DR + landing zone gaps.
+sidebar:
+  label: "Discovery Workshop"
+  order: 3
+---
+
+## Format
+
+3 days on-site (or remote-equivalent), customer + partner squad together. Deliverable is a workshop output pack that seeds the HLD, the wave plan, and the WAF assessment.
+
+---
+
+## Day 1 — Business + Estate
+
+| Time | Topic | Owner |
+|---|---|---|
+| 09:00 | Welcome + outcomes for the workshop | PM |
+| 09:30 | Business drivers, forcing function, success criteria | Sponsor + PM |
+| 10:30 | Review of qualification questionnaire | PM + Customer IT lead |
+| 11:30 | vSphere estate deep-dive (versions, hosts, vSAN, NSX-T) | Customer VMware lead + Partner VMware SME |
+| 13:30 | Top-20 workload walk-through (criticality, dependencies, owners) | Customer app owners |
+| 15:00 | Initial AVS sizing discussion (node SKU candidates) | Partner AVS architect |
+| 16:00 | Day 1 recap + Day 2 prep | PM |
+
+**Outputs**
+
+- Validated business drivers
+- Top-20 workload list with criticality + dependencies
+- Initial AVS node SKU candidates
+
+---
+
+## Day 2 — Networking + Identity + Security
+
+| Time | Topic | Owner |
+|---|---|---|
+| 09:00 | Day 1 recap | PM |
+| 09:30 | WAN topology + ER + Global Reach feasibility | Partner network engineer + Customer network lead |
+| 10:30 | CIDR overlap check (on-prem / AVS mgmt / AVS workload) | Partner network engineer |
+| 11:30 | NSX-T design discussion (T0/T1, DFW baseline, segments) | Partner network engineer |
+| 13:30 | Identity (AD forest, Entra, AVS SSO source) | Partner identity SME + Customer AD admin |
+| 15:00 | Security posture (Defender for Cloud, Sentinel, DFW, IDS/IPS) | Partner SecOps + Customer CISO delegate |
+| 16:00 | Day 2 recap | PM |
+
+**Outputs**
+
+- ExpressRoute / Global Reach decision
+- CIDR plan with non-overlap confirmed
+- NSX-T high-level design
+- Identity binding plan for AVS SSO
+
+---
+
+## Day 3 — Migration waves + DR + Landing zone gaps
+
+| Time | Topic | Owner |
+|---|---|---|
+| 09:00 | Day 2 recap | PM |
+| 09:30 | Wave plan — workload sequencing, rollback strategy, freeze windows | Partner migration lead + Customer app owners |
+| 11:00 | HCX readiness review (bandwidth, port + MTU prereqs) | Partner VMware SME |
+| 13:00 | DR strategy (in-AVS DR, AVS-as-DR, SRM vs HCX DR) | Partner AVS architect + Customer DR lead |
+| 14:30 | Landing zone gap analysis (vs CAF ALZ + AVS LZ Accelerator) | Partner Azure architect |
+| 15:30 | Workshop output review + next steps | PM + all |
+| 16:30 | Close | Sponsor |
+
+**Outputs**
+
+- Wave plan (draft)
+- HCX readiness checklist with gaps
+- DR strategy + chosen mechanism
+- Landing zone gap list + remediation backlog
+
+---
+
+## Workshop pack deliverable
+
+A single PDF / SharePoint folder containing:
+- Workshop slides
+- Day-by-day notes
+- All outputs above
+- Action register
+- Recommended next phase (Offering 1 / 2 / 3 + estimated effort)

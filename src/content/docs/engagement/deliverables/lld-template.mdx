@@ -1,0 +1,92 @@
+---
+title: "LLD Template – Azure VMware Solution"
+description: Low-Level Design template for an AVS engagement with detailed tables for IP plan, NSX-T design, DFW baseline, ANF volumes, HCX mesh, identity, ER.
+sidebar:
+  label: "LLD Template"
+  order: 2
+---
+
+> Tabular detail extending the HLD. Each table is fillable per customer.
+
+## 1. IP plan
+
+| Network | CIDR | Purpose | VLAN / NSX segment |
+|---|---|---|---|
+| AVS Management | | vCenter, NSX-T, HCX Manager (assigned by AVS provisioning) | — |
+| AVS vMotion | | | |
+| AVS vSAN | | | |
+| AVS NSX TEP | | | |
+| Workload Tier 1 | | App tier | |
+| Workload Tier 2 | | DB tier | |
+| Workload Tier 3 | | Web tier | |
+
+## 2. NSX-T T0 / T1 design
+
+| Object | Name | Upstream / downstream | Notes |
+|---|---|---|---|
+| T0 Gateway | | ER uplink | Active/Active |
+| T1 — Tier1 App | | T0 | |
+| T1 — Tier1 DB | | T0 | |
+
+## 3. DFW baseline
+
+| Rule # | Source | Destination | Service | Action | Notes |
+|---|---|---|---|---|---|
+| 1 | Mgmt jump | vCenter / NSX-T Mgmt | HTTPS | Allow | Admin access |
+| 2 | App tier | DB tier | TCP/1433 | Allow | SQL |
+| 3 | Web tier | App tier | TCP/443 | Allow | HTTPS |
+| ... | | | | | |
+| LAST | Any | Any | Any | Drop | Default deny |
+
+## 4. ANF volume specs
+
+| Volume | Capacity (TiB) | Tier | Throughput target | Workload |
+|---|---|---|---|---|
+| | | Standard / Premium / Ultra | MB/s | |
+
+## 5. HCX service mesh
+
+| Profile | Name | Networks | Bandwidth |
+|---|---|---|---|
+| Network profile — Mgmt | | | |
+| Network profile — Uplink | | | |
+| Network profile — vMotion | | | |
+| Compute profile | | | |
+| Service mesh | | | |
+
+## 6. Mobility groups
+
+| Group | Workloads | Migration type | Wave | Window |
+|---|---|---|---|---|
+| Group 1 | | Bulk / vMotion / RAV / Cold | | |
+
+## 7. AD / DNS integration
+
+| Item | Value | Notes |
+|---|---|---|
+| AD forest | | |
+| AVS SSO source | On-prem AD / Azure-hosted DCs | |
+| DNS forwarder | NSX-T / Azure portal / Private Resolver | |
+
+## 8. ER + Global Reach
+
+| Item | Value |
+|---|---|
+| Customer ER circuit | |
+| AVS managed ER circuit | |
+| Global Reach peering | yes / no — rationale |
+| ER Gateway / vWAN hub | |
+
+## 9. Backup configuration
+
+| Workload tier | Schedule | Retention | Restore RTO target |
+|---|---|---|---|
+| Tier 1 | | | |
+| Tier 2 | | | |
+| Tier 3 | | | |
+
+## 10. Monitoring + alerting
+
+| Alert | Source | Threshold | Action |
+|---|---|---|---|
+| | | | |

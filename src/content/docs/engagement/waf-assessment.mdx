@@ -1,0 +1,85 @@
+---
+title: "Well-Architected Framework Assessment"
+description: AVS-specific Well-Architected Framework assessment guidance, with emphasis on Reliability, Cost Optimization, and Operational Excellence.
+sidebar:
+  label: "WAF Assessment"
+  order: 4
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+## Why WAF on AVS engagements
+
+The WAF assessment provides the structured input for control **A.2.2** (Well-Architected Workloads) and **B.2.2** (WAR of AVS workloads). The auditor will look for the WAR export and the linked remediation log.
+
+<Aside type="tip">
+  For AVS engagements, emphasise **Reliability**, **Cost Optimization**, and **Operational
+  Excellence**. These three pillars surface the highest-impact AVS-specific findings (stretched
+  clusters, node reservations, ANF tier choice, Arc coverage).
+</Aside>
+
+---
+
+## Pillar-by-pillar AVS-specific prompts
+
+### Reliability
+
+- Are stretched clusters used? If not, what is the SLA composition (AVS + ANF + ER + dependency services)?
+- How is host failure tolerated? FTT setting on vSAN?
+- What is the backup RPO / RTO per workload tier?
+- Is DR exercised? When was the last drill?
+- Is the AVS region paired with a DR target (in-AVS or out)?
+- ER circuit redundancy — single circuit, dual circuit, MetroConnect?
+- Dependency mapping — what fails if AVS is unavailable?
+
+### Cost Optimization
+
+- Node reservation vs. pay-as-you-go?
+- AV36 vs AV36P vs AV52 vs AV64 — right-sized for the workload mix?
+- ANF tier selection (Standard / Premium / Ultra) matched to workload IOPS?
+- ER bandwidth utilisation — over-provisioned?
+- Standby DR nodes — minimised via small-footprint warm DR?
+- Customer-managed reservations covering AVS Reserved Instances?
+
+### Operational Excellence
+
+- Azure Arc-enabled VMware vSphere coverage?
+- Azure Monitor for AVS deployed?
+- Syslog from ESXi / NSX-T / vCenter into Log Analytics?
+- Runbook library covering BAU, incident triage, DR?
+- Change-management process documented?
+- Joint Microsoft + VMware support case process documented?
+
+### Security
+
+- NSX-T DFW baseline (default deny + named allowlist)?
+- NSX-T IDS/IPS enabled?
+- Defender for Servers on AVS guest VMs?
+- Customer-managed keys (CMK) for AVS?
+- Privileged access path documented for vCenter / NSX-T / HCX admin?
+
+### Performance Efficiency
+
+- vSAN ESA capacity headroom (≥ 30% recommended)?
+- Storage policy per workload tier?
+- ANF volume sizing matched to IOPS demand?
+- NSX-T DFW rule count manageable?
+- VM right-sizing post-migration (cleanup of over-provisioned VMs)?
+
+---
+
+## Process
+
+1. Run the [Azure Well-Architected Review](https://learn.microsoft.com/assessments/azure-architecture-review/) tool with the customer
+2. Scope to the AVS workload
+3. Cover **≥ 2 pillars** (Reliability + Cost Optimization is the recommended default for AVS)
+4. Export results as PDF (customer named on the export)
+5. Build the remediation log (finding → owner → target date → status)
+6. Schedule re-review pre-go-live for any blocking findings
+
+## Deliverables
+
+- WAR PDF export (file the same PDF for A.2.2 and B.2.2)
+- Pillar-selection rationale (1-pager)
+- Remediation log (Excel)
+- Pre-go-live re-review note (if applicable)

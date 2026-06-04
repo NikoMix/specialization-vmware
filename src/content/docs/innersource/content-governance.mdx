@@ -1,0 +1,61 @@
+---
+title: "Content Governance"
+description: Content lifecycle for the AVS specialization toolkit — Draft → Reviewed → Endorsed → Deprecated.
+sidebar:
+  label: "Content Governance"
+  order: 2
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+## Lifecycle
+
+```
+Draft  →  Reviewed  →  Endorsed  →  Deprecated
+```
+
+| Stage | Meaning | Owner |
+|---|---|---|
+| **Draft** | New content authored, not yet reviewed | Contributor |
+| **Reviewed** | Peer-reviewed by a CODEOWNER; merged to `main` | CODEOWNER |
+| **Endorsed** | Practice lead has signed off as canonical | AVS practice lead |
+| **Deprecated** | Replaced or no longer recommended; flagged but kept for historical reference | AVS practice lead |
+
+<Aside type="tip">
+  Newly merged content is "Reviewed" by default. Promotion to "Endorsed" happens at the next
+  monthly governance review or immediately if proven on a closed engagement.
+</Aside>
+
+## Endorsement criteria
+
+A page is promoted to **Endorsed** when:
+- It has been used on **at least one closed engagement** without significant rework
+- The CODEOWNER and AVS practice lead both approve
+- It is consistent with the V1.9.1 audit checklist (or the active checklist version at time of endorsement)
+
+## Review cadence
+
+| Trigger | Action |
+|---|---|
+| Every 6 months | Full content sweep — re-endorse, deprecate, or update |
+| After each completed engagement | Targeted update from lessons-learned |
+| Audit-checklist version change | Module A / Module B controls re-baselined |
+| AVS feature change (Microsoft) | Affected pages flagged and updated |
+
+## Deprecation
+
+A page is moved to **Deprecated** when:
+- Replaced by a better page (link from deprecated → replacement)
+- The underlying Azure / AVS feature is retired
+- An audit-checklist version change invalidates it
+
+Deprecated pages are NOT deleted immediately — they are flagged and retained for at least 6 months for historical reference.
+
+## Governance roles
+
+| Role | Responsibility |
+|---|---|
+| **AVS practice lead** | Endorsement decisions; review-cadence enforcement |
+| **CODEOWNERS** | Per-area review approvals (see `/CODEOWNERS`) |
+| **Engagement leads** | Submit lessons-learned issues after each engagement |
+| **Contributors** | Submit improvements via Issue + PR |

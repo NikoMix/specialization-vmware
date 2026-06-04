@@ -1,0 +1,41 @@
+name: Template improvement
+description: Improve an engagement playbook page or deliverable template.
+title: "[Template improvement] <page> – <short description>"
+labels: ["engagement-playbook"]
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Which template?
+      options:
+        - Offering one-pager
+        - Qualification questionnaire
+        - Discovery workshop
+        - WAF assessment
+        - Assessment platform inputs (Azure Migrate + HCX)
+        - Reference architectures
+        - HLD template
+        - LLD template
+        - Runbook template
+        - KT plan template
+        - Hypercare plan template
+        - Definition of Done
+        - Other (specify below)
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What's wrong / unclear / missing today?
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested improvement
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Engagement context (anonymised)

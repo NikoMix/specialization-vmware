@@ -1,0 +1,79 @@
+name: Create Audit Engagement Issues
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 9 1 3 *"
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  create-issues:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Determine audit cycle year
+        id: cycle
+        run: |
+          YEAR=$(date -u +%Y)
+          echo "year=$YEAR"        >> "$GITHUB_OUTPUT"
+          echo "label=audit-$YEAR" >> "$GITHUB_OUTPUT"
+          echo "milestone=Audit $YEAR" >> "$GITHUB_OUTPUT"
+
+      - name: Create labels
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh label create "pre-qualification"   --color "0e8a16" --description "Pre-qualification gate"                 --repo "$GITHUB_REPOSITORY" --force
+          gh label create "module-a"            --color "e4e669" --description "Module A – General Requirements"       --repo "$GITHUB_REPOSITORY" --force
+          gh label create "module-b"            --color "d73a4a" --description "Module B – Azure VMware Solution"      --repo "$GITHUB_REPOSITORY" --force
+          gh label create "engagement-playbook" --color "5319e7" --description "Engagement playbook artefact"          --repo "$GITHUB_REPOSITORY" --force
+          gh label create "innersource"         --color "bfdadc" --description "Innersource governance / contribution" --repo "$GITHUB_REPOSITORY" --force
+          gh label create "${{ steps.cycle.outputs.label }}" --color "0075ca" \
+            --description "Audit cycle ${{ steps.cycle.outputs.year }}" \
+            --repo "$GITHUB_REPOSITORY" --force
+
+      - name: Create or find milestone
+        id: milestone
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          TITLE="${{ steps.cycle.outputs.milestone }}"
+          DUE="${{ steps.cycle.outputs.year }}-06-30T00:00:00Z"
+
+          NUMBER=$(gh api "repos/$GITHUB_REPOSITORY/milestones?state=all&per_page=100" \
+            --jq "[.[] | select(.title == \"$TITLE\")][0].number // empty")
+
+          if [ -z "$NUMBER" ]; then
+            echo "Creating milestone '$TITLE'..."
+            NUMBER=$(gh api "repos/$GITHUB_REPOSITORY/milestones" \
+              --method POST \
+              --field title="$TITLE" \
+              --field due_on="$DUE" \
+              --field description="VMware on Microsoft Azure (Azure VMware Solution) Advanced Specialization – ${{ steps.cycle.outputs.year }} audit cycle" \
+              --jq ".number")
+          else
+            echo "Milestone '$TITLE' already exists (number=$NUMBER)"
+          fi
+
+          if [ -z "$NUMBER" ]; then
+            echo "::error::Failed to resolve milestone number for '$TITLE'"
+            exit 1
+          fi
+
+          echo "number=$NUMBER" >> "$GITHUB_OUTPUT"
+          echo "title=$TITLE"  >> "$GITHUB_OUTPUT"
+
+      - name: Create issues
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CYCLE_LABEL: ${{ steps.cycle.outputs.label }}
+          MILESTONE: ${{ steps.milestone.outputs.title }}
+          REPO: ${{ github.repository }}
+        run: bash .github/scripts/create-issues.sh

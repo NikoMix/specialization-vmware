@@ -1,0 +1,43 @@
+name: Lesson learned
+description: Capture a lesson learned from a closed AVS engagement.
+title: "[Lesson learned] <short description>"
+labels: ["lesson-learned"]
+body:
+  - type: input
+    id: engagement
+    attributes:
+      label: Engagement code / anonymised customer ref
+    validations:
+      required: true
+  - type: dropdown
+    id: phase
+    attributes:
+      label: Engagement phase
+      options:
+        - Qualification
+        - Discovery / Assess
+        - Design
+        - Implementation / Migration
+        - Validation / Testing
+        - Hypercare / Post-deployment
+    validations:
+      required: true
+  - type: textarea
+    id: situation
+    attributes:
+      label: What happened? (situation)
+    validations:
+      required: true
+  - type: textarea
+    id: lesson
+    attributes:
+      label: Lesson learned
+    validations:
+      required: true
+  - type: textarea
+    id: action
+    attributes:
+      label: Recommended toolkit change
+      description: Which page(s) should be updated? Which template? Which control?
+    validations:
+      required: true

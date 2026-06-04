@@ -1,0 +1,92 @@
+---
+title: "B.3.1 – Infrastructure Implementation and Configuration"
+description: Evidence requirements for control B.3.1 – AVS infrastructure implementation and application enablement evidence.
+sidebar:
+  label: "3.1 Infrastructure Implementation"
+  order: 4
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+## What the Auditor Checks
+
+The auditor verifies your **capability to implement and configure AVS infrastructure and enable applications** on it. The accepted scenarios are:
+
+- An app **moved from on-prem to AVS**, or
+- An app **deployed / running on a new AVS** private cloud
+
+**Typical questions:**
+- Walk us through the SOW and signed scope for the AVS implementation.
+- Show the solution design that drove the implementation.
+- Where is the customer-approved project plan + migration / deployment sequence?
+- Show the architecture diagrams for the implemented environment.
+- Where are the implementation / "as-built" documents?
+
+---
+
+## Required Evidence Checklist
+
+> **Minimum 2** of the following.
+
+| # | Evidence Item | Accepted Formats | Status |
+|---|---|---|---|
+| 1 | **Signed SOW** for the AVS implementation | PDF | ⬜ |
+| 2 | **Solution design document** (HLD / LLD) | PDF, Word | ⬜ |
+| 3 | **Customer-approved project plan** + **migration / deployment sequence** | PDF, Excel, Project | ⬜ |
+| 4 | **Architecture diagrams** of the implemented environment | PDF, Visio, Draw.io | ⬜ |
+| 5 | **Implementation / "as-built" documents** | PDF, Word | ⬜ |
+
+> **Customers required:** 1 AVS production customer • **Window:** Last 12 months
+
+<Aside type="tip">
+  The "as-built" document is the strongest single artifact — it shows the design was actually
+  realised. Pair it with the signed SOW to cover both halves of the control with two artifacts.
+</Aside>
+
+---
+
+## Evidence Guidance
+
+### SOW
+
+- Customer-signed
+- Scope clearly identifies AVS infrastructure implementation
+- Deliverables include the as-built documentation
+
+### Customer-approved project plan + migration sequence
+
+- Wave plan (which workloads in which wave, in what order)
+- Cut-over windows
+- Dependencies + decision gates
+- Customer sign-off (email approval acceptable)
+
+### As-built documentation
+
+Should reflect the **actual state** post-implementation, including:
+- AVS private cloud configuration (node SKU, count, region, AZ)
+- vSphere version + ESXi build
+- NSX-T configuration (T0/T1, segments, DFW)
+- vSAN / ANF datastore configuration
+- HCX / SRM deployment (if applicable)
+- ER circuit + Global Reach
+- Identity integration (AD / Entra)
+
+---
+
+## Evidence Status
+
+| Evidence Item | Owner | Status | Last Updated | Notes |
+|---|---|---|---|---|
+| Signed SOW | | ⬜ Not started | | |
+| Solution design | | ⬜ Not started | | |
+| Project plan + migration sequence | | ⬜ Not started | | |
+| Architecture diagrams (implemented) | | ⬜ Not started | | |
+| As-built documents | | ⬜ Not started | | |
+
+---
+
+## Common Gaps
+
+- **Design doc submitted but no as-built**: Auditors want proof the design was realised, not just planned.
+- **Project plan without customer approval**: Sign-off (even via email) must be visible.
+- **Diagrams are pre-implementation only**: Update post-deployment to reflect actual configuration.

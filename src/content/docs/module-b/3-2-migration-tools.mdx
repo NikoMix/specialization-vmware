@@ -1,0 +1,102 @@
+---
+title: "B.3.2 – Migration Tools"
+description: Evidence requirements for control B.3.2 – proof of HCX usage or alternative VMware motion / 3rd-party migration tooling.
+sidebar:
+  label: "3.2 Migration Tools"
+  order: 5
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+## What the Auditor Checks
+
+The auditor verifies proof of **HCX usage** OR **automated VMware motion at scale** OR **3rd-party tooling** for the migration. Evidence is required via **one** of the three options below.
+
+**Typical questions:**
+- Which migration tool did you use, and why?
+- Show the HCX mobility group / mesh / migration plan, OR the alternative motion plan, OR the 3rd-party tool output.
+- How did you handle live migration vs cold migration?
+- Were heterogeneous vSphere versions in play?
+
+---
+
+## Required Evidence Checklist
+
+> **Pick one option (A / B / C)** and provide the listed evidence.
+
+### Option A – HCX
+
+| # | Evidence Item | Accepted Formats | Status |
+|---|---|---|---|
+| A1 | **HCX experience documented** for at least one of: app migration with **live VM mobility**; **heterogeneous vSphere-version** migration; workload **rebalancing** between on-prem DCs and AVS region(s) | PDF, Word, Screenshot | ⬜ |
+| A2 | HCX **mobility groups** + **service mesh** configuration | PDF, Screenshot | ⬜ |
+| A3 | Migration **wave plan** referencing HCX | PDF, Excel | ⬜ |
+
+### Option B – VMware motion mechanism
+
+| # | Evidence Item | Accepted Formats | Status |
+|---|---|---|---|
+| B1 | **VMware motion plans / scripts / pre+post-assessments** for on-prem → AVS (or other-cloud → AVS) | PDF, Word, Script | ⬜ |
+| B2 | Pre-migration validation results | PDF, Excel | ⬜ |
+| B3 | Post-migration validation results | PDF, Excel | ⬜ |
+
+### Option C – 3rd-party tooling
+
+| # | Evidence Item | Accepted Formats | Status |
+|---|---|---|---|
+| C1 | **3rd-party migration tool** referenced in project plan (e.g. Commvault, RiverMeadow, Rubrik) | PDF, Project | ⬜ |
+| C2 | **Tool output snapshots** (migration job logs, success metrics) | PDF, Screenshot, CSV | ⬜ |
+
+> **Customers required:** 1 AVS customer
+
+<Aside type="tip">
+  HCX Enterprise edition is **included with AVS**, so Option A is the default for most engagements.
+  Option B applies when HCX is not used (e.g. greenfield deployment with no motion). Option C applies
+  when an established 3rd-party migration platform is preferred (often for cross-cloud).
+</Aside>
+
+---
+
+## Evidence Guidance
+
+### Option A: HCX
+
+For the chosen scenario:
+
+| Scenario | What to show |
+|---|---|
+| **Live VM mobility** | HCX vMotion or Replication-Assisted vMotion (RAV) job logs + screenshots |
+| **Heterogeneous vSphere versions** | Source vCenter version vs. AVS target version; HCX bridging the gap |
+| **Workload rebalancing** | Mobility from on-prem DC → AVS region, or AVS region → AVS region |
+
+Always include: mobility groups, service mesh, network extension cutover plan (with IP retention notes).
+
+### Option B: VMware motion
+
+- Document the motion mechanism (cold migration, RVTools-driven scripted import, vSphere replication)
+- Pre-migration assessment script outputs
+- Post-migration validation (boot test, network connectivity test, app-layer smoke test)
+
+### Option C: 3rd-party
+
+- Identify the tool, version, and licence
+- Reference in the project plan
+- Provide output snapshots demonstrating successful migration jobs
+
+---
+
+## Evidence Status
+
+| Evidence Item | Owner | Status | Last Updated | Notes |
+|---|---|---|---|---|
+| Chosen option (A/B/C) | | ⬜ Not started | | |
+| Primary artifact | | ⬜ Not started | | |
+| Supporting artifact | | ⬜ Not started | | |
+
+---
+
+## Common Gaps
+
+- **HCX deployed but no mobility evidence**: Show the actual migration logs, not just the HCX dashboard.
+- **3rd-party tool mentioned but no output**: Tool name in a slide deck is not evidence — show logs / snapshots.
+- **No pre/post-validation for Option B**: Validation steps are what differentiate "we did a migration" from "we did a controlled migration".

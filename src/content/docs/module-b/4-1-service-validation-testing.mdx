@@ -1,0 +1,87 @@
+---
+title: "B.4.1 – Service Validation and Testing"
+description: Evidence requirements for control B.4.1 – documented testing process for AVS application performance and post-migration architectural review.
+sidebar:
+  label: "4.1 Service Validation & Testing"
+  order: 7
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+## What the Auditor Checks
+
+The auditor verifies a **documented process for testing application performance** against user expectations and Azure best practices, plus a **process for evaluating and improving architectural best practices** to remediate performance / cost gaps post-migration.
+
+**Typical questions:**
+- Show the test plan and the executed test results.
+- Where is the customer sign-off confirming expectations were met?
+- How are post-migration architectural gaps captured and remediated?
+
+---
+
+## Required Evidence Checklist
+
+| # | Evidence Item | Accepted Formats | Status |
+|---|---|---|---|
+| 1 | **Testing / validation plan** | PDF, Word, Excel | ⬜ |
+| 2 | **Performance evaluation results** vs user expectations + Azure best practices | PDF, Excel | ⬜ |
+| 3 | **Customer sign-off** stating expectations met | PDF (signed), Email | ⬜ |
+| 4 | **Post-migration improvement plan** (architectural best-practice evaluation) | PDF, Word, Excel | ⬜ |
+
+> **Customers required:** 1 AVS migration customer • **Window:** Last 12 months
+
+<Aside type="tip">
+  Customer sign-off can be a signed PDF, but a clear email approval from the customer's accountable
+  decision-maker is acceptable. Capture it at the end of the migration wave acceptance call.
+</Aside>
+
+---
+
+## Evidence Guidance
+
+### Testing / validation plan
+
+Must include:
+- Functional test cases (boot, login, app smoke test)
+- Performance test cases (throughput, latency, IOPS) with expected thresholds
+- Network connectivity tests (on-prem ↔ AVS ↔ Azure PaaS)
+- Backup + restore drill
+- DR fail-over drill (if in scope)
+
+### Performance evaluation
+
+For each in-scope workload:
+- Baseline expectation (often from Azure Migrate sizing or pre-migration telemetry)
+- Measured result on AVS
+- Variance + explanation
+
+### Customer sign-off
+
+- Named customer decision-maker
+- Reference to the test plan
+- Statement: "Expectations met" or "Expectations met with caveats: ..."
+- Date
+
+### Post-migration improvement plan
+
+- Findings from running on AVS (e.g. node utilisation, ANF tier optimisation, DFW rule simplification)
+- Owner + target date per finding
+
+---
+
+## Evidence Status
+
+| Evidence Item | Owner | Status | Last Updated | Notes |
+|---|---|---|---|---|
+| Test plan | | ⬜ Not started | | |
+| Performance results | | ⬜ Not started | | |
+| Customer sign-off | | ⬜ Not started | | |
+| Post-migration improvement plan | | ⬜ Not started | | |
+
+---
+
+## Common Gaps
+
+- **No customer sign-off**: This is the strongest single piece of evidence. Don't skip it.
+- **Test plan with no executed results**: A plan alone is insufficient — show the actual outcomes.
+- **No post-migration improvement plan**: Common — the architectural-improvement half of the control is often missed.

@@ -1,0 +1,87 @@
+---
+title: "A.3.1 – Repeatable Deployment (ALZ)"
+description: Evidence requirements for control A.3.1 – Azure Landing Zone aligned, repeatable IaC deployment using Bicep, Terraform, or ARM.
+sidebar:
+  label: "3.1 Repeatable Deployment (ALZ)"
+  order: 5
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+## What the Auditor Checks
+
+The auditor verifies adherence to **Azure Landing Zone design areas** via **repeatable Infrastructure-as-Code**. The deployment must configure at minimum: **Identity** (Entra ID or equivalent), **Networking topology** (including hybrid via ExpressRoute / VPN Gateway), and **Resource organization** (tagging + naming). One of four approaches is accepted: (1) Start small, (2) Full ALZ conceptual, (3) Alternative articulated, (4) Brownfield update.
+
+**Typical questions:**
+- Show the IaC repository — which tool: Bicep, Terraform, or ARM? *(Pick one per V1.9.1 Dec 1, 2025 clarification — not all three.)*
+- Walk us through the ALZ conceptual architecture you aligned to, or the ALZ Accelerator you used.
+- Where is the Azure Landing Zone Review confirming multi-region or multi-zone redundancy policy?
+
+---
+
+## Required Evidence Checklist
+
+| # | Evidence Item | Accepted Formats | Status |
+|---|---|---|---|
+| 1 | **Repeatable IaC deployment** aligned to ALZ conceptual architecture — Bicep, Terraform, **OR** ARM (pick one) | Git repo link, ZIP, PDF | ⬜ |
+| 2 | *(Alternative)* **Azure Landing Zone Accelerator** (Bicep/Terraform/portal) — deployment evidence | Git repo link, Screenshot | ⬜ |
+| 3 | **Identity** configuration evidence (Entra ID or equivalent) | PDF, Screenshot, IaC | ⬜ |
+| 4 | **Networking topology** evidence (hybrid via ExpressRoute or VPN Gateway) | Diagram, IaC, PDF | ⬜ |
+| 5 | **Resource organization** evidence (tagging + naming standards) | PDF, IaC, Policy | ⬜ |
+| 6 | **Azure Landing Zone Review** completed — multi-region or multi-zone redundancy policy confirmed | PDF | ⬜ |
+
+> **Customers required:** 2 unique
+> **Dec 1, 2025 clarification**: choose **one** of Bicep, Terraform, or ARM — not all three.
+
+<Aside type="tip">
+  The [AVS landing zone accelerator](https://learn.microsoft.com/azure/cloud-adoption-framework/scenarios/azure-vmware/enterprise-scale-landing-zone) is purpose-built for this control on AVS engagements.
+  Using it (option 2) shortens your evidence collection dramatically.
+</Aside>
+
+---
+
+## Evidence Guidance
+
+### IaC repository
+
+- Git repo with the IaC source, README, and a deployment guide
+- Pipeline definition (GitHub Actions / Azure DevOps) demonstrating the deployment is automated
+- Tagging + naming standards enforced via Azure Policy
+
+### Identity
+
+For AVS specifically, the AVS private cloud authenticates via vCenter local accounts (cloudadmin) but the customer's Azure tenant must show Entra ID with conditional access, PIM where appropriate, and any federation with on-prem AD.
+
+### Networking topology
+
+For AVS:
+- Hub-and-spoke or Virtual WAN hub
+- ExpressRoute circuit (customer ER + AVS managed ER) with Global Reach where applicable
+- NSX-T segments for AVS workload networks
+- Non-overlapping CIDRs across on-prem / AVS management / AVS workload
+
+### Azure Landing Zone Review
+
+- Run via Microsoft Assessments
+- Export results
+- Confirm policy assignments for multi-region or multi-zone redundancy
+
+---
+
+## Evidence Status
+
+| Evidence Item | Owner | Status | Last Updated | Notes |
+|---|---|---|---|---|
+| IaC repository – Customer A | | ⬜ Not started | | |
+| ALZ Review – Customer A | | ⬜ Not started | | |
+| IaC repository – Customer B | | ⬜ Not started | | |
+| ALZ Review – Customer B | | ⬜ Not started | | |
+
+---
+
+## Common Gaps
+
+- **Showing Bicep + Terraform + ARM "to cover bases"**: The Dec 1, 2025 clarification is explicit — choose one tool per customer.
+- **No Azure Landing Zone Review on file**: The Review is mandatory for confirming the redundancy policy posture.
+- **CIDR overlap with on-prem**: Common AVS gap — networking design must show non-overlapping ranges across on-prem, AVS management, and AVS workload networks.
+- **Identity only documented as "we use Entra"**: Show the conditional-access policies, PIM, and any federation explicitly.

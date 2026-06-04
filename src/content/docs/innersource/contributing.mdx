@@ -1,0 +1,47 @@
+---
+title: "Contributing"
+description: How to contribute to the VMware on Microsoft Azure (AVS) specialization engagement toolkit.
+sidebar:
+  label: "Contributing"
+  order: 1
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+This repository is an **innersource** engagement toolkit owned by the AVS practice. All practitioners are encouraged to contribute lessons-learned, template improvements, and reference-architecture refinements after each engagement.
+
+<Aside type="tip">
+  Most contributions land via a GitHub Issue (control-improvement / template-improvement /
+  lesson-learned) followed by a PR. See [`CONTRIBUTING.md`](https://github.com/) at the repo root
+  for the complete checklist.
+</Aside>
+
+## Where to contribute
+
+| Type of change | Where |
+|---|---|
+| Control evidence guidance | `src/content/docs/module-a/` or `src/content/docs/module-b/` |
+| Engagement playbook content | `src/content/docs/engagement/` |
+| Reference architecture | `src/content/docs/engagement/reference-architectures.mdx` |
+| Deliverable template | `src/content/docs/engagement/deliverables/` |
+| Innersource governance | `src/content/docs/innersource/` |
+| Agent / memory files | `.github/agents/` or `.github/memories/` |
+| GitHub Issue checklists | `.github/scripts/create-issues.sh` |
+
+## Branch + PR workflow
+
+- Branch: `feature/<area>/<short-slug>`
+- PR template auto-fills; link the engagement phase + control number
+- Review SLA: **2 working days**
+- At least one CODEOWNER approval required
+
+## When evidence requirements change
+
+If you edit an evidence item on a control page, you **must** also update `.github/scripts/create-issues.sh` so the auto-created issue checkboxes stay aligned. The doc and the issue are a single source of truth in two forms.
+
+## Style
+
+- Follow `.github/memories/mdx-content.md` strictly (escape rules, no-dot filenames)
+- Control numbers in prose use dots: `A.2.1`, `B.3.1`
+- Tables for evidence lists; prose for guidance
+- Anonymise customer references — never commit real customer names / IP

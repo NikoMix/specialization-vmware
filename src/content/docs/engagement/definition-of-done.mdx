@@ -1,0 +1,87 @@
+---
+title: "Definition of Done"
+description: Definition of Done per AVS offering — audit-pass-ready, customer-acceptance-ready, ops-handover-ready.
+sidebar:
+  label: "Definition of Done"
+  order: 8
+---
+
+The Definition of Done (DoD) is the gate before declaring an offering complete. Each offering has three DoD axes:
+
+- **Audit-pass-ready** — evidence collected to satisfy Module A + Module B controls
+- **Customer-acceptance-ready** — customer can sign off
+- **Ops-handover-ready** — the operations team can take over BAU
+
+---
+
+## Offering 1 — AVS Foundation + first migration wave
+
+### Audit-pass-ready
+
+- [ ] Azure Migrate VMware assessment exported + filed against B.1.1
+- [ ] HLD + LLD filed against B.2.1 and B.3.1
+- [ ] WAR export (≥ 2 pillars) filed against B.2.2
+- [ ] HCX migration evidence filed against B.3.2
+- [ ] AVS configuration evidence (≥ 3 capabilities) filed against B.3.3
+- [ ] Test plan + customer sign-off filed against B.4.1
+- [ ] SOPs + monitoring + backup + DR evidence filed against B.4.2
+- [ ] FinOps Review, CASE, ALZ Review, Cloud Adoption Security Review, DevOps Capability Assessment filed against relevant Module A controls
+
+### Customer-acceptance-ready
+
+- [ ] Wave 1 cutover complete with no Sev-1 outstanding
+- [ ] Service-validation report signed by customer
+- [ ] As-built documentation handed over
+- [ ] Outstanding-issues register agreed
+
+### Ops-handover-ready
+
+- [ ] KT plan executed (recordings + Q&amp;A complete)
+- [ ] Runbook library reviewed with ops team
+- [ ] Hypercare plan agreed (30 / 60 / 90)
+- [ ] Joint support case process tested with one Sev-3 / Sev-4 case
+- [ ] Monitoring dashboards handed over
+
+---
+
+## Offering 2 — DR-to-AVS
+
+### Audit-pass-ready
+
+- [ ] DR design document filed against B.2.1
+- [ ] DR fail-over drill report filed against B.4.1 and B.4.2
+- [ ] Automated DR evidence (workloads run at alternate site) filed against B.4.2
+
+### Customer-acceptance-ready
+
+- [ ] DR fail-over drill executed and signed off
+- [ ] RPO / RTO targets validated
+- [ ] DR run-book agreed
+
+### Ops-handover-ready
+
+- [ ] DR run-book in ops team's hands
+- [ ] Periodic-drill schedule agreed
+- [ ] Hypercare for DR plan agreed
+
+---
+
+## Offering 3 — Stretched cluster build
+
+### Audit-pass-ready
+
+- [ ] Stretched-cluster design (including SLA math) filed against B.2.1
+- [ ] WAR with Reliability pillar covered filed against B.2.2
+- [ ] Failure-mode runbook filed against B.4.2
+
+### Customer-acceptance-ready
+
+- [ ] Failure-mode tests executed (host failure, AZ failure simulation where safe)
+- [ ] Designated workload running on stretched cluster
+- [ ] SLA expectations agreed
+
+### Ops-handover-ready
+
+- [ ] Failure-mode runbook in ops team's hands
+- [ ] Monitoring dashboards specific to stretched cluster handed over
+- [ ] Hypercare plan agreed
