@@ -1,8 +1,8 @@
 ---
-title: "LLD Template – Azure VMware Solution"
-description: Low-Level Design template for an AVS engagement with detailed tables for IP plan, NSX-T design, DFW baseline, ANF volumes, HCX mesh, identity, ER.
+title: "Detailed Technical Design Document Template – Azure VMware Solution"
+description: Detailed Technical Design Document template for an AVS engagement with tables for IP planning, NSX-T, distributed firewall, storage, mobility, identity, and connectivity.
 sidebar:
-  label: "LLD Template"
+  label: "Design Document Template"
   order: 2
 ---
 
@@ -12,39 +12,38 @@ import { Aside } from '@astrojs/starlight/components';
   <a href={`${import.meta.env.BASE_URL}templates/deliverables/lld-template.docx`} download>lld-template.docx</a> — pre-formatted template; fill in for your engagement.
 </Aside>
 
-> Tabular detail extending the HLD. Each table is fillable per customer.
+> Use this template for the Detailed Technical Design Document (DTDD). It extends the High-Level Architecture Document with implementation-grade detail.
 
 ## 1. IP plan
 
-| Network | CIDR | Purpose | VLAN / NSX segment |
+| Network | CIDR | Purpose | VLAN or NSX segment |
 |---|---|---|---|
-| AVS Management | | vCenter, NSX-T, HCX Manager (assigned by AVS provisioning) | — |
+| AVS management | | vCenter, NSX-T, HCX Manager (assigned during provisioning) | — |
 | AVS vMotion | | | |
 | AVS vSAN | | | |
 | AVS NSX TEP | | | |
-| Workload Tier 1 | | App tier | |
-| Workload Tier 2 | | DB tier | |
-| Workload Tier 3 | | Web tier | |
+| Workload tier 1 | | Application tier | |
+| Workload tier 2 | | Database tier | |
+| Workload tier 3 | | Web tier | |
 
-## 2. NSX-T T0 / T1 design
+## 2. NSX-T T0 and T1 design
 
-| Object | Name | Upstream / downstream | Notes |
+| Object | Name | Upstream or downstream | Notes |
 |---|---|---|---|
-| T0 Gateway | | ER uplink | Active/Active |
-| T1 — Tier1 App | | T0 | |
-| T1 — Tier1 DB | | T0 | |
+| T0 gateway | | ExpressRoute uplink | Active/active |
+| T1 application | | T0 | |
+| T1 database | | T0 | |
 
-## 3. DFW baseline
+## 3. Distributed firewall baseline
 
 | Rule # | Source | Destination | Service | Action | Notes |
 |---|---|---|---|---|---|
-| 1 | Mgmt jump | vCenter / NSX-T Mgmt | HTTPS | Allow | Admin access |
-| 2 | App tier | DB tier | TCP/1433 | Allow | SQL |
+| 1 | Management jump host | vCenter or NSX-T management | HTTPS | Allow | Admin access |
+| 2 | App tier | Database tier | TCP/1433 | Allow | SQL |
 | 3 | Web tier | App tier | TCP/443 | Allow | HTTPS |
-| ... | | | | | |
 | LAST | Any | Any | Any | Drop | Default deny |
 
-## 4. ANF volume specs
+## 4. Azure NetApp Files volume specifications
 
 | Volume | Capacity (TiB) | Tier | Throughput target | Workload |
 |---|---|---|---|---|
@@ -54,9 +53,9 @@ import { Aside } from '@astrojs/starlight/components';
 
 | Profile | Name | Networks | Bandwidth |
 |---|---|---|---|
-| Network profile — Mgmt | | | |
-| Network profile — Uplink | | | |
-| Network profile — vMotion | | | |
+| Network profile – management | | | |
+| Network profile – uplink | | | |
+| Network profile – vMotion | | | |
 | Compute profile | | | |
 | Service mesh | | | |
 
@@ -64,34 +63,34 @@ import { Aside } from '@astrojs/starlight/components';
 
 | Group | Workloads | Migration type | Wave | Window |
 |---|---|---|---|---|
-| Group 1 | | Bulk / vMotion / RAV / Cold | | |
+| Group 1 | | Bulk / vMotion / RAV / cold | | |
 
-## 7. AD / DNS integration
+## 7. Active Directory and DNS integration
 
 | Item | Value | Notes |
 |---|---|---|
-| AD forest | | |
-| AVS SSO source | On-prem AD / Azure-hosted DCs | |
-| DNS forwarder | NSX-T / Azure portal / Private Resolver | |
+| Active Directory forest | | |
+| AVS single sign-on source | On-premises Active Directory / Azure-hosted domain controllers | |
+| DNS forwarder | NSX-T / Azure DNS Private Resolver | |
 
-## 8. ER + Global Reach
+## 8. ExpressRoute and Global Reach
 
 | Item | Value |
 |---|---|
-| Customer ER circuit | |
-| AVS managed ER circuit | |
-| Global Reach peering | yes / no — rationale |
-| ER Gateway / vWAN hub | |
+| Customer ExpressRoute circuit | |
+| AVS managed ExpressRoute circuit | |
+| Global Reach peering | Yes / no with rationale |
+| ExpressRoute gateway or Virtual WAN hub | |
 
 ## 9. Backup configuration
 
-| Workload tier | Schedule | Retention | Restore RTO target |
+| Workload tier | Schedule | Retention | Restore target |
 |---|---|---|---|
 | Tier 1 | | | |
 | Tier 2 | | | |
 | Tier 3 | | | |
 
-## 10. Monitoring + alerting
+## 10. Monitoring and alerting
 
 | Alert | Source | Threshold | Action |
 |---|---|---|---|

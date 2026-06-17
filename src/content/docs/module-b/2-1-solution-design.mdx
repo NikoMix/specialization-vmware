@@ -1,6 +1,6 @@
 ---
 title: "B.2.1 – Solution Design"
-description: Evidence requirements for control B.2.1 – AVS solution design covering migration strategy, ALZ alignment, ExpressRoute Global Reach, NSX-T, and backup/DR.
+description: Evidence requirements for control B.2.1 – AVS solution design covering migration strategy, Azure Landing Zone alignment, ExpressRoute Global Reach, NSX-T, and backup/DR.
 sidebar:
   label: "2.1 Solution Design"
   order: 2
@@ -16,9 +16,9 @@ The auditor verifies a **consistent design approach** for an AVS engagement. The
 - Migration risk + mitigation
 - High-level sequence + validation criteria
 - Non-overlapping network topology
-- **Azure Landing Zone** alignment (Mgmt Groups: Tenant / Platform / Landing Zone / Sandbox; subscriptions for Identity / Connectivity / Management / AVS-Prod / AVS-Pilot; RBAC role definitions + assignments; Policy definitions + assignments; AzOps process; AVS Resource Provider registration permissions; DHCP / DNS strategy — hybrid or cloud)
-- **ExpressRoute Global Reach** for migration scenarios when available
-- AVS ExpressRoute circuit key termination on ER Gateway / Virtual WAN
+- **Azure Landing Zone (ALZ)** alignment (Mgmt Groups: Tenant / Platform / Landing Zone / Sandbox; subscriptions for Identity / Connectivity / Management / AVS-Prod / AVS-Pilot; RBAC role definitions + assignments; Policy definitions + assignments; AzOps process; AVS Resource Provider registration permissions; DHCP / DNS strategy — hybrid or cloud)
+- **ExpressRoute (ER) Global Reach** for migration scenarios when available
+- AVS ExpressRoute circuit key termination on ExpressRoute gateway / Virtual WAN
 - Connectivity from on-prem / Azure jump box to **vCenter / NSX-T / HCX** interfaces
 - VLAN segments + DHCP + port mirroring + DNS forwarder via NSX-T or Azure portal
 - Connectivity to guest VM on AVS
@@ -28,7 +28,7 @@ The auditor verifies a **consistent design approach** for an AVS engagement. The
 
 **Typical questions:**
 - Walk us through the design — is this P2V/V2V or cloud → cloud?
-- Show the ALZ alignment: management groups, subscription topology, RBAC, policy.
+- Show the Azure Landing Zone (ALZ) alignment: management groups, subscription topology, RBAC, policy.
 - Where is Global Reach configured? If not, why not?
 - Show NSX-T design — VLAN segments, DHCP, port mirroring, DNS forwarder.
 - How do guest VMs reach Azure PaaS via Private Endpoint?
@@ -42,11 +42,11 @@ The auditor verifies a **consistent design approach** for an AVS engagement. The
 
 | # | Evidence Item | Accepted Formats | Status |
 |---|---|---|---|
-| 1 | **High-Level Design (HLD)** document | PDF, Word | ⬜ |
-| 2 | **Low-Level Design (LLD)** / Functional Spec | PDF, Word, Excel | ⬜ |
+| 1 | **High-Level Architecture Document (HLAD)** | PDF, Word | ⬜ |
+| 2 | **Detailed Technical Design Document (DTDD)** / functional specification | PDF, Word, Excel | ⬜ |
 | 3 | **Architecture diagrams** (logical + physical) | PDF, Visio, Draw.io | ⬜ |
-| 4 | **Automated tooling reports** (Azure Migrate, ALZ accelerator outputs) | PDF, JSON | ⬜ |
-| 5 | **ALZ alignment** evidence (MG structure, sub topology, RBAC, Policy) | PDF, IaC, Screenshot | ⬜ |
+| 4 | **Automated tooling reports** (Azure Migrate, Azure Landing Zone accelerator outputs) | PDF, JSON | ⬜ |
+| 5 | **Azure Landing Zone (ALZ) alignment** evidence (MG structure, sub topology, RBAC, Policy) | PDF, IaC, Screenshot | ⬜ |
 | 6 | **Global Reach** configuration evidence (or written rationale if unavailable) | PDF, Screenshot | ⬜ |
 | 7 | **NSX-T design** (VLAN segments, DHCP, port mirroring, DNS forwarder) | PDF, Visio | ⬜ |
 | 8 | **Backup / restore / monitor / DR design** sections | PDF, Word | ⬜ |
@@ -54,18 +54,18 @@ The auditor verifies a **consistent design approach** for an AVS engagement. The
 > **Customers required:** 1 AVS production customer • **Window:** Last 12 months
 
 <Aside type="tip">
-  Use the [`engagement/deliverables/hld-template`](../../engagement/deliverables/hld-template/) and
-  [`lld-template`](../../engagement/deliverables/lld-template/) as your starting point — they
-  already contain the section structure aligned to this control.
+  Use the [High-Level Architecture Document template](../../engagement/deliverables/hld-template/)
+  and the [Detailed Technical Design Document template](../../engagement/deliverables/lld-template/)
+  as your starting point. They already contain the section structure aligned to this control.
 </Aside>
 
 ---
 
 ## Evidence Guidance
 
-### ALZ alignment (AVS-specific)
+### Azure Landing Zone (ALZ) alignment (AVS-specific)
 
-| ALZ element | AVS specifics |
+| Azure Landing Zone element | AVS specifics |
 |---|---|
 | Management Groups | Tenant → Platform → Landing Zones → Sandbox |
 | Subscriptions | Identity, Connectivity, Management, **AVS-Prod**, **AVS-Pilot** |
@@ -77,7 +77,7 @@ The auditor verifies a **consistent design approach** for an AVS engagement. The
 ### ExpressRoute Global Reach
 
 - Configure when available in the regions involved
-- Document the ER circuit key termination point (ER Gateway or Virtual WAN hub)
+- Document the ExpressRoute circuit key termination point (ExpressRoute gateway or Virtual WAN hub)
 - Show the on-prem ↔ AVS traffic path
 
 ### NSX-T design
@@ -91,7 +91,7 @@ The auditor verifies a **consistent design approach** for an AVS engagement. The
 
 ### Guest VM → Azure PaaS via Private Endpoint
 
-- Document the VNet → AVS connectivity (ER Gateway or vWAN hub)
+- Document the VNet → AVS connectivity (ExpressRoute gateway or Virtual WAN hub)
 - Private Endpoint subnet in the connectivity / spoke VNet
 - DNS resolution chain from AVS guest VM → on-prem DNS / Azure Private Resolver → Private Endpoint
 
@@ -109,10 +109,10 @@ Brief sections (these expand in B.3.3 and B.4.2):
 
 | Evidence Item | Owner | Status | Last Updated | Notes |
 |---|---|---|---|---|
-| HLD | | ⬜ Not started | | |
-| LLD | | ⬜ Not started | | |
+| HLAD | | ⬜ Not started | | |
+| DTDD | | ⬜ Not started | | |
 | Architecture diagrams | | ⬜ Not started | | |
-| ALZ alignment | | ⬜ Not started | | |
+| Azure Landing Zone alignment | | ⬜ Not started | | |
 | Global Reach config | | ⬜ Not started | | |
 | NSX-T design | | ⬜ Not started | | |
 
@@ -120,8 +120,18 @@ Brief sections (these expand in B.3.3 and B.4.2):
 
 ## Common Gaps
 
-- **Design doesn't show ALZ MG/sub topology**: Architecture-only diagrams aren't enough — the ALZ governance layer must be explicit.
+- **Design doesn't show ALZ management-group/subscription topology**: Architecture-only diagrams aren't enough — the Azure Landing Zone governance layer must be explicit.
 - **Global Reach silently omitted**: If Global Reach is unavailable, write the rationale; don't leave it out.
 - **NSX-T DFW baseline missing**: Default-permit DFW is a security finding; show the deny-all + allowlist baseline.
 - **No DNS strategy**: Hybrid vs cloud DNS must be chosen and documented.
 - **Guest → Azure PaaS path undocumented**: Common — Private Endpoint design is overlooked.
+
+---
+
+## Resources & Samples
+
+- [Azure Architecture Center – Azure VMware Solution foundation](https://learn.microsoft.com/azure/architecture/solution-ideas/articles/azure-vmware-solution-foundation)
+- [Enterprise-Scale for AVS GitHub](https://github.com/Azure/Enterprise-Scale-for-AVS)
+- [AVS Landing Zone Accelerator](https://github.com/Azure/Enterprise-Scale-for-AVS/tree/main/AVS-Landing-Zone)
+- [Microsoft Learn – Run VMware workloads on Azure VMware Solution](https://learn.microsoft.com/training/paths/run-vmware-workloads-azure-vmware-solution/)
+- [Azure VMware Solution documentation](https://learn.microsoft.com/azure/azure-vmware/)

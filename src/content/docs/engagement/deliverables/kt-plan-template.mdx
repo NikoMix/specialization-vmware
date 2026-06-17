@@ -1,8 +1,8 @@
 ---
-title: "KT Plan Template – AVS Operations Handover"
-description: Knowledge-transfer plan template for handing over AVS operations to the customer's ops team.
+title: "Knowledge Transfer Plan Template – AVS Operations Handover"
+description: Knowledge Transfer plan template for handing over Azure VMware Solution operations, architecture, networking, and support processes.
 sidebar:
-  label: "KT Plan Template"
+  label: "Knowledge Transfer Plan Template"
   order: 4
 ---
 
@@ -12,45 +12,89 @@ import { Aside } from '@astrojs/starlight/components';
   <a href={`${import.meta.env.BASE_URL}templates/deliverables/kt-plan-template.docx`} download>kt-plan-template.docx</a> — pre-formatted template; fill in for your engagement.
 </Aside>
 
-## Audience
+<Aside type="note">
+  Treat Knowledge Transfer (KT) as a deliverable, not an informal walkthrough. The audit evidence is
+  strongest when the Knowledge Transfer (KT) plan is role-based, scheduled, recorded, and linked to specific handover
+  artefacts.
+</Aside>
 
-- Customer Azure IT Admin team
-- Customer Network team
-- Customer SecOps team
-- Customer VMware operators (if separate from Azure)
+## Training Guide
 
-## Format
+### Project Manager
 
-| Session | Duration | Format | Recording |
+| Focus area | Microsoft Learn | Certification target | Why it matters |
 |---|---|---|---|
-| Overview + landing zone tour | 1 h | Walkthrough + Q&amp;A | ✅ |
-| AVS portal | 1 h | Demo | ✅ |
-| vCenter on AVS | 1.5 h | Demo + hands-on | ✅ |
-| NSX-T Manager (DFW, segments, T0/T1, IDS/IPS) | 2 h | Demo + hands-on | ✅ |
-| HCX dashboard + future migrations | 1 h | Demo | ✅ |
-| Monitoring stack (Azure Monitor, Defender, Sentinel) | 1.5 h | Demo + hands-on | ✅ |
-| Backup + restore drill | 1 h | Hands-on | ✅ |
-| DR fail-over (tabletop or partial) | 2 h | Tabletop + hands-on | ✅ |
-| Runbook library tour | 1 h | Walkthrough | ✅ |
-| Joint support case process (Microsoft + VMware) | 0.5 h | Walkthrough | ✅ |
-| Q&amp;A wrap-up | 1 h | Open Q&amp;A | ✅ |
+| Azure platform fundamentals for delivery governance | [AZ-104 learning path](https://learn.microsoft.com/training/paths/az-104-administrator-prerequisites/) | AZ-104 or internal Azure delivery accreditation | Enables milestone, cost, and risk conversations with the customer and Microsoft field teams. |
+| AVS engagement lifecycle | [Run VMware workloads on Azure VMware Solution](https://learn.microsoft.com/training/paths/run-vmware-workloads-azure-vmware-solution/) | AZ-305 recommended | Helps the project manager track architecture, migration, and operational workstreams. |
+| Monitoring and service reporting | [Monitor usage, performance, and availability with Azure Monitor](https://learn.microsoft.com/training/paths/monitor-usage-performance-availability-resources-azure-monitor/) | AZ-400 or ITIL recommended | Supports status reporting, hypercare governance, and operational readiness reviews. |
 
-## Pre-requisites
+### Solution Architect
 
-- Customer access to AVS portal confirmed
-- vCenter / NSX-T cloudadmin credentials handed over (via secure channel)
-- Customer attendees nominated per session
-- Recordings repository identified (SharePoint / Stream)
+| Focus area | Microsoft Learn | Certification target | Why it matters |
+|---|---|---|---|
+| Azure architecture and governance | [AZ-104 learning path](https://learn.microsoft.com/training/paths/az-104-administrator-prerequisites/) | AZ-305 (mandatory target) | Baseline platform knowledge for designing identity, networking, and governance. |
+| AVS design patterns | [Run VMware workloads on Azure VMware Solution](https://learn.microsoft.com/training/paths/run-vmware-workloads-azure-vmware-solution/) | AZ-305 + VCP-DCV recommended | Aligns the architecture lead to AVS platform capabilities, migration patterns, and landing-zone design. |
+| Hybrid networking | [Azure network management learning path](https://learn.microsoft.com/training/paths/azure-administrator-manage-virtual-networks/) | AZ-700 recommended | Required for ExpressRoute, Virtual WAN, DNS, and private-endpoint design decisions. |
 
-## Acceptance
+### Cloud Engineer
 
-- [ ] All sessions completed
-- [ ] Recordings filed
-- [ ] Q&amp;A log filed
-- [ ] Customer sign-off email received
+| Focus area | Microsoft Learn | Certification target | Why it matters |
+|---|---|---|---|
+| Azure administration | [AZ-104 learning path](https://learn.microsoft.com/training/paths/az-104-administrator-prerequisites/) | AZ-104 (mandatory target) | Required for subscriptions, policy, RBAC, and day-2 administration. |
+| AVS implementation | [Run VMware workloads on Azure VMware Solution](https://learn.microsoft.com/training/paths/run-vmware-workloads-azure-vmware-solution/) | AZ-104 + VCP-DCV recommended | Covers AVS private cloud deployment, HCX, NSX-T, and guest-platform integration. |
+| Networking operations | [Azure network management learning path](https://learn.microsoft.com/training/paths/azure-administrator-manage-virtual-networks/) | AZ-700 recommended | Enables the engineer to support ExpressRoute, routing, segmentation, and private access patterns. |
 
-## Linked artifacts
+### Operations Engineer
 
-- AVS BAU SOP library (see [`module-b/4-2-post-deployment-documentation`](../../../module-b/4-2-post-deployment-documentation/))
-- Runbook library
-- Monitoring dashboards
+| Focus area | Microsoft Learn | Certification target | Why it matters |
+|---|---|---|---|
+| Azure monitoring and incident operations | [Monitor usage, performance, and availability with Azure Monitor](https://learn.microsoft.com/training/paths/monitor-usage-performance-availability-resources-azure-monitor/) | AZ-104 recommended | Supports monitoring, alerting, KQL, and dashboard ownership. |
+| AVS run-state operations | [Run VMware workloads on Azure VMware Solution](https://learn.microsoft.com/training/paths/run-vmware-workloads-azure-vmware-solution/) | AZ-104 + operational runbook sign-off | Ensures the operations engineer can manage AVS host health, guest monitoring, and platform escalations. |
+| Hybrid networking triage | [Azure network management learning path](https://learn.microsoft.com/training/paths/azure-administrator-manage-virtual-networks/) | AZ-700 recommended | Required for ExpressRoute incident triage and private-endpoint validation. |
+
+## Certification Targets by Role
+
+| Role | Minimum target | Recommended stretch target | Review cadence |
+|---|---|---|---|
+| Project Manager | Internal Azure delivery readiness | AZ-104 fundamentals or ITIL | Review at kickoff and handover |
+| Solution Architect | AZ-305 | AZ-700 + VCP-DCV | Monthly during engagement |
+| Cloud Engineer | AZ-104 | AZ-700 + VCP-DCV | Bi-weekly during deployment |
+| Operations Engineer | AZ-104 or equivalent operations baseline | AZ-700 + Azure Monitor depth | Weekly during hypercare |
+
+## Pre-engagement Reading List
+
+1. [Azure VMware Solution documentation](https://learn.microsoft.com/azure/azure-vmware/)
+2. [Azure Architecture Review assessment](https://learn.microsoft.com/en-us/assessments/azure-architecture-review/)
+3. [Enterprise-Scale for AVS GitHub repository](https://github.com/Azure/Enterprise-Scale-for-AVS)
+4. Customer-specific architecture document, design document, and migration wave plan.
+5. Existing customer runbooks for backup, identity, incident management, and change windows.
+
+## Lab Resources and Sandbox Environments
+
+| Resource | Purpose | Owner | Entry criteria |
+|---|---|---|---|
+| Customer pilot subscription | Validate RBAC, policy, private-endpoint access, and monitoring wiring | Partner cloud engineer | Access approved and least-privilege roles assigned |
+| AVS pilot private cloud | Demonstrate AVS portal, vCenter, NSX-T, and HCX workflows | Partner solution architect | Private cloud provisioned and jump access available |
+| Azure Monitor and Log Analytics sandbox | Practice alert tuning, dashboards, KQL, and workbook exports | Operations engineer | Test workspace with sample logs and metrics |
+| Networking lab | Rehearse ExpressRoute, routing, DNS, and failover checks | Network or cloud engineer | Connectivity diagram and test prefixes agreed |
+
+## Knowledge Transfer Session Schedule
+
+| Session | Topic | Audience | Duration | Format | Deliverables |
+|---|---|---|---|---|---|
+| 1 | Engagement overview, scope, success criteria, support model | All roles | 60 min | Live walkthrough | Recording, attendee list, Q&A log |
+| 2 | Azure Landing Zone and subscription topology | Project Manager, Solution Architect, Cloud Engineer | 90 min | Architecture review | Updated architecture document, actions list |
+| 3 | AVS private cloud, vCenter, and NSX-T administration | Solution Architect, Cloud Engineer, Operations Engineer | 120 min | Demo + guided hands-on | Recording, step-by-step notes |
+| 4 | ExpressRoute, DNS, private endpoints, and hybrid routing | Solution Architect, Cloud Engineer, Operations Engineer | 120 min | Whiteboard + portal walkthrough | Network validation checklist |
+| 5 | HCX, migration waves, rollback, and validation evidence | Solution Architect, Cloud Engineer | 90 min | Demo + runbook review | Migration runbook sign-off |
+| 6 | Monitoring, alerting, Defender for Cloud, and incident triage | Operations Engineer, Cloud Engineer | 120 min | Hands-on lab | Workbook export, KQL examples, alert-owner matrix |
+| 7 | Backup, restore, disaster recovery, and failover responsibilities | Operations Engineer, Solution Architect | 120 min | Runbook walkthrough + tabletop | Restore-test evidence, DR decision tree |
+| 8 | Final operational handover and open issues review | All roles | 60 min | Governance review | KT completion record, outstanding actions |
+
+## Knowledge Transfer (KT) Completion Checklist
+
+- [ ] Attendance captured for every session.
+- [ ] Recordings and decks stored in the agreed repository.
+- [ ] Open questions logged with owners and due dates.
+- [ ] Role-based reading list issued to all customer attendees.
+- [ ] Final Knowledge Transfer (KT) completion record signed by customer delivery owner.

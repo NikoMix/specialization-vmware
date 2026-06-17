@@ -14,7 +14,7 @@ import { Aside } from '@astrojs/starlight/components';
 
 <Aside type="tip">
   Use this questionnaire on the first qualification call. Answers feed directly into Azure Migrate
-  sizing, ExpressRoute bandwidth estimation, and the AVS node SKU recommendation.
+  sizing, ExpressRoute (ER) bandwidth estimation, and the AVS node SKU recommendation.
 </Aside>
 
 ## 1 — Current vSphere estate
@@ -106,8 +106,8 @@ import { Aside } from '@astrojs/starlight/components';
 
 | Signal | Likely outcome |
 |---|---|
-| Datacenter exit + > 50 VMs + ER already in place | Strong fit → Offering 1 |
+| Datacenter exit + > 50 VMs + ExpressRoute (ER) already in place | Strong fit → Offering 1 |
 | DR modernisation mandate + on-prem primary keeps | Offering 2 (DR-to-AVS) |
 | Active/passive metro requirement + AZ pair available | Offering 3 (stretched cluster) |
 | Cloud-native ambition + small vSphere estate | Recommend Azure-native rehost via Azure Migrate, not AVS |
-| No urgency + no forcing function | Nurture; recommend WAR + Azure Migrate as paid discovery |
+| No urgency + no forcing function | Nurture; recommend Well-Architected Review (WAR) + Azure Migrate as paid discovery |

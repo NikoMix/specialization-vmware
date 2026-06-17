@@ -8,13 +8,12 @@ sidebar:
 import { Aside } from '@astrojs/starlight/components';
 
 <Aside type="tip" title="📄 Download the workfiles">
-  - <a href={`${import.meta.env.BASE_URL}templates/audit/evidence-tracker.xlsx`} download>evidence-tracker.xlsx</a> — one row per control × customer, status dropdowns, summary tab
+  - <a href={`${import.meta.env.BASE_URL}templates/audit/evidence-tracker.xlsx`} download>evidence-tracker.xlsx</a> — one row per control and customer, with status dropdowns and summary tabs
   - <a href={`${import.meta.env.BASE_URL}templates/audit/pre-qual-checklist.xlsx`} download>pre-qual-checklist.xlsx</a> — pre-qualification gate checklist
 </Aside>
 
-<Aside type="tip">
-  Copy this tracker into your project management tool (Excel, Azure DevOps, Jira, or SharePoint) and
-  assign owners and due dates for each control. Update status as evidence is collected.
+<Aside type="caution">
+  The <a href="https://learn.microsoft.com/en-us/assessments/azure-architecture-review/">Azure Architecture Review assessment</a> should be visible in every AVS project tracker. It is one of the easiest audit artefacts to miss if it is not scheduled during design.
 </Aside>
 
 ## Status Legend
@@ -31,34 +30,34 @@ import { Aside } from '@astrojs/starlight/components';
 
 ## Module A – Azure Essentials Cloud Foundation
 
-> Requires **2 unique customers per control** in the last 12 months. Same customer may be reused across multiple controls. Module A pass is valid for **2 years**.
+> Requires **2 unique customers per control** inside the audit look-back period. A passed Module A result can be reused for **2 years**.
 
 | Control | Description | Owner | Due Date | Status | Notes |
 |---|---|---|---|---|---|
-| A.1.1 | Cloud &amp; AI Adoption Business Strategy | | | ⬜ | FinOps Review + CASE |
-| A.1.2 | Cloud &amp; AI Adoption Plan | | | ⬜ | Cost Mgmt + DevOps Capability Assessment |
-| A.2.1 | Security &amp; Governance Tooling | | | ⬜ | Defender for Cloud + Cloud Adoption Security Review |
-| A.2.2 | Well-Architected Workloads | | | ⬜ | WAR export |
-| A.3.1 | Repeatable Deployment (ALZ) | | | ⬜ | Bicep / Terraform / ARM + ALZ Review |
-| A.3.2 | Plan for Skilling | | | ⬜ | Skilling plan + Learn paths |
-| A.3.3 | Operations Management Tooling | | | ⬜ | Monitor / Automation / Backup + CI security pipeline |
+| A.1.1 | Cloud and AI Adoption Business Strategy | | | ⬜ | FinOps Review + CASE + strategy readout |
+| A.1.2 | Cloud and AI Adoption Plan | | | ⬜ | Cost model + DevOps Capability Assessment |
+| A.2.1 | Security and Governance Tooling | | | ⬜ | Defender for Cloud + Cloud Adoption Security Review |
+| A.2.2 | Well-Architected Workloads | | | ⬜ | Azure Architecture Review assessment export |
+| A.3.1 | Repeatable Deployment (Azure Landing Zone) | | | ⬜ | Infrastructure-as-code + Azure Landing Zone Review |
+| A.3.2 | Plan for Skilling | | | ⬜ | Skilling plan + Microsoft Learn mappings |
+| A.3.3 | Operations Management Tooling | | | ⬜ | Monitor / automation / backup + pipeline artefact |
 
 ---
 
 ## Module B – Azure VMware Solution (V1.9.1, 8 controls)
 
-> Requires **1 AVS production customer** in the last 12 months (same customer may be reused across all 8 controls).
+> Requires **1 AVS production customer** in the last 12 months. The same customer may support all eight controls.
 
 | Control | Description | Owner | Due Date | Status | Notes |
 |---|---|---|---|---|---|
-| B.1.1 | Workload Assessment | | | ⬜ | Azure Migrate VMware + dependency map |
-| B.2.1 | Solution Design | | | ⬜ | HLD / LLD / architecture diagrams |
-| B.2.2 | Well-Architected Review of Workloads | | | ⬜ | WAR export (≥ 2 pillars) |
-| B.3.1 | Infrastructure Implementation &amp; Configuration | | | ⬜ | SOW + as-built docs |
-| B.3.2 | Migration Tools | | | ⬜ | HCX plans / scripts / 3rd-party tool outputs |
-| B.3.3 | AVS Configuration &amp; Azure Services Integration | | | ⬜ | ≥ 3 integration capabilities demonstrated |
-| B.4.1 | Service Validation &amp; Testing | | | ⬜ | Test plan + customer sign-off |
-| B.4.2 | Post-Deployment Documentation | | | ⬜ | SOPs, monitoring, DR, backup |
+| B.1.1 | Workload Assessment | | | ⬜ | Azure Migrate output + dependency map |
+| B.2.1 | Solution Design | | | ⬜ | Architecture Documents + architecture diagrams |
+| B.2.2 | Well-Architected Review of Workloads | | | ⬜ | Azure Architecture Review / Well-Architected Review export |
+| B.3.1 | Infrastructure Implementation and Configuration | | | ⬜ | Statement of work + as-built documents |
+| B.3.2 | Migration Tools | | | ⬜ | HCX plans, scripts, or third-party migration outputs |
+| B.3.3 | AVS Configuration and Azure Services Integration | | | ⬜ | Minimum 3 integration capabilities demonstrated |
+| B.4.1 | Service Validation and Testing | | | ⬜ | Test plan + customer sign-off |
+| B.4.2 | Post-Deployment Documentation | | | ⬜ | SOPs, monitoring, backup, and disaster-recovery evidence |
 
 ---
 
@@ -67,21 +66,19 @@ import { Aside } from '@astrojs/starlight/components';
 | Item | Owner | Status | Notes |
 |---|---|---|---|
 | Active Solutions Partner designation confirmed | | ⬜ | |
-| AVS ACR consumption confirmed | | ⬜ | |
-| AVS-adjacent infra ACR confirmed | | ⬜ | |
+| AVS Azure Consumed Revenue (ACR) consumption confirmed | | ⬜ | |
+| AVS-adjacent infrastructure ACR confirmed | | ⬜ | |
 | ≥ 1 AVS production customer in last 12 months | | ⬜ | |
 | ≥ 2 unique customers for Module A | | ⬜ | |
-| AZ-104 (≥ 1 holder) | | ⬜ | |
-| AZ-305 (≥ 1 holder) | | ⬜ | |
-| (Recommended) VCP-DCV holder identified | | ⬜ | Not an audit gate; delivery quality |
-| Module A pass within last 2 years? (waiver eligible) | | ⬜ | If yes, request Module B only |
+| AZ-104 holder identified | | ⬜ | |
+| AZ-305 holder identified | | ⬜ | |
+| Recommended VCP-DCV holder identified | | ⬜ | Delivery quality signal, not an audit gate |
+| Module A pass within last 2 years verified | | ⬜ | If yes, request Module B-only audit |
 | Audit requested via Partner Center | | ⬜ | |
 
 ---
 
 ## Customer-Evidence Matrix
-
-> Track which customer satisfies which controls. Same customer may appear across multiple controls.
 
 | Customer (anonymised) | Industry | AVS production? | Module A controls covered | Module B controls covered |
 |---|---|---|---|---|
@@ -90,25 +87,23 @@ import { Aside } from '@astrojs/starlight/components';
 
 ---
 
-## Required Microsoft Assessments (audit evidence)
+## Required Microsoft Assessments
 
-| Assessment | Linked controls | Owner | Status | Date completed |
-|---|---|---|---|---|
-| FinOps Review | A.1.1 | | ⬜ | |
-| Cloud Adoption Strategy Evaluator (CASE) | A.1.1 | | ⬜ | |
-| Pricing Calculator export | A.1.2 | | ⬜ | |
-| DevOps Capability Assessment | A.1.2 | | ⬜ | |
-| Cloud Adoption Security Review | A.2.1 | | ⬜ | |
-| Azure Well-Architected Review | A.2.2, B.2.2 | | ⬜ | |
-| Azure Landing Zone Review | A.3.1 | | ⬜ | |
-| Azure Migrate – VMware appliance | B.1.1 | | ⬜ | |
-| Azure Advisor Reliability Review *(optional)* | A.3.3 | | ⬜ | |
+| Assessment | Mandatory? | Linked controls | Owner | Status | Date completed |
+|---|---|---|---|---|---|
+| Azure Architecture Review assessment | **Yes** | A.2.2, B.2.1, B.2.2 | | ⬜ | |
+| FinOps Review | Yes | A.1.1 | | ⬜ | |
+| Cloud Adoption Strategy Evaluator (CASE) | Yes | A.1.1 | | ⬜ | |
+| Pricing Calculator export | Yes | A.1.2 | | ⬜ | |
+| DevOps Capability Assessment | Yes | A.1.2 | | ⬜ | |
+| Cloud Adoption Security Review | Yes | A.2.1 | | ⬜ | |
+| Azure Landing Zone Review | Yes | A.3.1 | | ⬜ | |
+| Azure Migrate – VMware appliance | Yes | B.1.1 | | ⬜ | |
+| Azure Advisor Reliability Review | Optional | A.3.3 | | ⬜ | |
 
 ---
 
 ## Certification Holders Mapping
-
-Track required (AZ-104, AZ-305) and recommended (AZ-700, VCP-DCV, NSX-T) certifications separately to avoid an overly-wide table.
 
 ### Required certifications
 
@@ -124,8 +119,6 @@ Track required (AZ-104, AZ-305) and recommended (AZ-700, VCP-DCV, NSX-T) certifi
 | | | ⬜ | ⬜ | ⬜ | |
 | | | ⬜ | ⬜ | ⬜ | |
 
-Add rows as needed. ✅ = holds cert, ⬜ = does not hold.
-
 ---
 
 ## Evidence Submission Log
@@ -136,7 +129,7 @@ Add rows as needed. ✅ = holds cert, ⬜ = does not hold.
 
 ---
 
-## Auditor Queries &amp; Responses
+## Auditor Queries and Responses
 
 | Date Received | Control | Query | Response | Date Resolved |
 |---|---|---|---|---|

@@ -1,6 +1,6 @@
 ---
 title: "A.1.2 – Cloud & AI Adoption Plan"
-description: Evidence requirements for control A.1.2 – planning and tracking adoption projects using Cost Management + DevOps Capability Assessment.
+description: Audit-gate checklist for control A.1.2 covering adoption planning, cost modelling, and delivery tracking.
 sidebar:
   label: "1.2 Adoption Plan"
   order: 2
@@ -8,77 +8,26 @@ sidebar:
 
 import { Aside } from '@astrojs/starlight/components';
 
-## What the Auditor Checks
-
-The auditor verifies that you have a **plan for tracking adoption projects** — analytics, application modernisation, AI initiatives — and that the plan is backed by quantitative evidence (cost, DevOps capability).
-
-**Typical questions:**
-- Show the adoption plan you produced for two customers, including milestones and tracking cadence.
-- Where is the Cost Management report and Pricing Calculator output for each project?
-- Where is the DevOps Capability Assessment report for each project?
-
----
-
-## Required Evidence Checklist
-
-| # | Evidence Item | Accepted Formats | Status |
-|---|---|---|---|
-| 1 | **Cost Management report** with **Pricing Calculator** output (required) | PDF, Excel | ⬜ |
-| 2 | **DevOps Capability Assessment** report (required) | PDF, Word | ⬜ |
-| 3 | **Adoption plan** with milestones, owners, tracking cadence | PDF, Word, Excel, Project | ⬜ |
-| 4 | **Per-project tracking artefact** (board, status report, dashboard) | PDF, Screenshot | ⬜ |
-
-> **Customers required:** 2 unique • **Window:** Last 12 months
-> **Minimum**: At least **two** of the four items above per customer; Cost Management + Pricing Calculator **and** DevOps Capability Assessment are both required for the project.
-
-<Aside type="tip">
-  A single project plan that bakes in cost tracking (Cost Management export) and a DevOps maturity
-  view (DevOps Capability Assessment) covers both required assessments and the adoption plan in one
-  artefact.
+<Aside type="note">
+  Build the evidence pack around a real project plan. The strongest submission is a customer-approved
+  plan that already contains cost, timeline, ownership, and delivery-tracking sections.
 </Aside>
 
----
+## Audit Gate
 
-## Evidence Guidance
+| Control name | What auditors check | Minimum evidence | Pass threshold |
+|---|---|---|---|
+| A.1.2 Cloud & AI Adoption Plan | A practical adoption plan that tracks milestones, funding, delivery cadence, and engineering readiness for Azure adoption work. Auditors look for planning artefacts tied to cost data and delivery-maturity evidence. | For each of 2 customers: Cost Management export plus Pricing Calculator estimate, DevOps Capability Assessment report, customer-facing adoption plan, and at least one tracking artefact such as a board, status report, or steering dashboard. | 2 unique customers; evidence created within the last 12 months; a passed Module A result can be reused for 2 years. |
 
-### Cost Management + Pricing Calculator
+## Audit-ready evidence pack
 
-- Export Cost Management report (subscription or resource group scope) for the customer's AVS + adjacent Azure resources
-- Include the **Pricing Calculator** output used during planning (e.g. AV36 reservation sizing, ANF volume costs, ExpressRoute circuit pricing)
-- Annotate to show how cost projections fed into the adoption plan
+1. Project plan with phases, milestones, decision gates, and owners.
+2. Cost model showing estimated Azure spend and migration assumptions.
+3. DevOps Capability Assessment results and planned remediation actions.
+4. Delivery-tracking artefact proving the plan was actively managed.
 
-### DevOps Capability Assessment
+## Common fail conditions
 
-- Run the [DevOps Capability Assessment](https://learn.microsoft.com/azure/devops/) for the customer's delivery team
-- Export the maturity report
-- Identify the gaps that the adoption plan will address (e.g. release frequency, security shift-left)
-
-### Adoption plan
-
-Required elements:
-- Workload waves and sequencing
-- Milestones with target dates
-- RACI / ownership
-- Tracking cadence (weekly steerco / monthly exec)
-- KPIs tied to the FinOps Review and CASE outputs from A.1.1
-
----
-
-## Evidence Status
-
-| Evidence Item | Owner | Status | Last Updated | Notes |
-|---|---|---|---|---|
-| Cost Mgmt + Pricing Calc – Customer A | | ⬜ Not started | | |
-| DevOps Capability Assessment – Customer A | | ⬜ Not started | | |
-| Cost Mgmt + Pricing Calc – Customer B | | ⬜ Not started | | |
-| DevOps Capability Assessment – Customer B | | ⬜ Not started | | |
-| Adoption plan – Customer A | | ⬜ Not started | | |
-| Adoption plan – Customer B | | ⬜ Not started | | |
-
----
-
-## Common Gaps
-
-- **Pricing Calculator output missing**: Cost Management export alone is not enough — the planning-time Pricing Calculator output must also be present.
-- **DevOps Capability Assessment treated as optional**: It is **required** per V1.9.1. Without it, A.1.2 fails.
-- **Adoption plan with no tracking evidence**: A static plan is not enough — show the cadence (status report cadence, board screenshots, dashboard).
+- Pricing Calculator output omitted from the plan pack.
+- DevOps Capability Assessment treated as optional.
+- Plan shows milestones but no cadence for status tracking or governance.

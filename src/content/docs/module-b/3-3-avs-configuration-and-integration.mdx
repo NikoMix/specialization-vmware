@@ -62,7 +62,7 @@ The auditor verifies AVS configuration and Azure-services integration evidence a
 ### Identity source
 
 For AVS, two patterns are common:
-1. **On-prem AD reachable from AVS** via ER / VPN — vCenter Single Sign-On (SSO) bound to on-prem AD
+1. **On-prem AD reachable from AVS** via ExpressRoute (ER) / VPN — vCenter Single Sign-On (SSO) bound to on-prem AD
 2. **Domain controllers on Azure VMs** (federated with on-prem AD) — vCenter SSO bound to the Azure-hosted DCs
 
 Document chosen pattern + AVS SSO configuration.
@@ -85,7 +85,7 @@ Two options:
 
 ### Virtual WAN multi-site
 
-- vWAN hub with AVS ER circuit attached
+- Virtual WAN hub with AVS ExpressRoute circuit attached
 - Multiple branches / regions attached
 - Routing intent / routing policies if used
 
@@ -106,3 +106,13 @@ Two options:
 - **Only 2 capabilities covered**: V1.9.1 requires **at least 3**. Pick easy wins (identity, Content Library, scale).
 - **Identity source unclear**: vCenter SSO binding to AD must be explicit — screenshot the SSO config.
 - **Diagrams don't cover all 5 areas**: Networking / HA/DR / Backup / Mgmt+Monitoring / Load Balancing must all be represented.
+
+---
+
+## Resources & Samples
+
+- [Azure Architecture Center – Azure VMware Solution foundation](https://learn.microsoft.com/azure/architecture/solution-ideas/articles/azure-vmware-solution-foundation)
+- [Configure ExpressRoute Global Reach for AVS](https://learn.microsoft.com/azure/azure-vmware/configure-expressroute-global-reach-private-cloud)
+- [Microsoft Learn – Run VMware workloads on Azure VMware Solution](https://learn.microsoft.com/training/paths/run-vmware-workloads-azure-vmware-solution/)
+- [Enterprise-Scale for AVS](https://github.com/Azure/Enterprise-Scale-for-AVS)
+- [Azure VMware Solution documentation](https://learn.microsoft.com/azure/azure-vmware/)
