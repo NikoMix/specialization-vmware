@@ -1,6 +1,6 @@
 ---
 title: "A.3.2 – Plan for Skilling"
-description: Evidence requirements for control A.3.2 – skilling plan for technical roles plus knowledge-transfer resources.
+description: Audit-gate checklist for control A.3.2 covering role-based learning, certification targets, and handover readiness.
 sidebar:
   label: "3.2 Plan for Skilling"
   order: 6
@@ -8,68 +8,26 @@ sidebar:
 
 import { Aside } from '@astrojs/starlight/components';
 
-## What the Auditor Checks
-
-The auditor verifies that you produced a **skilling plan** covering: (1) new skills for technical roles (IT Admin / Governance / Operations / Security) and (2) knowledge-transfer resources including Microsoft Learn paths and relevant certifications.
-
-> *(Note: the V1.9.1 checklist also lists a "TAGA report" requirement for AI specializations — N/A for AVS.)*
-
-**Typical questions:**
-- Show the skilling plan delivered to two customers.
-- Which Microsoft Learn paths and certifications are mapped to the technical roles in scope?
-- How is the plan tracked to completion?
-
----
-
-## Required Evidence Checklist
-
-| # | Evidence Item | Accepted Formats | Status |
-|---|---|---|---|
-| 1 | **Customer-facing skilling plan** OR planning docs OR post-deployment docs | PDF, Word, PowerPoint | ⬜ |
-| 2 | **Role-to-skills mapping** for IT Admin / Governance / Ops / Security | PDF, Excel | ⬜ |
-| 3 | **Microsoft Learn paths + certifications** recommended per role | PDF, Word | ⬜ |
-| 4 | **Knowledge-transfer resources** (recordings, runbooks, KT plan) | PDF, Word, MP4 | ⬜ |
-
-> **Customers required:** 2 unique • **Window:** Last 12 months
-> Reference: [How to Build a Skilling Readiness Plan](https://learn.microsoft.com/training/).
-
-<Aside type="tip">
-  For AVS, the skilling plan typically covers: AZ-104, AZ-305, AZ-700 (networking), AVS deep-dive
-  Learn paths, NSX-T administration, and HCX operations. Pair with hands-on labs during hypercare.
+<Aside type="note">
+  Keep the skilling plan role-based. Auditors want to see who must learn what, through which learning
+  path, and how the team will prove completion.
 </Aside>
 
----
+## Audit Gate
 
-## Evidence Guidance
+| Control name | What auditors check | Minimum evidence | Pass threshold |
+|---|---|---|---|
+| A.3.2 Plan for Skilling | A customer-facing skilling plan that maps technical roles to required skills, Microsoft Learn content, certifications, and operational handover resources. | For each of 2 customers: skilling plan, role-to-skills matrix, Microsoft Learn and certification mapping, and evidence of supporting handover material such as recordings, runbooks, or Knowledge Transfer (KT) plans. | 2 unique customers; evidence created within the last 12 months; a passed Module A result can be reused for 2 years. |
 
-### Role-to-skills mapping (AVS-specific example)
+## Audit-ready evidence pack
 
-| Role | Recommended skills |
-|---|---|
-| Azure IT Admin | AZ-104, AVS portal operations, NSX-T basics |
-| Network Engineer | AZ-700, ExpressRoute / Global Reach, NSX-T DFW + T0/T1 |
-| AVS Platform Architect | AZ-305, VCP-DCV, AVS Learn path |
-| SecOps | Defender for Cloud, Sentinel, NSX-T IDS/IPS |
+1. Role-based skilling matrix for platform, network, security, and operations roles.
+2. Microsoft Learn paths and certification targets.
+3. Delivery timeline for learning, labs, and follow-up reviews.
+4. Linked handover assets such as recordings, runbooks, and Knowledge Transfer (KT) schedule.
 
-### Knowledge-transfer resources
+## Common fail conditions
 
-- KT plan (covered in detail in [`engagement/deliverables/kt-plan-template`](../../engagement/deliverables/kt-plan-template/))
-- Recorded sessions for AVS portal, HCX, NSX-T, vCenter
-- Runbook library
-
----
-
-## Evidence Status
-
-| Evidence Item | Owner | Status | Last Updated | Notes |
-|---|---|---|---|---|
-| Skilling plan – Customer A | | ⬜ Not started | | |
-| Skilling plan – Customer B | | ⬜ Not started | | |
-
----
-
-## Common Gaps
-
-- **Generic "training catalogue" with no role mapping**: Must show role → skill → Learn path mapping.
-- **No tracking**: Plan must show completion tracking or a follow-up cadence.
-- **No KT artefacts**: If recordings / runbooks aren't available, the plan looks aspirational.
+- Training catalogue provided with no role mapping.
+- Certifications recommended but no learning path or completion plan.
+- No linkage between the skilling plan and the operational handover approach.

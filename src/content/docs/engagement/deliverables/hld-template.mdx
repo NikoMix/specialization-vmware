@@ -1,8 +1,8 @@
 ---
-title: "HLD Template – Azure VMware Solution Landing Zone"
-description: High-Level Design template for an AVS engagement covering landing zone, networking, identity, storage, backup, DR, monitoring.
+title: "High-Level Architecture Document Template – Azure VMware Solution Landing Zone"
+description: High-Level Architecture Document template for an AVS engagement covering landing zone, networking, identity, storage, backup, disaster recovery, and monitoring.
 sidebar:
-  label: "HLD Template"
+  label: "Architecture Document Template"
   order: 1
 ---
 
@@ -12,102 +12,102 @@ import { Aside } from '@astrojs/starlight/components';
   <a href={`${import.meta.env.BASE_URL}templates/deliverables/hld-template.docx`} download>hld-template.docx</a> — pre-formatted template; fill in for your engagement.
 </Aside>
 
-> Copy this template into your customer-facing HLD document. Sections marked **(audit)** map directly to Module B controls.
+> Copy this template into your customer-facing High-Level Architecture Document (HLAD). Sections marked **(audit)** map directly to Module B controls.
 
 ## 1. Executive summary
 
 - Business drivers
-- Forcing function + target dates
-- Recommended pattern(s) (from [Reference Architectures](../../reference-architectures/))
+- Forcing function and target dates
+- Recommended pattern(s) from the [Reference Architectures](../../reference-architectures/)
 - Headline cost envelope
 
 ## 2. Scope **(audit – B.2.1, B.3.1)**
 
 - In-scope workloads
 - Out-of-scope workloads
-- Migration type (P2V / V2V or Cloud → Cloud)
+- Migration type (P2V / V2V or cloud-to-cloud)
 
-## 3. Azure region + AZ strategy
+## 3. Azure region and availability-zone strategy
 
 - Primary region
-- DR region (if applicable)
-- Stretched cluster AZ pair (if Pattern 2)
+- Disaster-recovery region (if applicable)
+- Stretched-cluster zone pair (if applicable)
 
 ## 4. AVS private cloud **(audit – B.3.1)**
 
-- Node SKU (AV36 / AV36P / AV52 / AV64) + count
-- Growth plan (additional nodes timing)
-- vSAN ESA configuration
-- Customer-managed keys (CMK) decision
-- Maintenance windows
+- Node SKU (AV36P / AV52 / AV64) and count
+- Growth plan and expansion trigger
+- vSAN Express Storage Architecture configuration
+- Customer-managed key decision
+- Maintenance-window expectations
 
 ## 5. Networking **(audit – B.2.1, B.3.3)**
 
-- ER circuits (customer ER + AVS managed ER)
-- ER Global Reach configuration (or rationale if unavailable)
-- vWAN / Route Server pattern
-- NSX-T design (T0 / T1, segments, DFW baseline, IDS/IPS)
-- Public IP pattern (NSX-T DNAT vs Azure-managed)
-- DNS strategy (hybrid vs cloud)
+- ExpressRoute circuits (customer and AVS managed)
+- ExpressRoute Global Reach design or rationale if unavailable
+- Virtual WAN or hub-spoke routing pattern
+- NSX-T design (T0 / T1, segments, distributed firewall baseline, IDS/IPS)
+- Public IP pattern (NSX-T DNAT vs Azure-managed public IP)
+- DNS and DHCP strategy
 - CIDR plan with non-overlap confirmed
 
 ## 6. Identity **(audit – B.2.1, B.3.3)**
 
-- AD forest / Entra topology
-- AVS SSO source (on-prem AD via ER, or Azure-hosted DCs)
-- Privileged access (PIM, just-in-time)
+- Active Directory forest and Entra ID topology
+- AVS single sign-on source
+- Privileged-access model (PIM, break-glass, jump access)
 
 ## 7. Storage **(audit – B.2.1)**
 
-- vSAN ESA capacity + headroom
-- ANF for AVS datastores (tier + capacity)
-- Blob for backup target / Content Library
+- vSAN capacity, resilience policy, and headroom
+- Azure NetApp Files for AVS datastores (if used)
+- Blob storage use cases (Content Library, backup target, exports)
 
 ## 8. Backup **(audit – B.4.2)**
 
-- Backup tool (Azure Backup Server / 3rd-party)
-- Schedule + retention per workload tier
-- Restore drill cadence
+- Backup tool or partner platform
+- Schedule and retention by workload tier
+- Restore-test cadence and ownership
 
-## 9. DR **(audit – B.2.1, B.4.2)**
+## 9. Disaster recovery **(audit – B.2.1, B.4.2)**
 
-- DR mechanism (HCX DR / SRM / partner)
-- Target site
-- RPO / RTO per tier
-- Fail-over / fail-back runbook reference
+- Recovery mechanism (HCX DR, SRM, partner platform)
+- Target site or region
+- Recovery point objective and recovery time objective targets
+- Failover and failback runbook references
 
 ## 10. Monitoring **(audit – B.2.1, B.4.2)**
 
-- Azure Monitor for AVS
-- Log Analytics workspace
-- Defender for Cloud (Defender for Servers)
-- Sentinel ingestion (if scoped)
-- Custom dashboards
+- Azure Monitor for AVS design
+- Log Analytics workspace and data sources
+- Defender for Cloud coverage
+- Sentinel or SIEM integration
+- Executive and operations dashboards
 
-## 11. Landing zone alignment **(audit – B.2.1)**
+## 11. Landing-zone alignment **(audit – B.2.1)**
 
-- MG structure
+- Management-group structure
 - Subscription topology
-- RBAC custom roles
+- RBAC model
 - Policy assignments
-- AzOps process
-- AVS Resource Provider registration
+- GitOps or AzOps process
+- AVS resource-provider registration responsibilities
 
 ## 12. Cost model **(audit – A.1.2)**
 
-- Pricing Calculator output
-- Node reservation strategy
-- Bandwidth + ANF tier cost
-- Year-1 / year-3 envelope
+- Pricing Calculator assumptions
+- Reservation strategy
+- Connectivity and Azure NetApp Files cost drivers
+- Year-1 and year-3 operating envelope
 
-## 13. Risks + mitigations
+## 13. Risks and mitigations
 
-- Top 5 risks with mitigation owners
+- Top delivery and operational risks with mitigation owners
 
-## 14. Decisions log
+## 14. Decision log
 
-- Key decisions taken + rationale
+- Key design decisions and rationale
 
 ## 15. Acceptance criteria
 
-- Customer sign-off criteria for the HLD
+- Customer sign-off criteria for the architecture document

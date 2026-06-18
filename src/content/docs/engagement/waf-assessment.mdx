@@ -1,6 +1,6 @@
 ---
 title: "Well-Architected Framework Assessment"
-description: AVS-specific Well-Architected Framework assessment guidance, with emphasis on Reliability, Cost Optimization, and Operational Excellence.
+description: Mandatory Azure Architecture Review guidance for AVS engagements, including workflow, output mapping, and audit-evidence handoff.
 sidebar:
   label: "WAF Assessment"
   order: 4
@@ -12,78 +12,89 @@ import { Aside } from '@astrojs/starlight/components';
   <a href={`${import.meta.env.BASE_URL}templates/engagement/waf-assessment.xlsx`} download>waf-assessment.xlsx</a> — pre-formatted template; fill in for your engagement.
 </Aside>
 
-## Why WAF on AVS engagements
-
-The WAF assessment provides the structured input for control **A.2.2** (Well-Architected Workloads) and **B.2.2** (WAR of AVS workloads). The auditor will look for the WAR export and the linked remediation log.
-
-<Aside type="tip">
-  For AVS engagements, emphasise **Reliability**, **Cost Optimization**, and **Operational
-  Excellence**. These three pillars surface the highest-impact AVS-specific findings (stretched
-  clusters, node reservations, ANF tier choice, Arc coverage).
+<Aside type="caution" title="Mandatory Assessment">
+  Every AVS engagement should include the <a href="https://learn.microsoft.com/en-us/assessments/azure-architecture-review/">Azure Architecture Review assessment</a> as a formal delivery step. Treat the exported report and the follow-up action log as mandatory evidence for both design quality and audit readiness.
 </Aside>
 
----
+## Why this assessment is mandatory for AVS
 
-## Pillar-by-pillar AVS-specific prompts
+The Azure Architecture Review assessment is the most direct Microsoft-authored proof that the AVS design was checked against the Well-Architected Framework (WAF) before handover. It supports:
+
+- **A.2.2** by proving the workload design was reviewed against Microsoft guidance.
+- **B.2.2** by showing a formal Well-Architected Review (WAR) output and action log.
+- **B.2.1** by feeding design decisions back into the architecture document and design document.
+- **B.4.1 / B.4.2** by creating follow-up actions for validation, monitoring, backup, and disaster recovery.
+
+## Step-by-step customer workflow
+
+1. **Schedule the review during design, not after go-live.**
+   - Target the end of discovery or the start of design.
+   - Confirm the customer workload owner, AVS architect, networking lead, and operations lead will attend.
+2. **Open the assessment with the customer.**
+   - Use the [Azure Architecture Review assessment](https://learn.microsoft.com/en-us/assessments/azure-architecture-review/).
+   - Name the assessment after the customer workload or migration wave.
+3. **Select the most relevant pillars.**
+   - Minimum for AVS: **Reliability** plus **Cost Optimization** or **Operational Excellence**.
+   - Add **Security** when NSX-T, privileged access, or Defender for Cloud decisions are still in flight.
+4. **Answer with real deployment assumptions.**
+   - Use the chosen AVS node SKU, ExpressRoute topology, NSX-T segmentation plan, backup platform, and disaster-recovery mechanism.
+   - Capture decisions on Azure Landing Zone alignment, private endpoints, monitoring workspace, and logging strategy.
+5. **Export the report immediately after the session.**
+   - Save the PDF in the customer evidence folder.
+   - Create an action log with owner, due date, severity, and target milestone.
+6. **Replay the findings into delivery artefacts.**
+   - Update the architecture document, design document, migration wave plan, test plan, and hypercare plan.
+7. **Re-run or review before final handover.**
+   - Confirm that critical and high-priority actions are resolved, deferred with customer approval, or tracked in the optimisation backlog.
+
+## Assessment outputs mapped to AVS design decisions
+
+| Assessment output | AVS design decision it should influence | Delivery artefact to update |
+|---|---|---|
+| Reliability findings | Stretched cluster vs single-zone design, backup RPO/RTO, host-failure handling, disaster-recovery target | Architecture document, design document, service-validation plan |
+| Cost Optimization findings | Node SKU sizing, reservation strategy, Azure NetApp Files tier, ExpressRoute bandwidth, HCX wave throttling | Pricing model, project plan, optimisation backlog |
+| Operational Excellence findings | Monitoring workspace, runbooks, alert ownership, logging, patching, operational readiness | Hypercare plan, post-deployment documentation, KT plan |
+| Security findings | NSX-T distributed firewall baseline, Defender for Cloud coverage, privileged access model, private-endpoint routing | Design document, security backlog, incident runbooks |
+| Performance Efficiency findings | Storage policy, vSAN headroom, workload placement, scale-out trigger | Validation plan, capacity plan, monthly operations review |
+
+## Pillar prompts for AVS workshops
 
 ### Reliability
 
-- Are stretched clusters used? If not, what is the SLA composition (AVS + ANF + ER + dependency services)?
-- How is host failure tolerated? FTT setting on vSAN?
-- What is the backup RPO / RTO per workload tier?
-- Is DR exercised? When was the last drill?
-- Is the AVS region paired with a DR target (in-AVS or out)?
-- ER circuit redundancy — single circuit, dual circuit, MetroConnect?
-- Dependency mapping — what fails if AVS is unavailable?
+- Is a stretched cluster required, or is single-zone AVS acceptable with disaster recovery?
+- What is the end-to-end SLA path across AVS, ExpressRoute, Azure NetApp Files, DNS, and identity dependencies?
+- How often will restore and failover tests run, and who signs them off?
 
 ### Cost Optimization
 
-- Node reservation vs. pay-as-you-go?
-- AV36 vs AV36P vs AV52 vs AV64 — right-sized for the workload mix?
-- ANF tier selection (Standard / Premium / Ultra) matched to workload IOPS?
-- ER bandwidth utilisation — over-provisioned?
-- Standby DR nodes — minimised via small-footprint warm DR?
-- Customer-managed reservations covering AVS Reserved Instances?
+- Which AVS node family matches the measured workload profile?
+- Is the customer buying reserved instances or starting on pay-as-you-go?
+- Is ExpressRoute sized for migration peaks as well as steady-state production?
 
 ### Operational Excellence
 
-- Azure Arc-enabled VMware vSphere coverage?
-- Azure Monitor for AVS deployed?
-- Syslog from ESXi / NSX-T / vCenter into Log Analytics?
-- Runbook library covering BAU, incident triage, DR?
-- Change-management process documented?
-- Joint Microsoft + VMware support case process documented?
+- Which logs land in Log Analytics, and which dashboards are mandatory for day-2 support?
+- Who owns alert tuning during hypercare?
+- What is the workflow for Microsoft support plus VMware escalation?
 
 ### Security
 
-- NSX-T DFW baseline (default deny + named allowlist)?
-- NSX-T IDS/IPS enabled?
-- Defender for Servers on AVS guest VMs?
-- Customer-managed keys (CMK) for AVS?
-- Privileged access path documented for vCenter / NSX-T / HCX admin?
+- How is the NSX-T distributed firewall baseline enforced and reviewed?
+- Are AVS guest VMs in Defender for Cloud and the correct Defender plans?
+- How are privileged access and break-glass identities controlled?
 
-### Performance Efficiency
+## Audit-evidence handoff
 
-- vSAN ESA capacity headroom (≥ 30% recommended)?
-- Storage policy per workload tier?
-- ANF volume sizing matched to IOPS demand?
-- NSX-T DFW rule count manageable?
-- VM right-sizing post-migration (cleanup of over-provisioned VMs)?
+| Evidence item | Audit controls | Storage location recommendation |
+|---|---|---|
+| Azure Architecture Review PDF export | A.2.2, B.2.1, B.2.2 | Customer evidence folder / assessment subfolder |
+| Action log with owners and dates | A.2.2, B.2.2, B.4.1 | Project tracker or spreadsheet with dated export |
+| Updated architecture document sections | B.2.1 | Architecture folder with version history |
+| Updated monitoring, backup, and disaster-recovery actions | B.4.2 | Operations or hypercare folder |
 
----
+## Recommended meeting outputs
 
-## Process
-
-1. Run the [Azure Well-Architected Review](https://learn.microsoft.com/assessments/azure-architecture-review/) tool with the customer
-2. Scope to the AVS workload
-3. Cover **≥ 2 pillars** (Reliability + Cost Optimization is the recommended default for AVS)
-4. Export results as PDF (customer named on the export)
-5. Build the remediation log (finding → owner → target date → status)
-6. Schedule re-review pre-go-live for any blocking findings
-
-## Deliverables
-
-- WAR PDF export (file the same PDF for A.2.2 and B.2.2)
-- Pillar-selection rationale (1-pager)
-- Remediation log (Excel)
-- Pre-go-live re-review note (if applicable)
+1. Final PDF export from the Azure Architecture Review assessment.
+2. Action log with owner, due date, and status.
+3. Updated architecture document and design document.
+4. Summary slide for the steering committee covering major risks and accepted trade-offs.

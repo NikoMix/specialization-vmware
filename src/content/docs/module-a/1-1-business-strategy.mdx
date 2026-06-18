@@ -1,6 +1,6 @@
 ---
 title: "A.1.1 – Cloud & AI Adoption Business Strategy"
-description: Evidence requirements for control A.1.1 – data-driven business strategy review using FinOps Review and Cloud Adoption Strategy Evaluator (CASE).
+description: Audit-gate checklist for control A.1.1 covering strategy reviews, FinOps outputs, and customer-specific recommendations.
 sidebar:
   label: "1.1 Business Strategy"
   order: 1
@@ -8,85 +8,27 @@ sidebar:
 
 import { Aside } from '@astrojs/starlight/components';
 
-## What the Auditor Checks
-
-The auditor verifies that you operate a **defined, data-driven process** for guiding customer cloud and AI adoption decisions. The process must cover: (1) a structured strategy review of customer business needs, (2) personalised recommendations based on that review, and (3) recommendations specifically for maximising cloud business value (financial and non-financial).
-
-**Typical questions:**
-- Show us the business-needs review you ran for two customers — what tools, what cadence, what outputs?
-- Where is the FinOps Review evidence — the export, the findings, and the recommendations delivered to the customer?
-- Where is the CASE (Cloud Adoption Strategy Evaluator) output that drove the strategy recommendation?
-- How did the recommendations link to measurable business outcomes for the customer?
-
----
-
-## Required Evidence Checklist
-
-| # | Evidence Item | Accepted Formats | Status |
-|---|---|---|---|
-| 1 | **FinOps Review** completed (required) — export + customer-facing recommendation | PDF, Word, PowerPoint | ⬜ |
-| 2 | **Cloud Adoption Strategy Evaluator (CASE)** completed — assessment output + recommendation | PDF, Word | ⬜ |
-| 3 | *(Optional)* Advisor Assessment output | PDF | ⬜ |
-| 4 | **Strategy review document** demonstrating business needs analysis | PDF, Word, PowerPoint | ⬜ |
-| 5 | **Personalised recommendations** delivered to the customer | PDF, Word, PowerPoint | ⬜ |
-| 6 | **Cloud business-value recommendations** (financial + non-financial) | PDF, Word, Excel | ⬜ |
-
-> **Customers required:** 2 unique • **Window:** Last 12 months
-
-<Aside type="tip">
-  Bundle the FinOps Review export and the CASE output into a single customer-facing strategy
-  presentation. The auditor wants to see the **process**, not just the raw tool exports.
+<Aside type="note">
+  Keep two anonymised customer packs ready. The same customer can appear across multiple Module A
+  controls, but this control still needs two unique customer examples inside the audit look-back
+  window.
 </Aside>
 
----
+## Audit Gate
 
-## Evidence Guidance
+| Control name | What auditors check | Minimum evidence | Pass threshold |
+|---|---|---|---|
+| A.1.1 Cloud & AI Adoption Business Strategy | A repeatable strategy motion that turns business drivers into Azure adoption recommendations backed by financial and organisational data. Auditors expect a structured review, customer-specific recommendations, and clear business-value outcomes. | For each of 2 customers: FinOps Review export, Cloud Adoption Strategy Evaluator (CASE) output, strategy readout or workshop summary, and a recommendation pack that links actions to cost, risk, or growth outcomes. | 2 unique customers; evidence created within the last 12 months; a passed Module A result can be reused for 2 years. |
 
-### FinOps Review (required)
+## Audit-ready evidence pack
 
-- Run via the [Microsoft FinOps Review](https://learn.microsoft.com/azure/cost-management-billing/finops/) assessment template
-- Export the completed assessment as PDF
-- Pair with a 1–2 slide customer-facing summary of findings and next actions
+1. Customer business drivers and forcing function.
+2. FinOps Review findings with recommended actions.
+3. CASE output showing maturity themes and priorities.
+4. Customer-facing summary with business outcomes, owners, and next steps.
 
-### Cloud Adoption Strategy Evaluator (CASE) (required)
+## Common fail conditions
 
-- Conduct CASE with the customer's business and IT stakeholders
-- Capture the maturity-by-domain output
-- Translate findings into a prioritised recommendation list
-
-### Strategy review process
-
-Demonstrate that the customer engagement followed a documented process:
-
-1. Discovery interviews with business + IT stakeholders
-2. Workload portfolio review
-3. Financial baseline (current state → target state)
-4. Recommendation set (technical + financial + change)
-5. Stakeholder readout
-
-### Cloud business-value recommendations
-
-Must address both:
-- **Financial outcomes** — TCO, ROI, payback period, ACR run-rate
-- **Non-financial outcomes** — speed to market, risk reduction, talent attraction, sustainability
-
----
-
-## Evidence Status
-
-| Evidence Item | Owner | Status | Last Updated | Notes |
-|---|---|---|---|---|
-| FinOps Review – Customer A | | ⬜ Not started | | |
-| CASE – Customer A | | ⬜ Not started | | |
-| FinOps Review – Customer B | | ⬜ Not started | | |
-| CASE – Customer B | | ⬜ Not started | | |
-| Strategy review document | | ⬜ Not started | | |
-
----
-
-## Common Gaps
-
-- **No FinOps Review on file**: This is a *required* assessment, not optional. Without it, A.1.1 fails. Run it as soon as the engagement begins.
-- **CASE output not linked to recommendations**: The auditor wants to see how the CASE findings shaped the strategy — not just the raw output.
-- **Only financial outcomes addressed**: Make sure non-financial outcomes (risk, speed, sustainability) are explicit.
-- **Recommendations are generic**: "Migrate to Azure" is not personalised. Recommendations must reference the customer's specific workloads, constraints, and business drivers.
+- FinOps Review missing or not shared with the customer.
+- CASE output exported but not translated into recommendations.
+- Generic recommendations with no customer-specific business context.

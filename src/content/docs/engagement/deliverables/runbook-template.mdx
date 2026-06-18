@@ -39,7 +39,7 @@ import { Aside } from '@astrojs/starlight/components';
 |---|---|
 | HCX mesh health degraded > 30 min | Pause wave |
 | Post-cutover Sev-1 within 4 hours | Roll back affected VMs |
-| ER bandwidth saturation | Throttle HCX or defer remaining migrations |
+| ExpressRoute (ER) bandwidth saturation | Throttle HCX or defer remaining migrations |
 
 ---
 
@@ -49,7 +49,7 @@ import { Aside } from '@astrojs/starlight/components';
 
 - [ ] HCX mobility group prepared
 - [ ] Network Extension health verified
-- [ ] Bandwidth headroom on ER confirmed
+- [ ] Bandwidth headroom on ExpressRoute (ER) confirmed
 - [ ] Target AVS capacity confirmed
 - [ ] Backup of source VMs verified
 - [ ] Customer comms sent (impact window)
@@ -65,7 +65,7 @@ import { Aside } from '@astrojs/starlight/components';
 ### Migration in flight
 
 - [ ] Monitor HCX dashboard (% complete, throughput, errors)
-- [ ] Monitor ER bandwidth utilisation
+- [ ] Monitor ExpressRoute (ER) bandwidth utilisation
 - [ ] Address per-VM warnings immediately
 
 ### Network extension cutover

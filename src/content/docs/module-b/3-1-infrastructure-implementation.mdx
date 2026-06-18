@@ -31,7 +31,7 @@ The auditor verifies your **capability to implement and configure AVS infrastruc
 | # | Evidence Item | Accepted Formats | Status |
 |---|---|---|---|
 | 1 | **Signed SOW** for the AVS implementation | PDF | ⬜ |
-| 2 | **Solution design document** (HLD / LLD) | PDF, Word | ⬜ |
+| 2 | **Solution design documents** (HLAD / DTDD) | PDF, Word | ⬜ |
 | 3 | **Customer-approved project plan** + **migration / deployment sequence** | PDF, Excel, Project | ⬜ |
 | 4 | **Architecture diagrams** of the implemented environment | PDF, Visio, Draw.io | ⬜ |
 | 5 | **Implementation / "as-built" documents** | PDF, Word | ⬜ |
@@ -68,7 +68,7 @@ Should reflect the **actual state** post-implementation, including:
 - NSX-T configuration (T0/T1, segments, DFW)
 - vSAN / ANF datastore configuration
 - HCX / SRM deployment (if applicable)
-- ER circuit + Global Reach
+- ExpressRoute (ER) circuit + Global Reach
 - Identity integration (AD / Entra)
 
 ---
@@ -90,3 +90,13 @@ Should reflect the **actual state** post-implementation, including:
 - **Design doc submitted but no as-built**: Auditors want proof the design was realised, not just planned.
 - **Project plan without customer approval**: Sign-off (even via email) must be visible.
 - **Diagrams are pre-implementation only**: Update post-deployment to reflect actual configuration.
+
+---
+
+## Resources & Samples
+
+- [Azure Architecture Center – Azure VMware Solution foundation](https://learn.microsoft.com/azure/architecture/solution-ideas/articles/azure-vmware-solution-foundation)
+- [Deploy Azure VMware Solution](https://learn.microsoft.com/azure/azure-vmware/deploy-azure-vmware-solution)
+- [Microsoft Learn – Run VMware workloads on Azure VMware Solution](https://learn.microsoft.com/training/paths/run-vmware-workloads-azure-vmware-solution/)
+- [Enterprise-Scale for AVS](https://github.com/Azure/Enterprise-Scale-for-AVS)
+- [AVS Landing Zone Accelerator](https://github.com/Azure/Enterprise-Scale-for-AVS/tree/main/AVS-Landing-Zone)
