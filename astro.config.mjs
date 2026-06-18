@@ -25,6 +25,16 @@ const githubUrl = process.env.ASTRO_GITHUB_URL ?? `https://github.com/${repo}`;
 export default defineConfig({
   site,
   base,
+  // Markdown defaults must be set explicitly so @astrojs/mdx inherits them. Astro leaves
+  // `markdown.gfm` unmaterialized (undefined) in the resolved config, and @astrojs/mdx reads
+  // it directly via `options.gfm ?? config.markdown.gfm`. Because that resolves falsy, remark-gfm
+  // is never applied to `.mdx`, so GFM tables render as raw pipe text. (The `.md` pipeline is
+  // unaffected — it applies the `gfm: true` default internally.) `smartypants` is pinned for the
+  // same explicit-config reason and to keep MDX typography aligned with the documented default.
+  markdown: {
+    gfm: true,
+    smartypants: true,
+  },
   integrations: [
     starlight({
       title: 'VMware on Microsoft Azure – Advanced Specialization',
